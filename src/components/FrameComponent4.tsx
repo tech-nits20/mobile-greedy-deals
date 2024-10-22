@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image, StyleSheet, View, Text } from "react-native";
-import { Border, Color, FontSize, FontFamily, Gap } from "../GlobalStyles";
+import { Border, Color, FontSize, FontFamily, Gap } from "../../GlobalStyles";
 
 export type FrameComponent4Type = {
   menFashion?: string;
@@ -16,7 +16,7 @@ const FrameComponent4 = ({ menFashion }: FrameComponent4Type) => {
           <Image
             style={styles.bodyShotOfADarkSkinnedFaIcon}
             resizeMode="cover"
-            source={require("../assets/bodyshotofadarkskinnedfashionpng-11.png")}
+            source={require("../../assets/bodyshotofadarkskinnedfashionpng-11.png")}
           />
         </View>
       </View>

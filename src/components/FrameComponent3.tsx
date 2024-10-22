@@ -9,7 +9,7 @@ import {
   FontFamily,
   Border,
   Padding,
-} from "../GlobalStyles";
+} from "../../GlobalStyles";
 
 export type FrameComponent3Type = {
   fashion?: string;
@@ -34,13 +34,13 @@ const FrameComponent3 = ({
           <Image
             style={[styles.backArrowIcon1, styles.backArrowIcon1Layout]}
             resizeMode="cover"
-            source={require("../assets/211686-back-arrow-icon-1.png")}
+            source={require("../../assets/211686-back-arrow-icon-1.png")}
           />
         </Pressable>
         <Image
           style={[styles.locationUserBarChild, styles.searchStrongIcon1Layout]}
           resizeMode="cover"
-          source={require("../assets/8665611-location-crosshairs-icon-1.png")}
+          source={require("../../assets/8665611-location-crosshairs-icon-1.png")}
         />
         <View style={styles.fashionWrapper}>
           <Text style={[styles.fashion, styles.offersTypo]}>{fashion}</Text>
@@ -54,7 +54,7 @@ const FrameComponent3 = ({
                   styles.searchStrongIcon1Layout,
                 ]}
                 resizeMode="cover"
-                source={require("../assets/211817-search-strong-icon-1.png")}
+                source={require("../../assets/211817-search-strong-icon-1.png")}
               />
               <View style={styles.parentFlexBox}>
                 <Text style={[styles.searchFor, styles.dealsTypo]}>
@@ -68,14 +68,14 @@ const FrameComponent3 = ({
             <Image
               style={[styles.locationUserBarItem, styles.backArrowIcon1Layout]}
               resizeMode="cover"
-              source={require("../assets/frame-3.png")}
+              source={require("../../assets/frame-3.png")}
             />
           </View>
           <View style={styles.backArrowIcon1Wrapper}>
             <Image
               style={styles.menuLeftIcon1}
               resizeMode="cover"
-              source={require("../assets/9057028-menu-left-icon-1.png")}
+              source={require("../../assets/9057028-menu-left-icon-1.png")}
             />
           </View>
         </View>

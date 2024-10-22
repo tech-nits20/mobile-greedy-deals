@@ -1,39 +1,37 @@
-const Stack = createNativeStackNavigator();
-import * as React from "react";
+import React, {useState} from 'react';
 import { NavigationContainer } from "@react-navigation/native";
-
-import MainApps1415Pro from "./screens/MainApps1415Pro";
-import ListingPage from "./screens/ListingPage";
-import Categories from "./screens/Categories";
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import { CATEGORIES_SCREEN, HOME_SCREEN, LISTING_SCREEN } from "./src/routes/Routes";
+import CategoriesScreen from './src/screens/CategoriesScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import ListingScreen from './src/screens/ListingScreen';
 
+const Stack = createNativeStackNavigator();
 const App = () => {
-  const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
+  const [hideSplashScreen, setHideSplashScreen] = useState(true);
 
   return (
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator
-            initialRouteName="MainApps1415Pro"
+            initialRouteName={HOME_SCREEN}
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen
-              name="MainApps1415Pro"
-              component={MainApps1415Pro}
+              name={HOME_SCREEN}
+              component={HomeScreen}
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="ListingPage"
-              component={ListingPage}
+              name={LISTING_SCREEN}
+              component={ListingScreen}
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="Categories"
-              component={Categories}
-              options={{ headerShown: false }}
+              name={CATEGORIES_SCREEN}
+              component={CategoriesScreen}
+              options={{ headerShown: false, title: 'Categories' }}
             />
           </Stack.Navigator>
         ) : null}

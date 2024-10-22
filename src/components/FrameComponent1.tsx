@@ -13,7 +13,7 @@ import {
   Color,
   Gap,
   Padding,
-} from "../GlobalStyles";
+} from "../../GlobalStyles";
 
 export type FrameComponent1Type = {
   flipkartLogoFDAASeeklogoc?: ImageSourcePropType;

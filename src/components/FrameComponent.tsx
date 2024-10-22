@@ -13,7 +13,7 @@ import {
   FontFamily,
   Padding,
   Gap,
-} from "../GlobalStyles";
+} from "../../GlobalStyles";
 
 export type FrameComponentType = {
   adidasLogosvg1?: ImageSourcePropType;

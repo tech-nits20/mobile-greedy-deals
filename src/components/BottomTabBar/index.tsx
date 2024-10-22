@@ -1,21 +1,8 @@
 import React, { useMemo } from "react";
-import {
-  Text,
-  StyleSheet,
-  Image,
-  View,
-  ImageSourcePropType,
-} from "react-native";
-import {
-  Gap,
-  FontSize,
-  FontFamily,
-  Color,
-  Border,
-  Padding,
-} from "../GlobalStyles";
+import { Text, Image, View, ImageSourcePropType } from "react-native";
+import { styles } from "./styles";
 
-export type FrameComponent2Type = {
+export type BottomTabBarProps = {
   categoryVarietyRandomShu?: ImageSourcePropType;
   bxsGiftIcon1?: ImageSourcePropType;
   giftboxGiftPresentIcon1?: ImageSourcePropType;
@@ -37,7 +24,7 @@ const getStyleValue = (key: string, value: string | number | undefined) => {
   if (value === undefined) return;
   return { [key]: value === "unset" ? undefined : value };
 };
-const FrameComponent2 = ({
+const BottomTabBar = ({
   categoryVarietyRandomShu,
   bxsGiftIcon1,
   giftboxGiftPresentIcon1,
@@ -51,7 +38,7 @@ const FrameComponent2 = ({
   propWidth1,
   propFlex2,
   propWidth2,
-}: FrameComponent2Type) => {
+}: BottomTabBarProps) => {
   const frameView2Style = useMemo(() => {
     return {
       ...getStyleValue("flex", propFlex),
@@ -84,7 +71,7 @@ const FrameComponent2 = ({
               styles.homeIconLayout,
             ]}
             resizeMode="cover"
-            source={require("../assets/1564508-home-main-room-estate-property-icon-1.png")}
+            source={require("../../../assets/1564508-home-main-room-estate-property-icon-1.png")}
           />
           <Image
             style={[
@@ -92,7 +79,7 @@ const FrameComponent2 = ({
               styles.homeIconLayout,
             ]}
             resizeMode="cover"
-            source={require("../assets/4781831-building-business-home-house-mobile-icon-1.png")}
+            source={require("../../../assets/4781831-building-business-home-house-mobile-icon-1.png")}
           />
         </View>
         <View style={styles.parentFlexBox}>
@@ -103,7 +90,7 @@ const FrameComponent2 = ({
               styles.homeIconLayout,
             ]}
             resizeMode="cover"
-            source={require("../assets/9055212-bxs-category-icon-1.png")}
+            source={require("../../../assets/7148740-category-variety-random-shuffle-icon-1.png")}
           />
           <Image
             style={[
@@ -111,7 +98,7 @@ const FrameComponent2 = ({
               styles.homeIconLayout,
             ]}
             resizeMode="cover"
-            source={categoryVarietyRandomShu}
+            source={require("../../../assets/7148740-category-variety-random-shuffle-icon-1.png")}
           />
         </View>
         <View
@@ -163,7 +150,7 @@ const FrameComponent2 = ({
               styles.homeIconLayout,
             ]}
             resizeMode="cover"
-            source={require("../assets/6843092-currency-finance-financial-income-management-icon-1.png")}
+            source={require("../../../assets/6843092-currency-finance-financial-income-management-icon-1.png")}
           />
           <Image
             style={[
@@ -182,7 +169,7 @@ const FrameComponent2 = ({
               styles.homeIconLayout,
             ]}
             resizeMode="cover"
-            source={require("../assets/6843092-currency-finance-financial-income-management-icon-11.png")}
+            source={require("../../../assets/6843092-currency-finance-financial-income-management-icon-11.png")}
           />
           <Image
             style={[
@@ -190,7 +177,7 @@ const FrameComponent2 = ({
               styles.homeIconLayout,
             ]}
             resizeMode="cover"
-            source={boxMoneyIcon11}
+            source={require("../../../assets/172507-box-money-icon-11.png")}
           />
         </View>
       </View>
@@ -198,74 +185,4 @@ const FrameComponent2 = ({
   );
 };
 
-const styles = StyleSheet.create({
-  frameParentFlexBox: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  parentFlexBox: {
-    gap: Gap.gap_2xs,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  homeIconLayout: {
-    height: 18,
-    width: 18,
-    overflow: "hidden",
-  },
-  home: {
-    fontSize: FontSize.size_3xs,
-    lineHeight: 10,
-    fontFamily: FontFamily.poppinsRegular,
-    color: Color.colorLightslategray,
-    textAlign: "left",
-  },
-  homeMainRoomEstatePropertyIcon: {
-    display: "none",
-    overflow: "hidden",
-  },
-  buildingBusinessHomeHouseMIcon: {
-    overflow: "hidden",
-  },
-  homeParent: {
-    borderRadius: Border.br_81xl,
-  },
-  dealsParent: {
-    display: "none",
-  },
-  buyCartDiscountPriceSaleIIcon: {
-    width: 20,
-    height: 20,
-    overflow: "hidden",
-  },
-  frameParent: {
-    alignSelf: "stretch",
-    shadowColor: "rgba(0, 0, 0, 0.15)",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowRadius: 10,
-    elevation: 10,
-    shadowOpacity: 1,
-    backgroundColor: Color.colorWhite,
-    borderStyle: "solid",
-    borderColor: Color.colorGainsboro_200,
-    borderWidth: 1,
-    height: 50,
-    flexDirection: "row",
-    paddingHorizontal: Padding.p_3xs,
-    paddingVertical: 0,
-    gap: Gap.gap_lg,
-    borderRadius: Border.br_81xl,
-  },
-  mainApps1415ProInner: {
-    width: 430,
-    paddingHorizontal: Padding.p_base,
-    paddingVertical: Padding.p_3xs,
-    zIndex: 0,
-  },
-});
-
-export default FrameComponent2;
+export default BottomTabBar;

@@ -1,0 +1,367 @@
+import { StyleSheet } from "react-native";
+import {
+  FontFamily,
+  Color,
+  FontSize,
+  Gap,
+  Border,
+  Padding,
+} from "../../../GlobalStyles";
+
+export const styles = StyleSheet.create({
+  minimumTypo: {
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: "500",
+  },
+  offText: {
+    textShadowRadius: 2,
+    textShadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    textShadowColor: "rgba(0, 0, 0, 0.5)",
+    color: Color.colorGold,
+    textAlign: "left",
+    position: "absolute",
+  },
+  bigBrandsFlexBox: {
+    display: "flex",
+    textAlign: "left",
+    left: 0,
+    position: "absolute",
+    alignItems: "center",
+  },
+  trendingCategoriesTypo: {
+    fontFamily: FontFamily.poppinsLight,
+    fontWeight: "300",
+    color: Color.colorOrangered_100,
+  },
+  primeBrandsTypo: {
+    fontSize: FontSize.size_lg,
+    letterSpacing: 1,
+  },
+  parentFlexBox1: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  parentFlexBox: {
+    gap: Gap.gap_2xs,
+    alignSelf: "stretch",
+  },
+  offTypo: {
+    fontFamily: FontFamily.poppinsSemiBold,
+    fontWeight: "600",
+  },
+  offersTypo: {
+    color: Color.colorDimgray_100,
+    fontSize: FontSize.size_3xs,
+    fontFamily: FontFamily.poppinsLight,
+    fontWeight: "300",
+    letterSpacing: 1,
+    alignSelf: "stretch",
+  },
+  frameLayout1: {
+    width: 121,
+    height: 1,
+    borderTopWidth: 1,
+    borderStyle: "solid",
+  },
+  frameWrapper1Border: {
+    borderWidth: 1,
+    borderStyle: "solid",
+    overflow: "hidden",
+  },
+  minimumTypo1: {
+    fontSize: FontSize.size_sm,
+    textAlign: "left",
+  },
+  frameLayout: {
+    height: 16,
+    width: 16,
+    top: 72,
+    position: "absolute",
+  },
+  minimum: {
+    top: 0,
+    textAlign: "left",
+    color: Color.colorBlack,
+    fontSize: FontSize.size_sm,
+    left: 0,
+    position: "absolute",
+  },
+  off: {
+    left: 112,
+    fontSize: 20,
+    transform: [
+      {
+        rotate: "90deg",
+      },
+    ],
+    fontFamily: FontFamily.poppinsSemiBold,
+    fontWeight: "600",
+    top: 25,
+  },
+  text: {
+    top: 20,
+    fontSize: 40,
+    lineHeight: 40,
+    fontWeight: "700",
+    fontFamily: FontFamily.poppinsBold,
+    left: 0,
+  },
+  minimumParent: {
+    height: 62,
+    width: 112,
+  },
+  component3: {
+    top: 16,
+    left: 273,
+    height: 57,
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    width: 112,
+    position: "absolute",
+  },
+  onAmazing1: {
+    color: Color.colorBlack,
+  },
+  text1: {
+    color: Color.colorWhite,
+  },
+  onAmazing: {
+    fontFamily: FontFamily.poppinsRegular,
+  },
+  dealsOffersCashback: {
+    color: Color.colorOrangered_100,
+  },
+  onAmazingDealsContainer1: {
+    width: "100%",
+  },
+  onAmazingDealsContainer: {
+    top: 47,
+    width: 371,
+    letterSpacing: 1,
+    fontSize: FontSize.size_lg,
+  },
+  bigBrands: {
+    top: -6,
+    fontSize: 36,
+    width: 217,
+    color: Color.colorOrangered_100,
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: "500",
+  },
+  onAmazingDealsOffersCashParent: {
+    left: 24,
+    width: 359,
+    height: 83,
+    top: 25,
+    position: "absolute",
+  },
+  component3Parent: {
+    width: 408,
+    height: 108,
+  },
+  primeBrands: {
+    lineHeight: 20,
+    color: Color.colorOrangered_100,
+    fontFamily: FontFamily.poppinsRegular,
+    letterSpacing: 1,
+    textAlign: "left",
+  },
+  frameChild: {
+    width: 411,
+    height: 1,
+    borderTopWidth: 1,
+    borderStyle: "solid",
+    borderColor: Color.colorGray_200,
+  },
+  primeBrandsParent: {
+    gap: Gap.gap_lg,
+    alignItems: "center",
+  },
+  uwlrjrAq9ti0pc1Icon: {
+    width: 42,
+    height: 6,
+  },
+  uwlrjrAq9ti0pc1Wrapper: {
+    height: 64,
+    width: 64,
+    justifyContent: "center",
+    borderRadius: Border.br_5xs,
+    backgroundColor: Color.colorWhite,
+  },
+  buy1Get: {
+    lineHeight: 18,
+    textAlign: "left",
+    color: Color.colorBlack,
+    fontSize: FontSize.size_sm,
+  },
+  babySopa: {
+    lineHeight: 12,
+    textAlign: "left",
+  },
+  buy1Get1Parent: {
+    paddingTop: Padding.p_9xs,
+    flex: 1,
+  },
+  frameView: {
+    gap: Gap.gap_md,
+    flexDirection: "row",
+    alignSelf: "stretch",
+  },
+  frameWrapper: {
+    backgroundColor: "rgba(129, 195, 65, 0.1)",
+    width: 200,
+    padding: Padding.p_5xs,
+    borderRadius: Border.br_5xs,
+    overflow: "hidden",
+  },
+  frameContainer: {
+    flexDirection: "row",
+    gap: Gap.gap_lg,
+    alignItems: "center",
+    alignSelf: "stretch",
+  },
+  frameGroup: {
+    gap: Gap.gap_lg,
+    alignSelf: "stretch",
+  },
+  frameItem: {
+    borderColor: Color.colorGray_200,
+    width: 121,
+  },
+  trendingCategories: {
+    fontSize: FontSize.size_xs,
+    color: Color.colorOrangered_100,
+    textAlign: "left",
+  },
+  plusIcon1: {
+    width: 12,
+    height: 12,
+    overflow: "hidden",
+  },
+  trendingCategoriesParent: {
+    borderRadius: Border.br_81xl,
+    paddingHorizontal: 12,
+    paddingVertical: Padding.p_9xs,
+    gap: Gap.gap_xs,
+    borderColor: Color.colorGainsboro_200,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  frameInner: {
+    borderColor: Color.colorGainsboro_200,
+  },
+  lineParent: {
+    gap: 1,
+    display: "none",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  discountsAndOffers: {
+    lineHeight: 16,
+    color: Color.colorOrangered_100,
+    fontFamily: FontFamily.poppinsRegular,
+    letterSpacing: 1,
+    textAlign: "left",
+  },
+  discountsAndOffersParent: {
+    gap: Gap.gap_lg,
+  },
+  frameIcon: {
+    left: -8,
+    zIndex: 1,
+  },
+  frameChild1: {
+    left: 120,
+    zIndex: 2,
+  },
+  frameParent3: {
+    flexDirection: "row",
+    gap: Gap.gap_lg,
+    alignItems: "center",
+  },
+  frameParent2: {
+    flexDirection: "row",
+    gap: Gap.gap_lg,
+    alignSelf: "stretch",
+  },
+  frameParent1: {
+    gap: Gap.gap_lg,
+    alignItems: "center",
+    alignSelf: "stretch",
+  },
+  adidasLogosvg1Icon: {
+    width: 43,
+    height: 30,
+    display: "none",
+  },
+  zomatoLogosvg1Icon: {
+    width: 80,
+    height: 17,
+  },
+  adidasLogosvg1Parent: {
+    height: 64,
+    width: 64,
+    justifyContent: "center",
+    borderRadius: Border.br_5xs,
+    gap: Gap.gap_lg,
+  },
+  offers: {
+    lineHeight: 14,
+    textAlign: "center",
+  },
+  offParent: {
+    borderBottomRightRadius: Border.br_5xs,
+    borderBottomLeftRadius: Border.br_5xs,
+    borderStyle: "dashed",
+    borderRadius: 0.001,
+    borderTopWidth: 0.5,
+    height: 48,
+    borderColor: Color.colorGainsboro_300,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Color.colorWhite,
+  },
+  frameParent10: {
+    paddingTop: Padding.p_5xs,
+    gap: Gap.gap_sm,
+    alignSelf: "stretch",
+    flex: 1,
+  },
+  frameWrapper1: {
+    backgroundColor: "rgba(226, 55, 68, 0.1)",
+    width: 128,
+    height: 128,
+    zIndex: 0,
+    borderColor: Color.colorGainsboro_300,
+    borderRadius: Border.br_5xs,
+  },
+  frameParent: {
+    gap: Gap.gap_xl,
+    marginTop: -25,
+    overflow: "hidden",
+    alignSelf: "stretch",
+  },
+  midRow: {
+    paddingHorizontal: Padding.p_3xs,
+    paddingVertical: 0,
+    marginTop: -1,
+    alignItems: "center",
+    alignSelf: "stretch",
+    flex: 1,
+  },
+  locationUserBarParent: {
+    zIndex: 1,
+    alignSelf: "stretch",
+    flex: 1,
+  },
+  mainApps1415Pro: {
+    height: 932,
+    width: "100%",
+    flex: 1,
+    backgroundColor: Color.colorWhite,
+  },
+});

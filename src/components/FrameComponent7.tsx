@@ -1,12 +1,8 @@
 import * as React from "react";
 import { Image, StyleSheet, View, Text } from "react-native";
-import { Border, FontFamily, Color, FontSize, Gap } from "../GlobalStyles";
+import { Border, FontFamily, Color, FontSize, Gap } from "../../GlobalStyles";
 
-export type FrameComponent6Type = {
-  uPTO?: string;
-};
-
-const FrameComponent6 = ({ uPTO }: FrameComponent6Type) => {
+const FrameComponent7 = () => {
   return (
     <View style={styles.frameParent}>
       <View style={[styles.frameWrapper, styles.wrapperLayout]}>
@@ -16,7 +12,7 @@ const FrameComponent6 = ({ uPTO }: FrameComponent6Type) => {
           <Image
             style={styles.bodyShotOfADarkSkinnedFaIcon}
             resizeMode="cover"
-            source={require("../assets/bodyshotofadarkskinnedfashionpng-11.png")}
+            source={require("../../assets/bodyshotofadarkskinnedfashionpng-11.png")}
           />
         </View>
       </View>
@@ -24,15 +20,15 @@ const FrameComponent6 = ({ uPTO }: FrameComponent6Type) => {
         <Image
           style={[styles.frameChild, styles.framePosition]}
           resizeMode="cover"
-          source={require("../assets/rectangle-448.png")}
+          source={require("../../assets/rectangle-446.png")}
         />
+        <Text style={[styles.buy4000, styles.offTypo]}>BUY4000</Text>
+        <Text style={[styles.text, styles.offTypo]}>1000</Text>
         <Image
           style={[styles.frameItem, styles.framePosition]}
           resizeMode="cover"
-          source={require("../assets/rectangle-446.png")}
+          source={require("../../assets/rectangle-448.png")}
         />
-        <Text style={styles.upto}>{uPTO}</Text>
-        <Text style={[styles.text, styles.offTypo]}>20%</Text>
         <Text style={[styles.off, styles.offTypo]}>Off</Text>
       </View>
       <View style={styles.summerFashionWrapper}>
@@ -52,9 +48,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   offTypo: {
+    textAlign: "left",
     fontFamily: FontFamily.poppinsBold,
     fontWeight: "700",
-    textAlign: "left",
     textTransform: "uppercase",
     position: "absolute",
   },
@@ -76,38 +72,40 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   frameChild: {
-    top: 32,
-    width: 5,
-    height: 3,
-  },
-  frameItem: {
     top: 0,
     width: 61,
     height: 29,
   },
-  upto: {
+  buy4000: {
     top: 4,
-    fontWeight: "500",
-    fontFamily: FontFamily.poppinsMedium,
-    textAlign: "left",
-    textTransform: "uppercase",
+    fontSize: FontSize.size_5xs,
     color: Color.colorWhite,
     lineHeight: 10,
-    fontSize: FontSize.size_xs,
+    textAlign: "left",
+    fontFamily: FontFamily.poppinsBold,
+    fontWeight: "700",
+    textTransform: "uppercase",
     left: 10,
-    position: "absolute",
   },
   text: {
     top: 14,
+    fontSize: FontSize.size_xs,
     color: Color.colorGold,
     lineHeight: 12,
+    textAlign: "left",
+    fontFamily: FontFamily.poppinsBold,
     fontWeight: "700",
-    fontSize: FontSize.size_xs,
+    textTransform: "uppercase",
     left: 10,
+  },
+  frameItem: {
+    top: 32,
+    width: 5,
+    height: 3,
   },
   off: {
     top: 5,
-    left: 52,
+    left: 57,
     fontSize: FontSize.size_4xs,
     transform: [
       {
@@ -116,7 +114,10 @@ const styles = StyleSheet.create({
     ],
     color: Color.colorWhite,
     lineHeight: 10,
+    textAlign: "left",
+    fontFamily: FontFamily.poppinsBold,
     fontWeight: "700",
+    textTransform: "uppercase",
   },
   vectorParent: {
     top: 9,
@@ -150,4 +151,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FrameComponent6;
+export default FrameComponent7;

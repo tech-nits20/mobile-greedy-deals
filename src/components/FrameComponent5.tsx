@@ -7,7 +7,7 @@ import {
   FontSize,
   Padding,
   Gap,
-} from "../GlobalStyles";
+} from "../../GlobalStyles";
 
 const FrameComponent5 = () => {
   return (
@@ -20,7 +20,7 @@ const FrameComponent5 = () => {
               styles.image1873881918IconFlexBox,
             ]}
             resizeMode="cover"
-            source={require("../assets/image-1873881918.png")}
+            source={require("../../assets/image-1873881918.png")}
           />
         </View>
       </View>
@@ -28,12 +28,12 @@ const FrameComponent5 = () => {
         <Image
           style={[styles.frameChild, styles.framePosition]}
           resizeMode="cover"
-          source={require("../assets/rectangle-448.png")}
+          source={require("../../assets/rectangle-448.png")}
         />
         <Image
           style={[styles.frameItem, styles.framePosition]}
           resizeMode="cover"
-          source={require("../assets/rectangle-446.png")}
+          source={require("../../assets/rectangle-446.png")}
         />
         <Text style={[styles.buy1, styles.buy1Clr]}>Buy 1</Text>
         <Text style={[styles.get2, styles.get2Typo]}>Get 2</Text>
