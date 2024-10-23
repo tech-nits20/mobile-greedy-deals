@@ -1,38 +1,31 @@
-import React, {useState} from 'react';
-import { NavigationContainer } from "@react-navigation/native";
+import React, { useState } from "react";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { CATEGORIES_SCREEN, HOME_SCREEN, LISTING_SCREEN } from "./src/routes/Routes";
-import CategoriesScreen from './src/screens/CategoriesScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import ListingScreen from './src/screens/ListingScreen';
+import { HOME_SCREEN } from "./src/routes/Routes";
+import BottomTabBar from "./src/components/BottomTabBar";
+import { Color } from "./GlobalStyles";
 
 const Stack = createNativeStackNavigator();
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = useState(true);
 
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: Color.colorWhite,
+    },
+  };
+
   return (
     <>
-      <NavigationContainer>
+      <NavigationContainer theme={MyTheme}>
         {hideSplashScreen ? (
           <Stack.Navigator
             initialRouteName={HOME_SCREEN}
             screenOptions={{ headerShown: false }}
           >
-            <Stack.Screen
-              name={HOME_SCREEN}
-              component={HomeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name={LISTING_SCREEN}
-              component={ListingScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name={CATEGORIES_SCREEN}
-              component={CategoriesScreen}
-              options={{ headerShown: false, title: 'Categories' }}
-            />
+            <Stack.Screen name="HomeTabs" component={BottomTabBar} />
           </Stack.Navigator>
         ) : null}
       </NavigationContainer>

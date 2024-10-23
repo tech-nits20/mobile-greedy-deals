@@ -11,7 +11,7 @@ import {
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { styles } from "./styles";
-import { CATEGORIES_SCREEN } from "../../routes/Routes";
+import { LISTING_SCREEN } from "../../routes/Routes";
 
 const mockSectionData = [
   {
@@ -128,9 +128,10 @@ const HomeSections = () => {
             <View style={styles.instanceParent}>
               {mockSectionData.map((item, index) => (
                 <HomeSectionItem
+                  key={index}
                   title={item.title}
                   iconSrc={item.src}
-                  onPress={() => navigation.navigate(CATEGORIES_SCREEN)}
+                  onPress={() => navigation.navigate(LISTING_SCREEN)}
                 />
               ))}
             </View>

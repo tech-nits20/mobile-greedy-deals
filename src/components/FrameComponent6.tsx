@@ -144,8 +144,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   frameParent: {
-    width: 163,
-    gap: Gap.gap_lg,
+    maxWidth: 163,
+    width: '100%',
+    gap: Gap.gap_xl,
     justifyContent: "center",
   },
 });

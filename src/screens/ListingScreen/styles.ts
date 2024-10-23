@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import {
   Padding,
   Gap,
@@ -49,10 +49,21 @@ export const styles = StyleSheet.create({
   },
   frameFlexBox: {
     alignContent: "flex-start",
+    flexDirection: "row",
+    alignSelf: "stretch",
+    alignItems: 'center',
+    marginBottom: 80,
+    width: '100%'
+  },
+  frameListingFlex: {
+    alignContent: "flex-start",
     flexWrap: "wrap",
     flexDirection: "row",
     alignSelf: "stretch",
-    marginBottom: 90,
+    alignItems: 'center',
+    marginBottom: 100,
+    width: Dimensions.get('screen').width,
+    gap: 12
   },
   subtractIcon: {
     width: 430,

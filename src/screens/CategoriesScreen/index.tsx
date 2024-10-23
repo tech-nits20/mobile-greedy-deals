@@ -6,7 +6,6 @@ import FrameComponent4 from "../../components/FrameComponent4";
 import TopAppBar from "../../components/TopAppBar";
 import { styles } from "./styles";
 import { LISTING_SCREEN } from "../../routes/Routes";
-import BottomTabBar from "../../components/BottomTabBar";
 
 const CategoriesScreen = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
@@ -118,7 +117,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -146,7 +145,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -176,7 +175,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -204,7 +203,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -232,7 +231,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -260,7 +259,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -288,7 +287,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -316,7 +315,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -344,7 +343,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -372,7 +371,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -402,7 +401,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -430,7 +429,7 @@ Fashion`}
 Fashion`}
                   />
                   <FrameComponent4
-                    menFashion={`Su
+                    menFashion={`Summer
 Fashion`}
                   />
                   <FrameComponent4
@@ -443,7 +442,6 @@ Fashion`}
           </View>
         </ScrollView>
       </View>
-      <BottomTabBar />
       <View style={styles.categoriesChild} />
     </View>
   );

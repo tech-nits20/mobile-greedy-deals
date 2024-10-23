@@ -1,16 +1,12 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text, ScrollView } from "react-native";
+import { Image, View, Text, ScrollView } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
-import FrameComponent3 from "../../components/FrameComponent3";
 import FrameComponent5 from "../../components/FrameComponent5";
 import FrameComponent6 from "../../components/FrameComponent6";
 import FrameComponent7 from "../../components/FrameComponent7";
-import FrameComponent2 from "../../components/FrameComponent2";
 import { styles } from "./styles";
-import { CATEGORIES_SCREEN } from "../../routes/Routes";
 import TopAppBar from "../../components/TopAppBar";
-import BottomTabBar from "../../components/BottomTabBar";
 const ListingScreen = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
 
@@ -294,10 +290,8 @@ const ListingScreen = () => {
                 </View>
               </View>
               <View style={styles.frameFlexBox}>
-                <View style={styles.frameWrapper12}>
-                  <ScrollView
-                    style={[styles.frameParent11, styles.frameFlexBox]}
-                  >
+                <ScrollView>
+                  <View style={styles.frameListingFlex}>
                     <FrameComponent5 />
                     <FrameComponent5 />
                     <FrameComponent5 />
@@ -314,14 +308,13 @@ const ListingScreen = () => {
                     <FrameComponent7 />
                     <FrameComponent7 />
                     <FrameComponent7 />
-                  </ScrollView>
-                </View>
+                  </View>
+                </ScrollView>
               </View>
             </View>
           </View>
         </View>
       </View>
-      <BottomTabBar />
     </View>
   );
 };

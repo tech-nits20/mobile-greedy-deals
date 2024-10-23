@@ -1,10 +1,8 @@
 import * as React from "react";
 import { Text, View, Image, ScrollView } from "react-native";
-import FrameComponent8 from "../../components/FrameComponent8";
 import FrameComponent from "../../components/FrameComponent";
 import FrameComponent1 from "../../components/FrameComponent1";
 import TopAppBar from "../../components/TopAppBar";
-import BottomTabBar from "../../components/BottomTabBar";
 import { styles } from "./styles";
 import HomeSections from "../../components/HomeSections";
 
@@ -15,7 +13,6 @@ const HomeScreen = () => {
       <ScrollView style={styles.mainApps1415Pro}>
         <View style={styles.locationUserBarParent}>
           <View style={styles.midRow}>
-            {/* <FrameComponent8 /> */}
             <HomeSections />
             <View style={styles.frameParent}>
               <View style={styles.component3Parent}>
@@ -454,7 +451,6 @@ const HomeScreen = () => {
           </View>
         </View>
       </ScrollView>
-      <BottomTabBar />
     </>
   );
 };

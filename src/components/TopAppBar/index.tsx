@@ -1,11 +1,14 @@
 import * as React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { styles } from "./styles";
-import { ParamListBase, useNavigation } from "@react-navigation/core";
+import { ParamListBase, useNavigation, useRoute } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 const TopAppBar = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+  const route = useRoute();
+  console.log(`==NAV: ${JSON.stringify(route)}`);
+  
   
   return (
     <View style={[styles.locationUserBar, styles.locationFlexBox]}>
