@@ -1,15 +1,19 @@
 import * as React from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import { styles } from "./styles";
-import { ParamListBase, useNavigation, useRoute } from "@react-navigation/core";
+import { ParamListBase, useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { TextInput } from "react-native-gesture-handler";
+import { Color } from "../../../GlobalStyles";
+import { useCurrentLocation } from "../../hooks/useCurrentLocation";
 
-const TopAppBar = () => {
+export interface TopAppBarProps {
+  title?: string;
+}
+const TopAppBar: React.FC<TopAppBarProps> = ({ title }) => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
-  const route = useRoute();
-  console.log(`==NAV: ${JSON.stringify(route)}`);
-  
-  
+  const {city} = useCurrentLocation();
+
   return (
     <View style={[styles.locationUserBar, styles.locationFlexBox]}>
       <View
@@ -37,31 +41,16 @@ const TopAppBar = () => {
           />
         )}
 
-        <Text style={styles.eastDelhiDelhi}>East Delhi, Delhi 110092.</Text>
+        <Text style={styles.eastDelhiDelhi}>
+          {title ?? city ?? "East Delhi, Delhi 110092."}
+        </Text>
       </View>
       <View style={[styles.locationUserBarParent, styles.searchParentFlexBox]}>
-        <View style={[styles.locationUserBar1, styles.searchParentFlexBox]}>
-          <View
-            style={[styles.searchStrongIcon1Parent, styles.searchParentFlexBox]}
-          >
-            <Image
-              style={styles.locationCrosshairsIcon1}
-              resizeMode="cover"
-              source={require("../../../assets/211817-search-strong-icon-1.png")}
-            />
-            <View style={[styles.searchForParent, styles.searchParentFlexBox]}>
-              <Text style={styles.searchFor}>Search for</Text>
-              <Text style={styles.offers}>‘Offers’</Text>
-              <Text style={styles.deals}>Deals</Text>
-              <Text style={styles.deals}>Cashback</Text>
-            </View>
-          </View>
-          <Image
-            style={styles.childLayout}
-            resizeMode="cover"
-            source={require("../../../assets/frame-3.png")}
-          />
-        </View>
+        <TextInput
+          style={[styles.locationUserBar1, styles.searchParentFlexBox]}
+          placeholder="Search for 'Offers'"
+          placeholderTextColor={Color.colorDimgray_100}
+        />
         <Image
           style={[styles.frameChild, styles.childLayout]}
           resizeMode="cover"

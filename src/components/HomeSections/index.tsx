@@ -5,13 +5,14 @@ import {
   Text,
   Pressable,
   ImageBackground,
-  ScrollView,
   ImageSourcePropType,
 } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { styles } from "./styles";
 import { LISTING_SCREEN } from "../../routes/Routes";
+import TopProductCarousel from "../TopProductCarousel";
+import { ScrollView } from "react-native-gesture-handler";
 
 const mockSectionData = [
   {
@@ -94,7 +95,8 @@ const HomeSections = () => {
     >
       <View style={styles.subtractParent}>
         <View style={styles.frameParent}>
-          <View style={[styles.component2Wrapper, styles.wrapperFlexBox]}>
+          <TopProductCarousel />
+          {/* <View style={[styles.component2Wrapper, styles.wrapperFlexBox]}>
             <View style={[styles.component2, styles.component2Layout]}>
               <View style={[styles.image122Wrapper, styles.wrapperFlexBox]}>
                 <Image
@@ -121,7 +123,7 @@ const HomeSections = () => {
               resizeMode="cover"
               source={require("../../../assets/ellipse-3.png")}
             />
-          </View>
+          </View> */}
         </View>
         <View style={styles.frameWrapper}>
           <ScrollView horizontal>

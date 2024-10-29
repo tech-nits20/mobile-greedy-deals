@@ -10,6 +10,7 @@ export const FontFamily = {
 export const FontSize = {
   size_3xs: 10,
   size_sm: 14,
+  size_base: 16,
   size_xs: 12,
   size_lg: 18,
   size_2xs: 11,
@@ -34,6 +35,7 @@ export const Color = {
   colorGold: "#ffc700",
   colorMistyrose: "#ffe7e2",
   colorWhitesmoke_100: "#f9f9f9",
+  colorTransparent: 'rgba(255,255,255,0.5)'
 };
 /* Gaps */
 export const Gap = {
@@ -44,6 +46,7 @@ export const Gap = {
   gap_lg: 10,
   gap_xl: 16,
   gap_2xl: 20,
+  gap_3xl: 32,
 };
 /* Paddings */
 export const Padding = {

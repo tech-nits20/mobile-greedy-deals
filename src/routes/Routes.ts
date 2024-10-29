@@ -3,3 +3,5 @@ export const CATEGORIES_SCREEN_STACK = 'CategoriesScreenStack';
 export const CATEGORIES_SCREEN = 'CategoriesScreen';
 export const LISTING_SCREEN = 'ListingScreen';
 export const PROFILE_SCREEN = 'ProfileScreen';
+export const PRODUCT_DETAILS_SCREEN = 'ProductDetailsScreen';
+export const MENU_SCREEN = 'MenuScreen';

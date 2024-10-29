@@ -32,7 +32,6 @@ export const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   component2Wrapper: {
-    height: 120,
     flexDirection: "row",
     overflow: "hidden",
     justifyContent: "center",
@@ -59,9 +58,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   frameGroup: {
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "stretch",
+    width: '100%'
   },
   categoriesPage: {
     fontSize: FontSize.size_lg,
@@ -82,73 +79,19 @@ export const styles = StyleSheet.create({
     borderRadius: Border.br_5xs,
     backgroundColor: Color.colorWhite,
   },
-  fashion1Typo: {
-    color: Color.colorOrangered_100,
-    fontFamily: FontFamily.poppinsMedium,
-    fontWeight: "500",
-    lineHeight: 16,
-    letterSpacing: 1,
-    fontSize: FontSize.size_sm,
-    textAlign: "left",
-  },
-  lineView: {
-    borderStyle: "solid",
-    borderColor: Color.colorGray_200,
-    borderTopWidth: 1,
-    width: 411,
-    height: 1,
-  },
-  fashionParent: {
-    gap: Gap.gap_2xs,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  bodyShotOfADarkSkinnedFaIcon: {
-    width: 44,
-    height: 70,
-  },
-  bodyShotOfADarkSkinnedFaWrapper: {
-    width: 70,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: Border.br_5xs,
-  },
-  frameWrapper: {
-    backgroundColor: Color.colorMistyrose,
-    height: 84,
-    justifyContent: "space-between",
-    alignItems: "center",
-    alignSelf: "stretch",
-    borderRadius: Border.br_5xs,
-  },
+ 
   womenFashion: {
     lineHeight: 12,
     color: Color.colorBlack,
     fontSize: FontSize.size_2xs,
   },
-  womenFashionWrapper: {
-    borderBottomRightRadius: Border.br_5xs,
-    borderBottomLeftRadius: Border.br_5xs,
-    width: 84,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: Color.colorWhite,
-  },
+
   framePressable: {
     width: 95,
     justifyContent: "center",
     gap: Gap.gap_lg,
   },
-  frameParent1: {
-    flexDirection: "row",
-    gap: Gap.gap_lg,
-    alignSelf: "stretch",
-  },
-  frameView: {
-    gap: Gap.gap_xl,
-    alignItems: "center",
-    alignSelf: "stretch",
-  },
+
   frameContainer: {
     width: 410,
     gap: 32,

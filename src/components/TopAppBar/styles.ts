@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     flexDirection: "row",
+    color: Color.colorBlack
   },
   childLayout: {
     height: 24,

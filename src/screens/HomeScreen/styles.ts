@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     fontWeight: "500",
   },
   offText: {
-    textShadowRadius: 2,
+    textShadowRadius: 1,
     textShadowOffset: {
       width: 0,
       height: 3,
@@ -36,30 +36,6 @@ export const styles = StyleSheet.create({
     fontWeight: "300",
     color: Color.colorOrangered_100,
   },
-  primeBrandsTypo: {
-    fontSize: FontSize.size_lg,
-    letterSpacing: 1,
-  },
-  parentFlexBox1: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  parentFlexBox: {
-    gap: Gap.gap_2xs,
-    alignSelf: "stretch",
-  },
-  offTypo: {
-    fontFamily: FontFamily.poppinsSemiBold,
-    fontWeight: "600",
-  },
-  offersTypo: {
-    color: Color.colorDimgray_100,
-    fontSize: FontSize.size_3xs,
-    fontFamily: FontFamily.poppinsLight,
-    fontWeight: "300",
-    letterSpacing: 1,
-    alignSelf: "stretch",
-  },
   frameLayout1: {
     width: 121,
     height: 1,
@@ -71,16 +47,6 @@ export const styles = StyleSheet.create({
     borderStyle: "solid",
     overflow: "hidden",
   },
-  minimumTypo1: {
-    fontSize: FontSize.size_sm,
-    textAlign: "left",
-  },
-  frameLayout: {
-    height: 16,
-    width: 16,
-    top: 72,
-    position: "absolute",
-  },
   minimum: {
     top: 0,
     textAlign: "left",
@@ -89,8 +55,16 @@ export const styles = StyleSheet.create({
     left: 0,
     position: "absolute",
   },
+  parentFlexBox1: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  frameGroup: {
+    gap: Gap.gap_lg,
+    alignSelf: "stretch",
+  },
   off: {
-    left: 112,
+    left: 70,
     fontSize: 20,
     transform: [
       {
@@ -162,71 +136,6 @@ export const styles = StyleSheet.create({
     width: 408,
     height: 108,
   },
-  primeBrands: {
-    lineHeight: 20,
-    color: Color.colorOrangered_100,
-    fontFamily: FontFamily.poppinsRegular,
-    letterSpacing: 1,
-    textAlign: "left",
-  },
-  frameChild: {
-    width: 411,
-    height: 1,
-    borderTopWidth: 1,
-    borderStyle: "solid",
-    borderColor: Color.colorGray_200,
-  },
-  primeBrandsParent: {
-    gap: Gap.gap_lg,
-    alignItems: "center",
-  },
-  uwlrjrAq9ti0pc1Icon: {
-    width: 42,
-    height: 6,
-  },
-  uwlrjrAq9ti0pc1Wrapper: {
-    height: 64,
-    width: 64,
-    justifyContent: "center",
-    borderRadius: Border.br_5xs,
-    backgroundColor: Color.colorWhite,
-  },
-  buy1Get: {
-    lineHeight: 18,
-    textAlign: "left",
-    color: Color.colorBlack,
-    fontSize: FontSize.size_sm,
-  },
-  babySopa: {
-    lineHeight: 12,
-    textAlign: "left",
-  },
-  buy1Get1Parent: {
-    paddingTop: Padding.p_9xs,
-    flex: 1,
-  },
-  frameView: {
-    gap: Gap.gap_md,
-    flexDirection: "row",
-    alignSelf: "stretch",
-  },
-  frameWrapper: {
-    backgroundColor: "rgba(129, 195, 65, 0.1)",
-    width: 200,
-    padding: Padding.p_5xs,
-    borderRadius: Border.br_5xs,
-    overflow: "hidden",
-  },
-  frameContainer: {
-    flexDirection: "row",
-    gap: Gap.gap_lg,
-    alignItems: "center",
-    alignSelf: "stretch",
-  },
-  frameGroup: {
-    gap: Gap.gap_lg,
-    alignSelf: "stretch",
-  },
   frameItem: {
     borderColor: Color.colorGray_200,
     width: 121,
@@ -259,34 +168,6 @@ export const styles = StyleSheet.create({
     display: "none",
     flexDirection: "row",
     alignItems: "center",
-  },
-  discountsAndOffers: {
-    lineHeight: 16,
-    color: Color.colorOrangered_100,
-    fontFamily: FontFamily.poppinsRegular,
-    letterSpacing: 1,
-    textAlign: "left",
-  },
-  discountsAndOffersParent: {
-    gap: Gap.gap_lg,
-  },
-  frameIcon: {
-    left: -8,
-    zIndex: 1,
-  },
-  frameChild1: {
-    left: 120,
-    zIndex: 2,
-  },
-  frameParent3: {
-    flexDirection: "row",
-    gap: Gap.gap_lg,
-    alignItems: "center",
-  },
-  frameParent2: {
-    flexDirection: "row",
-    gap: Gap.gap_lg,
-    alignSelf: "stretch",
   },
   frameParent1: {
     gap: Gap.gap_lg,

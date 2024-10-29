@@ -1,51 +1,17 @@
-import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
-import { Border, FontFamily, Color, FontSize, Gap } from "../../GlobalStyles";
+import { StyleSheet } from "react-native";
+import {
+  Border,
+  FontFamily,
+  Color,
+  FontSize,
+  Gap,
+} from "../../../GlobalStyles";
 
-export type FrameComponent6Type = {
-  uPTO?: string;
-};
-
-const FrameComponent6 = ({ uPTO }: FrameComponent6Type) => {
-  return (
-    <View style={styles.frameParent}>
-      <View style={[styles.frameWrapper, styles.wrapperLayout]}>
-        <View
-          style={[styles.bodyShotOfADarkSkinnedFaWrapper, styles.wrapperLayout]}
-        >
-          <Image
-            style={styles.bodyShotOfADarkSkinnedFaIcon}
-            resizeMode="cover"
-            source={require("../../assets/bodyshotofadarkskinnedfashionpng-11.png")}
-          />
-        </View>
-      </View>
-      <View style={styles.vectorParent}>
-        <Image
-          style={[styles.frameChild, styles.framePosition]}
-          resizeMode="cover"
-          source={require("../../assets/rectangle-448.png")}
-        />
-        <Image
-          style={[styles.frameItem, styles.framePosition]}
-          resizeMode="cover"
-          source={require("../../assets/rectangle-446.png")}
-        />
-        <Text style={styles.upto}>{uPTO}</Text>
-        <Text style={[styles.text, styles.offTypo]}>20%</Text>
-        <Text style={[styles.off, styles.offTypo]}>Off</Text>
-      </View>
-      <View style={styles.summerFashionWrapper}>
-        <Text style={styles.summerFashion}>Summer Fashion</Text>
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   wrapperLayout: {
     borderRadius: Border.br_5xs,
     alignItems: "center",
+    justifyContent: 'center'
   },
   framePosition: {
     left: 5,
@@ -59,11 +25,10 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   bodyShotOfADarkSkinnedFaIcon: {
-    width: 44,
-    height: 70,
+  alignItems: 'center',
+  justifyContent: 'center'  
   },
   bodyShotOfADarkSkinnedFaWrapper: {
-    width: 70,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -76,23 +41,23 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   frameChild: {
-    top: 32,
+    top: 29,
     width: 5,
     height: 3,
   },
   frameItem: {
-    top: 0,
+    top: -0,
     width: 61,
     height: 29,
   },
   upto: {
-    top: 4,
+    top: 3,
     fontWeight: "500",
     fontFamily: FontFamily.poppinsMedium,
     textAlign: "left",
     textTransform: "uppercase",
     color: Color.colorWhite,
-    lineHeight: 10,
+    lineHeight: 11,
     fontSize: FontSize.size_xs,
     left: 10,
     position: "absolute",
@@ -106,8 +71,8 @@ const styles = StyleSheet.create({
     left: 10,
   },
   off: {
-    top: 5,
-    left: 52,
+    top: 8,
+    left: 39,
     fontSize: FontSize.size_4xs,
     transform: [
       {
@@ -123,7 +88,7 @@ const styles = StyleSheet.create({
     left: -10,
     width: 64,
     zIndex: 1,
-    height: 29,
+    height: 32,
     position: "absolute",
   },
   summerFashion: {
@@ -145,10 +110,8 @@ const styles = StyleSheet.create({
   },
   frameParent: {
     maxWidth: 163,
-    width: '100%',
+    width: "100%",
     gap: Gap.gap_xl,
     justifyContent: "center",
   },
 });
-
-export default FrameComponent6;
