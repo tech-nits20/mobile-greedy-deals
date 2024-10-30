@@ -20,20 +20,18 @@ const App = () => {
 
   return (
     <>
-      <StrictMode >
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <NavigationContainer theme={MyTheme}>
-            {hideSplashScreen ? (
-              <Stack.Navigator
-                initialRouteName={HOME_SCREEN}
-                screenOptions={{ headerShown: false }}
-              >
-                <Stack.Screen name="HomeTabs" component={BottomTabBar} />
-              </Stack.Navigator>
-            ) : null}
-          </NavigationContainer>
-        </GestureHandlerRootView>
-      </StrictMode>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NavigationContainer theme={MyTheme}>
+          {hideSplashScreen ? (
+            <Stack.Navigator
+              initialRouteName={HOME_SCREEN}
+              screenOptions={{ headerShown: false }}
+            >
+              <Stack.Screen name="HomeTabs" component={BottomTabBar} />
+            </Stack.Navigator>
+          ) : null}
+        </NavigationContainer>
+      </GestureHandlerRootView>
     </>
   );
 };

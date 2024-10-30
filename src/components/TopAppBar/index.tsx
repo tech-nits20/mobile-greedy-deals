@@ -51,18 +51,6 @@ const TopAppBar: React.FC<TopAppBarProps> = ({ title }) => {
           placeholder="Search for 'Offers'"
           placeholderTextColor={Color.colorDimgray_100}
         />
-        {/* <Image
-          style={[styles.frameChild, styles.childLayout]}
-          resizeMode="cover"
-          source={require("../../../assets/frame-3.png")}
-        /> */}
-        {/* <View style={styles.menuLeftIcon1Wrapper}>
-          <Image
-            style={styles.menuLeftIcon1}
-            resizeMode="cover"
-            source={require("../../../assets/9057028-menu-left-icon-1.png")}
-          />
-        </View> */}
       </View>
       <View style={[styles.locationUserBarItem, styles.childLayout]} />
     </View>

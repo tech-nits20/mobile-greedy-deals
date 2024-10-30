@@ -104,7 +104,7 @@ const HomeScreen = () => {
   return (
     <>
       <TopAppBar />
-      <ScrollView style={styles.mainApps1415Pro}>
+      <ScrollView style={styles.mainApps1415Pro} bounces>
         <View style={styles.locationUserBarParent}>
           <View style={styles.midRow}>
             <HomeSections />

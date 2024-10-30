@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
+import LoginScreen from "../LoginScreen";
 
 const ProfileScreen = () => {
   return (
@@ -9,9 +10,10 @@ const ProfileScreen = () => {
         justifyContent: "center",
         display: "flex",
         height: "100%",
+        width: '100%'
       }}
     >
-      <Text style={{fontSize: 24, color: 'black'}}>Profile Screen</Text>
+      <LoginScreen />
     </View>
   );
 };
