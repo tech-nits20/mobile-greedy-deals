@@ -42,5 +42,40 @@ export const styles = StyleSheet.create({
   descriptionText: {
     color: Color.colorLightslategray,
     fontSize: FontSize.size_xs
-  }
+  },
+  productsTitle : {
+    color: Color.colorBlack,
+    fontSize: FontSize.size_base
+  },
+  productWrapper : {
+    gap: Gap.gap_xl,
+    paddingTop: Padding.p_3xs
+  },
+  mapWrapper : {
+    backgroundColor: Color.colorGray_100,
+    height: 200,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  youtubeLinks : {
+    flex: 1,
+  },
+  itemContainer: {
+    flex: 1,
+    marginHorizontal: 5,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    overflow: 'hidden',
+    alignItems: 'center',
+  },
+  thumbnail: {
+    width: 160,
+    height: 150,
+  },
+  youtubeTitle: {
+    padding: 5,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
 });

@@ -10,6 +10,7 @@ import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
 } from "react-native-reanimated";
+import { screenWidth } from "../../helper/Utils";
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -31,11 +32,10 @@ export interface CarouselProps {
   isFullWidth?: boolean;
   carouselMargin?: number;
   items?: {imgSrc: string}[];
+  autoPlay?: boolean;
 }
 
-const width = Dimensions.get("screen").width;
-
-const TopProductCarousel: FC<CarouselProps> = ({ isFullWidth, items, carouselMargin }) => {
+const CustomCarousel: FC<CarouselProps> = ({ isFullWidth, items, carouselMargin , autoPlay = true}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
@@ -43,15 +43,15 @@ const TopProductCarousel: FC<CarouselProps> = ({ isFullWidth, items, carouselMar
       <View style={styles.container}>
         <Carousel
           loop
-          width={width - (isFullWidth ? 0 : carouselMargin ?? Padding.p_base)}
+          width={screenWidth - (isFullWidth ? 0 : carouselMargin ?? Padding.p_base)}
           height={138}
           style={{
             borderRadius: isFullWidth ? 0 : 12,
           }}
-          autoPlay={true}
+          autoPlay={autoPlay}
           pagingEnabled
           data={mockCarouselData}
-          scrollAnimationDuration={2000}
+          scrollAnimationDuration={autoPlay ? 2000 : 500}
           snapEnabled
           onSnapToItem={(index) => setCurrentIndex(index)}
           renderItem={({ item, index }) => (
@@ -86,4 +86,4 @@ const TopProductCarousel: FC<CarouselProps> = ({ isFullWidth, items, carouselMar
   );
 };
 
-export default memo(TopProductCarousel);
+export default memo(CustomCarousel);

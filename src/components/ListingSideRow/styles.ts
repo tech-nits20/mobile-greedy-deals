@@ -10,6 +10,6 @@ import {
 
 export const styles = StyleSheet.create({
     container: {
-        gap: Gap.gap_lg
+        display: 'flex'
     }
 })

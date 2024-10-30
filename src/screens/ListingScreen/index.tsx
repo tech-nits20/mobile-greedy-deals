@@ -8,8 +8,8 @@ import ListingProductSection, {
   ListingProductSectionProps,
 } from "../../components/ListingProductSection";
 import { Color } from "../../../GlobalStyles";
-import { ScrollView } from "react-native-gesture-handler";
-import TopProductCarousel from "../../components/TopProductCarousel";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
+import CustomCarousel from "../../components/CustomCarousel";
 import { useRoute } from "@react-navigation/native";
 
 const mockListingSection: ListingProductSectionProps[] = [
@@ -103,8 +103,8 @@ const mockListingSection: ListingProductSectionProps[] = [
   },
 ];
 const ListingScreen = () => {
- const route = useRoute();
-  
+  const route = useRoute();
+
   return (
     <View style={styles.listingPage}>
       <Image
@@ -112,7 +112,7 @@ const ListingScreen = () => {
         resizeMode="cover"
         source={require("../../../assets/subtract1.png")}
       />
-      <TopAppBar title={route?.params?.title ?? ''}/>
+      <TopAppBar title={route?.params?.title ?? ""} />
       <View style={[styles.midRow, styles.midRowSpaceBlock]}>
         <View style={styles.midRowInner}>
           <View style={[styles.frameParent, styles.frameParentFlexBox]}>
@@ -122,20 +122,23 @@ const ListingScreen = () => {
             <View style={[styles.frameParent9, styles.frameParentFlexBox]}>
               <View style={[styles.component2Wrapper, styles.wrapperLayout]}>
                 <View style={styles.component2}>
-                  <TopProductCarousel />
+                  <CustomCarousel />
                 </View>
               </View>
               <View style={styles.frameWrapper10}>
                 <FilterAndSort />
               </View>
               <View style={styles.frameFlexBox}>
-                <ScrollView>
-                  <View style={styles.frameListingFlex}>
-                    {mockListingSection.map((item) => {
-                      return <ListingProductSection {...item} />;
-                    })}
-                  </View>
-                </ScrollView>
+                <FlatList
+                  data={mockListingSection}
+                  keyExtractor={(item) => item.title}
+                  numColumns={2}
+                  style={styles.flatlist}
+                  columnWrapperStyle={{justifyContent: 'space-between'}}
+                  renderItem={({ item }) => {
+                    return <ListingProductSection {...item} />;
+                  }}
+                />
               </View>
             </View>
           </View>

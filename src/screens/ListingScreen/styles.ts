@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
     alignContent: "flex-start",
     flexDirection: "row",
     alignSelf: "stretch",
-    alignItems: "center",
     marginBottom: 100,
     width: "100%",
   },
@@ -141,4 +140,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Color.colorWhite,
   },
+  flatlist: {
+    marginBottom: 100
+  }
 });

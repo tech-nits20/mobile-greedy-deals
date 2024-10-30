@@ -112,6 +112,6 @@ export const styles = StyleSheet.create({
     maxWidth: 163,
     width: "100%",
     gap: Gap.gap_xl,
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
 });

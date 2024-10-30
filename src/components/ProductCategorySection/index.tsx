@@ -1,5 +1,5 @@
 import React, { FC, memo } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { styles } from "./styles";
 import ProductCategorySectionItem, {
   ProductCategoryItemType,
@@ -12,18 +12,27 @@ import { ScrollView } from "react-native-gesture-handler";
 export interface ProductCategorySectionProps {
   sectionTitle: string;
   items: ProductCategoryItemType[];
+  onViewAllPressed?: () => void;
 }
 const ProductCategorySection: FC<ProductCategorySectionProps> = ({
   sectionTitle,
   items,
+  onViewAllPressed
 }) => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+  const onItemPressed = () => {
+    navigation.navigate(LISTING_SCREEN, { title: sectionTitle })
+  };
+
   return (
     <View style={styles.frameView}>
       <View style={styles.fashionParent}>
         <Text style={styles.fashion1Typo}>{sectionTitle}</Text>
-        <View style={styles.lineView} />
+        <Pressable onPress={onItemPressed}>
+          <Text style={styles.viewAll}>View all</Text>
+        </Pressable>
       </View>
+      <View style={styles.lineView} />
       <View style={styles.frameParent1}>
         <View style={styles.frameWrapper}></View>
         <ScrollView horizontal>
@@ -33,7 +42,7 @@ const ProductCategorySection: FC<ProductCategorySectionProps> = ({
                 <ProductCategorySectionItem
                   key={`${item.title}${index}`}
                   {...item}
-                  onPress={() => navigation.navigate(LISTING_SCREEN, {title: sectionTitle})}
+                  onPress={onItemPressed}
                 />
               );
             })}

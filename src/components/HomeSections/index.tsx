@@ -11,8 +11,9 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { styles } from "./styles";
 import { LISTING_SCREEN } from "../../routes/Routes";
-import TopProductCarousel from "../TopProductCarousel";
-import { ScrollView } from "react-native-gesture-handler";
+import CustomCarousel from "../CustomCarousel";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { Padding } from "../../../GlobalStyles";
 
 const mockSectionData = [
   {
@@ -95,49 +96,26 @@ const HomeSections = () => {
     >
       <View style={styles.subtractParent}>
         <View style={styles.frameParent}>
-          <TopProductCarousel />
-          {/* <View style={[styles.component2Wrapper, styles.wrapperFlexBox]}>
-            <View style={[styles.component2, styles.component2Layout]}>
-              <View style={[styles.image122Wrapper, styles.wrapperFlexBox]}>
-                <Image
-                  style={styles.image122Icon}
-                  resizeMode="cover"
-                  source={require("../../../assets/image-122.png")}
-                />
-              </View>
-            </View>
-          </View>
-          <View style={styles.ellipseParent}>
-            <Image
-              style={styles.frameChild}
-              resizeMode="cover"
-              source={require("../../../assets/ellipse-1.png")}
-            />
-            <Image
-              style={styles.frameChild}
-              resizeMode="cover"
-              source={require("../../../assets/ellipse-3.png")}
-            />
-            <Image
-              style={styles.frameChild}
-              resizeMode="cover"
-              source={require("../../../assets/ellipse-3.png")}
-            />
-          </View> */}
+          <CustomCarousel />
         </View>
         <View style={styles.frameWrapper}>
-          <ScrollView horizontal>
-            <View style={styles.instanceParent}>
-              {mockSectionData.map((item, index) => (
+          <FlatList
+            data={mockSectionData}
+            horizontal
+            ItemSeparatorComponent={() => (
+              <View style={{ paddingEnd: Padding.p_base }} />
+            )}
+            renderItem={({ item, index }) => {
+              return (
                 <HomeSectionItem
                   key={index}
                   title={item.title}
                   iconSrc={item.src}
                   onPress={() => navigation.navigate(LISTING_SCREEN)}
                 />
-              ))}
-            </View>
-          </ScrollView>
+              );
+            }}
+          />
         </View>
       </View>
     </ImageBackground>

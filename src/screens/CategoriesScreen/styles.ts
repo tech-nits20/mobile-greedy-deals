@@ -117,4 +117,7 @@ export const styles = StyleSheet.create({
     height: 932,
     backgroundColor: Color.colorWhite,
   },
+  sectionContainer: {
+    paddingBottom: 24
+  }
 });

@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     textAlign: "left",
     flex: 1,
   },
-  locationCrosshairsIcon1Parent: {
+  locationParent: {
     width: 160,
     zIndex: 0,
     gap: Gap.gap_xs,
@@ -82,7 +82,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Color.colorWhite,
     height: 32,
     padding: Padding.p_5xs,
-    gap: Gap.gap_sm,
+    marginEnd: Padding.p_5xs
   },
   frameChild: {
     borderRadius: Border.br_81xl,

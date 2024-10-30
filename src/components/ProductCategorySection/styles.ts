@@ -5,18 +5,21 @@ import {
   FontSize,
   Gap,
   Border,
+  Padding,
 } from "../../../GlobalStyles";
+import { screenWidth } from "../../helper/Utils";
 
 export const styles = StyleSheet.create({
   frameView: {
-    gap: Gap.gap_xl,
     alignItems: "center",
     alignSelf: "stretch",
   },
   fashionParent: {
-    gap: Gap.gap_2xs,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
+    width: "100%",
+    flexDirection: "row",
+    paddingHorizontal: Padding.p_3xs,
   },
   fashion1Typo: {
     color: Color.colorOrangered_100,
@@ -28,15 +31,15 @@ export const styles = StyleSheet.create({
     textAlign: "left",
   },
   lineView: {
-    borderStyle: "solid",
-    borderColor: Color.colorGray_200,
+    borderColor: Color.colorGray_100,
     borderTopWidth: 1,
-    width: 411,
-    height: 1,
+    width: screenWidth,
+    marginHorizontal: Padding.p_base,
+    marginVertical: Padding.p_9xs
   },
   frameParent1: {
     flexDirection: "row",
-    gap: Gap.gap_lg,
+    padding: Padding.p_3xs,
     display: "flex",
     alignSelf: "stretch",
   },
@@ -60,7 +63,10 @@ export const styles = StyleSheet.create({
   },
   womenFashionWrapper: {
     borderRadius: Border.br_5xs,
-    flexDirection: 'row',
-    gap: Gap.gap_lg
+    flexDirection: "row",
+    gap: Gap.gap_xl,
+  },
+  viewAll: {
+    color: Color.colorLightslategray,
   },
 });

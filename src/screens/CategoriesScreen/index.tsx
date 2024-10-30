@@ -5,8 +5,8 @@ import { styles } from "./styles";
 import ProductCategorySection, {
   ProductCategorySectionProps,
 } from "../../components/ProductCategorySection";
-import { ScrollView } from "react-native-gesture-handler";
-import TopProductCarousel from "../../components/TopProductCarousel";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
+import CustomCarousel from "../../components/CustomCarousel";
 import { CATEGORIES_SCREEN } from "../../routes/Routes";
 
 const mockCategoryData: ProductCategorySectionProps[] = [
@@ -311,8 +311,8 @@ const mockCategoryData: ProductCategorySectionProps[] = [
     ],
   },
 ];
-const CategoriesScreen = ({route}) => {
-  const screenTitle = route?.name === CATEGORIES_SCREEN ? 'Categories' : '';
+const CategoriesScreen = ({ route }) => {
+  const screenTitle = route?.name === CATEGORIES_SCREEN ? "Categories" : "";
   return (
     <View style={[styles.categories, styles.categoriesLayout]}>
       <Image
@@ -321,11 +321,11 @@ const CategoriesScreen = ({route}) => {
         source={require("../../../assets/subtract2.png")}
       />
       <View style={styles.frameParent}>
-        <TopAppBar title={screenTitle}/>
+        <TopAppBar title={screenTitle} />
         <ScrollView>
-            <View style={styles.frameGroup}>
-              <TopProductCarousel isFullWidth/>
-            </View>
+          <View style={styles.frameGroup}>
+            <CustomCarousel isFullWidth />
+          </View>
           <View style={styles.midRow}>
             <View style={styles.categoriesPageParent}>
               <Text style={styles.categoriesPage}>Categories Page</Text>
@@ -337,11 +337,17 @@ const CategoriesScreen = ({route}) => {
               </Text>
             </View>
             <View style={styles.frameContainer}>
-              {mockCategoryData.map((item) => {
-                return (
-                  <ProductCategorySection key={item.sectionTitle} {...item} />
-                );
-              })}
+              <FlatList
+                data={mockCategoryData}
+                keyExtractor={(item) => item.sectionTitle}
+                renderItem={(item) => {
+                  return (
+                    <View style={styles.sectionContainer}>
+                      <ProductCategorySection key={item.index} {...item.item} />
+                    </View>
+                  );
+                }}
+              />
             </View>
           </View>
         </ScrollView>

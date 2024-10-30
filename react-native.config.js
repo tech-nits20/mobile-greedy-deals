@@ -1,7 +1,5 @@
-module.exports = {
-    project: {
-      ios: {},
-      android: {}, // grouped into "project"
-    },
-    assets: ['./assets/fonts/'], // stays the same
-  };
+export const project = {
+  ios: {},
+  android: {}, // grouped into "project"
+};
+export const assets = ['./assets/fonts/'];

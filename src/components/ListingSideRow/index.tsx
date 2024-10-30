@@ -3,8 +3,9 @@ import { View } from "react-native";
 import ListingSideRowItem, {
   ListingSideRowItemProps,
 } from "../ListingSideRowItem";
-import { ScrollView } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 import { styles } from "./styles";
+import { Padding } from "../../../GlobalStyles";
 
 const mockSideRowData: ListingSideRowItemProps[] = [
   {
@@ -60,20 +61,25 @@ const ListingSideRow: FC = () => {
   };
 
   return (
-    <ScrollView horizontal>
-      <View style={styles.container}>
-        {mockSideRowData.map((value, index) => {
+    <View style={styles.container}>
+      <FlatList
+        data={mockSideRowData}
+        keyExtractor={(item) => item.title}
+        ItemSeparatorComponent={() => (
+          <View style={{ paddingBottom: Padding.p_base }} />
+        )}
+        renderItem={({ index, item }) => {
           return (
             <ListingSideRowItem
-              {...value}
+              {...item}
               id={index}
               onSelected={() => onSelected(index)}
               isSelected={selectedCategory === index}
             />
           );
-        })}
-      </View>
-    </ScrollView>
+        }}
+      />
+    </View>
   );
 };
 

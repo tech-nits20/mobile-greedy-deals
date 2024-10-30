@@ -73,8 +73,8 @@ const BottomTabBar = () => {
               resizeMode="cover"
               source={
                 focused
-                  ? require("../../../assets/profile_selected_icon.png")
-                  : require("../../../assets/172507-box-money-icon-11.png")
+                  ? require("../../../assets/menu_active.png")
+                  : require("../../../assets/menu_default.png")
               }
             />
           ),

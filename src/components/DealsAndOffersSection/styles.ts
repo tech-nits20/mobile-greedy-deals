@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
       },
       frameParent3: {
         flexDirection: "row",
-        gap: Gap.gap_lg,
+        gap: Gap.gap_2xl,
         alignItems: "center",
       },
       frameIcon: {
