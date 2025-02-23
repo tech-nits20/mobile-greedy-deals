@@ -1,5 +1,7 @@
-export const project = {
-  ios: {},
-  android: {}, // grouped into "project"
+module.exports = {
+  project: {
+    ios: {},
+    android: {}, // grouped into "project"
+  },
+  assets: ['./assets/fonts/', './node_modules/react-native-vector-icons/Fonts'],
 };
-export const assets = ['./assets/fonts/'];

@@ -30,12 +30,14 @@ export const Color = {
   colorGray_200: "rgba(255, 255, 255, 0)",
   colorGray_300: "rgba(0, 0, 0, 0.1)",
   colorOrangered_100: "#ee2b00",
+  colorOrangedHover: '#f57c62',
   colorOrangered_200: "rgba(238, 43, 0, 0.1)",
   colorCornflowerblue: "rgba(15, 123, 213, 0.1)",
   colorGold: "#ffc700",
   colorMistyrose: "#ffe7e2",
   colorWhitesmoke_100: "#f9f9f9",
-  colorTransparent: 'rgba(255,255,255,0.5)'
+  colorTransparent: 'rgba(255,255,255,0.5)',
+  colorLightHover: '#f2f6f7'
 };
 /* Gaps */
 export const Gap = {
@@ -51,6 +53,7 @@ export const Gap = {
 };
 /* Paddings */
 export const Padding = {
+  p_xl: 20,
   p_base: 16,
   p_3xs: 10,
   p_5xs: 8,

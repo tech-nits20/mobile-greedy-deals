@@ -1,80 +1,92 @@
-import React, { FC, memo, useState } from "react";
-import { View } from "react-native";
+import React, { FC, memo, useState } from 'react';
+import { View } from 'react-native';
 import ListingSideRowItem, {
   ListingSideRowItemProps,
-} from "../ListingSideRowItem";
-import { FlatList } from "react-native-gesture-handler";
-import { styles } from "./styles";
-import { Padding } from "../../../GlobalStyles";
+} from '../ListingSideRowItem';
+import { FlatList } from 'react-native-gesture-handler';
+import { styles } from './styles';
+import { Padding } from '../../../GlobalStyles';
+import { ICategory } from '../../redux/sagas/categories/categoriesTypes';
 
 const mockSideRowData: ListingSideRowItemProps[] = [
   {
-    title: "All",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'All',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Women",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Women',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Men",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Men',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Kids",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Kids',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Summer",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Summer',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Winter",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Winter',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Women",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Women1',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Men",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Men1',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Kids",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Kids1',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Summer",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Summer1',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
   {
-    title: "Winter",
-    imgSrc: require("../../../assets/bodyshotofadarkskinnedfashionpng-1.png"),
+    title: 'Winter1',
+    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-1.png'),
   },
 ];
-const ListingSideRow: FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<number>(0);
+interface IListingSideRowProps {
+  subCategories: ICategory[];
+  selectedCat: ICategory;
+  onSelectedItem: (item: ICategory) => void;
+}
+const ListingSideRow: FC<IListingSideRowProps> = ({
+  subCategories,
+  selectedCat,
+  onSelectedItem,
+}) => {
+  const [selectedCategory, setSelectedCategory] =
+    useState<ICategory>(selectedCat);
 
-  const onSelected = (index: number) => {
-    setSelectedCategory(index);
+  const onSelected = (category: ICategory) => {
+    onSelectedItem(category);
+    setSelectedCategory(category);
   };
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={mockSideRowData}
-        keyExtractor={(item) => item.title}
+        data={subCategories}
+        keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => (
           <View style={{ paddingBottom: Padding.p_base }} />
         )}
         renderItem={({ index, item }) => {
           return (
             <ListingSideRowItem
+              key={index}
               {...item}
-              id={index}
-              onSelected={() => onSelected(index)}
-              isSelected={selectedCategory === index}
+              onSelected={() => onSelected(item)}
+              isSelected={selectedCategory.id === item.id}
             />
           );
         }}

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from 'react-native';
 import {
   Padding,
   Gap,
@@ -6,11 +6,11 @@ import {
   Border,
   FontFamily,
   FontSize,
-} from "../../../GlobalStyles";
+} from '../../../GlobalStyles';
 
 export const styles = StyleSheet.create({
   frameContainer: {
-    shadowColor: "rgba(0, 0, 0, 0.15)",
+    shadowColor: 'rgba(0, 0, 0, 0.15)',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -18,19 +18,21 @@ export const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 6,
     shadowOpacity: 1,
-    justifyContent: "center",
-    overflow: "hidden",
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    overflow: 'hidden',
     borderWidth: 1,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderColor: Color.colorOrangered_100,
     borderBottomLeftRadius: Border.br_9xs,
     borderBottomRightRadius: Border.br_9xs,
     borderTopRightRadius: Border.br_3xs,
     borderTopLeftRadius: Border.br_3xs,
     backgroundColor: Color.colorWhite,
+    maxWidth: 70,
   },
   frameView: {
-    justifyContent: "center",
+    justifyContent: 'center',
     borderTopRightRadius: Border.br_3xs,
     borderTopLeftRadius: Border.br_3xs,
     borderBottomRightRadius: Border.br_9xs,
@@ -38,7 +40,7 @@ export const styles = StyleSheet.create({
   frameViewPosition: {
     borderBottomLeftRadius: Border.br_9xs,
     borderBottomRightRadius: Border.br_9xs,
-    justifyContent: "center",
+    justifyContent: 'center',
     backgroundColor: Color.colorWhite,
   },
   frameWrapper: {
@@ -47,35 +49,43 @@ export const styles = StyleSheet.create({
   },
   frameWrapperBg: {
     backgroundColor: Color.colorMistyrose,
-    padding: Padding.p_9xs,
-    alignItems: "center",
+    paddingHorizontal: Padding.p_9xs,
+    paddingBottom: Padding.p_9xs,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   productImageWrapper: {
     width: 40,
-    alignItems: "center",
+    alignItems: 'center',
   },
   wrapperLayout: {
     borderRadius: Border.br_5xs,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   productImage: {
     width: 25,
     height: 40,
   },
-  allWrapper: {
-    width: 48,
+  productIcon: {
+    width: 25,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  nameWrapper: {
     paddingHorizontal: 0,
     paddingVertical: Padding.p_11xs,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  all: {
+  name: {
     fontSize: FontSize.size_4xs,
     letterSpacing: 1,
     lineHeight: 9,
     fontFamily: FontFamily.poppinsRegular,
-    textAlign: "center",
+    textAlign: 'center',
     color: Color.colorBlack,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
+    paddingVertical: 2,
   },
 });

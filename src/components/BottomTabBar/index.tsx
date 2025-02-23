@@ -13,9 +13,13 @@ import ProfileScreen from "../../screens/ProfileScreen";
 import CategoriesStackNavigator from "../../navigator/CategoriesStackNavigator";
 import { Color } from "../../../GlobalStyles";
 import MenuScreen from "../../screens/MenuScreen";
+import { useRoute } from "@react-navigation/core";
 
 const Tab = createBottomTabNavigator();
 const BottomTabBar = () => {
+  const route = useRoute();
+  console.log(`==ROOT: ${JSON.stringify(route)}`);
+  
   return (
     <Tab.Navigator
       initialRouteName={HOME_SCREEN}

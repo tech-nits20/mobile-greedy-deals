@@ -1,16 +1,16 @@
-import React, { FC, memo, useEffect, useState } from "react";
-import { View, Dimensions, Image } from "react-native";
-import { styles } from "./styles";
-import Carousel from "react-native-reanimated-carousel";
-import { Padding } from "../../../GlobalStyles";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import ActiveDot from "../../../assets/active_dot.png";
-import InActiveDot from "../../../assets/inactive_dot.png";
+import React, { FC, memo, useEffect, useState } from 'react';
+import { View, Dimensions, Image } from 'react-native';
+import { styles } from './styles';
+import Carousel from 'react-native-reanimated-carousel';
+import { Padding } from '../../../GlobalStyles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import ActiveDot from '../../../assets/active_dot.png';
+import InActiveDot from '../../../assets/inactive_dot.png';
 import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
-} from "react-native-reanimated";
-import { screenWidth } from "../../helper/Utils";
+} from 'react-native-reanimated';
+import { screenWidth } from '../../helper/Utils';
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -19,23 +19,28 @@ configureReanimatedLogger({
 
 const mockCarouselData = [
   {
-    imgSrc: require("../../../assets/image-122.png"),
+    imgSrc: require('../../../assets/image-122.png'),
   },
   {
-    imgSrc: require("../../../assets/carousel1.png"),
+    imgSrc: require('../../../assets/carousel1.png'),
   },
   {
-    imgSrc: require("../../../assets/carousel2.png"),
+    imgSrc: require('../../../assets/carousel2.png'),
   },
 ];
 export interface CarouselProps {
   isFullWidth?: boolean;
   carouselMargin?: number;
-  items?: {imgSrc: string}[];
+  items?: { imgSrc: string }[];
   autoPlay?: boolean;
 }
 
-const CustomCarousel: FC<CarouselProps> = ({ isFullWidth, items, carouselMargin , autoPlay = true}) => {
+const CustomCarousel: FC<CarouselProps> = ({
+  isFullWidth,
+  items,
+  carouselMargin,
+  autoPlay = true,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
@@ -43,7 +48,9 @@ const CustomCarousel: FC<CarouselProps> = ({ isFullWidth, items, carouselMargin 
       <View style={styles.container}>
         <Carousel
           loop
-          width={screenWidth - (isFullWidth ? 0 : carouselMargin ?? Padding.p_base)}
+          width={
+            screenWidth - (isFullWidth ? 0 : carouselMargin ?? Padding.p_base)
+          }
           height={138}
           style={{
             borderRadius: isFullWidth ? 0 : 12,
@@ -51,7 +58,7 @@ const CustomCarousel: FC<CarouselProps> = ({ isFullWidth, items, carouselMargin 
           autoPlay={autoPlay}
           pagingEnabled
           data={mockCarouselData}
-          scrollAnimationDuration={autoPlay ? 2000 : 500}
+          scrollAnimationDuration={autoPlay ? 5000 : 500}
           snapEnabled
           onSnapToItem={(index) => setCurrentIndex(index)}
           renderItem={({ item, index }) => (

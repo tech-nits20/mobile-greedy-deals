@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, Alert, Pressable } from "react-native";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import { LoginManager, AccessToken } from "react-native-fbsdk-next";
 import { styles } from "./styles";
 import { TextInput } from "react-native-gesture-handler";
 import { Color } from "../../../GlobalStyles";
+import CTAButton from "../../components/CTAButton";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
 
   const handleLogin = () => {
     if (email && password) {
@@ -29,23 +30,23 @@ const LoginScreen = () => {
   };
 
   const handleFacebookLogin = async () => {
-    try {
-      const result = await LoginManager.logInWithPermissions([
-        "public_profile",
-        "email",
-      ]);
-      if (result.isCancelled) {
-        Alert.alert("Login Cancelled");
-      } else {
-        const data = await AccessToken.getCurrentAccessToken();
-        Alert.alert(
-          "Facebook Login Successful",
-          `Access Token: ${data.accessToken}`
-        );
-      }
-    } catch (error) {
-      Alert.alert("Facebook Login Failed", error.message);
-    }
+    // try {
+    //   const result = await LoginManager.logInWithPermissions([
+    //     "public_profile",
+    //     "email",
+    //   ]);
+    //   if (result.isCancelled) {
+    //     Alert.alert("Login Cancelled");
+    //   } else {
+    //     const data = await AccessToken.getCurrentAccessToken();
+    //     Alert.alert(
+    //       "Facebook Login Successful",
+    //       `Access Token: ${data.accessToken}`
+    //     );
+    //   }
+    // } catch (error) {
+    //   Alert.alert("Facebook Login Failed", error.message);
+    // }
   };
 
   return (
@@ -68,16 +69,18 @@ const LoginScreen = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Pressable style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </Pressable>
+      <TextInput
+        style={styles.input}
+        placeholder="Mobile number"
+        value={mobileNumber}
+        placeholderTextColor={Color.colorLightslategray}
+        onChangeText={setMobileNumber}
+        keyboardType="decimal-pad"
+      />
+      <CTAButton title="Login" onPress={handleLogin} />
       <View style={styles.socialButtons}>
-        <Pressable style={styles.button}  onPress={handleGoogleLogin}>
-          <Text style={styles.buttonText}>Login with Google</Text>
-        </Pressable>
-        <Pressable style={styles.button}  onPress={handleFacebookLogin}>
-          <Text style={styles.buttonText}>Login with Facebook</Text>
-        </Pressable>
+        <CTAButton title="Login with Google" onPress={handleGoogleLogin} />
+        <CTAButton title="Login with Facebook" onPress={handleFacebookLogin} />
       </View>
     </View>
   );

@@ -1,44 +1,44 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   Border,
   FontFamily,
   Color,
   FontSize,
   Gap,
-} from "../../../GlobalStyles";
+} from '../../../GlobalStyles';
 
 export const styles = StyleSheet.create({
   wrapperLayout: {
     borderRadius: Border.br_5xs,
-    alignItems: "center",
-    justifyContent: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   framePosition: {
     left: 5,
-    position: "absolute",
+    position: 'absolute',
   },
   offTypo: {
     fontFamily: FontFamily.poppinsBold,
-    fontWeight: "700",
-    textAlign: "left",
-    textTransform: "uppercase",
-    position: "absolute",
+    fontWeight: '700',
+    textAlign: 'left',
+    textTransform: 'uppercase',
+    position: 'absolute',
   },
-  bodyShotOfADarkSkinnedFaIcon: {
-  alignItems: 'center',
-  justifyContent: 'center'  
+  offerImage: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  bodyShotOfADarkSkinnedFaWrapper: {
-    alignItems: "center",
-    justifyContent: "center",
+  offerImageWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   frameWrapper: {
     backgroundColor: Color.colorMistyrose,
     height: 84,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     zIndex: 0,
-    alignItems: "center",
-    alignSelf: "stretch",
+    alignItems: 'center',
+    alignSelf: 'stretch',
   },
   frameChild: {
     top: 29,
@@ -52,21 +52,21 @@ export const styles = StyleSheet.create({
   },
   upto: {
     top: 3,
-    fontWeight: "500",
+    fontWeight: '500',
     fontFamily: FontFamily.poppinsMedium,
-    textAlign: "left",
-    textTransform: "uppercase",
+    textAlign: 'left',
+    textTransform: 'uppercase',
     color: Color.colorWhite,
     lineHeight: 11,
     fontSize: FontSize.size_xs,
     left: 10,
-    position: "absolute",
+    position: 'absolute',
   },
   text: {
     top: 14,
     color: Color.colorGold,
     lineHeight: 12,
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: FontSize.size_xs,
     left: 10,
   },
@@ -76,12 +76,12 @@ export const styles = StyleSheet.create({
     fontSize: FontSize.size_4xs,
     transform: [
       {
-        rotate: "90deg",
+        rotate: '90deg',
       },
     ],
     color: Color.colorWhite,
     lineHeight: 10,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   vectorParent: {
     top: 9,
@@ -89,29 +89,29 @@ export const styles = StyleSheet.create({
     width: 64,
     zIndex: 1,
     height: 32,
-    position: "absolute",
+    position: 'absolute',
   },
-  summerFashion: {
+  titleText: {
     fontSize: FontSize.size_2xs,
     fontFamily: FontFamily.poppinsRegular,
     color: Color.colorBlack,
-    textAlign: "center",
+    textAlign: 'center',
     lineHeight: 12,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
   },
-  summerFashionWrapper: {
+  titleWrapper: {
     borderBottomRightRadius: Border.br_5xs,
     borderBottomLeftRadius: Border.br_5xs,
     backgroundColor: Color.colorWhite,
     zIndex: 2,
-    alignItems: "center",
-    alignSelf: "stretch",
-    justifyContent: "center",
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
   },
   frameParent: {
     maxWidth: 163,
-    width: "100%",
-    gap: Gap.gap_xl,
-    justifyContent: "space-between",
+    width: '100%',
+    gap: Gap.gap_lg,
+    justifyContent: 'space-between',
   },
 });

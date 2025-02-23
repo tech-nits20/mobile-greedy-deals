@@ -243,6 +243,6 @@ export const styles = StyleSheet.create({
     height: 932,
     width: "100%",
     flex: 1,
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorTransparent,
   },
 });

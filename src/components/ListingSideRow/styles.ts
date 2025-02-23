@@ -1,15 +1,7 @@
-import { Dimensions, StyleSheet } from "react-native";
-import {
-  Padding,
-  Gap,
-  Color,
-  Border,
-  FontFamily,
-  FontSize,
-} from "../../../GlobalStyles";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    container: {
-        display: 'flex'
-    }
-})
+  container: {
+    display: 'flex',
+  },
+});

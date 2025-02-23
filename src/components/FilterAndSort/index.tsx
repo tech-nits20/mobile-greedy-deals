@@ -1,5 +1,5 @@
-import React, { FC, memo } from "react";
-import { View, Text } from "react-native";
+import React, { FC, memo, useState } from "react";
+import { View, Text, Pressable } from "react-native";
 import { styles } from "./styles";
 import { Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -11,29 +11,71 @@ const mockSortOption = [
   "GD Extra Discount",
 ];
 
-const FilterAndSort: FC = () => {
+export interface FilterAndSortProps {
+  onFilterSelected?: () => void;
+}
+const FilterAndSort: FC<FilterAndSortProps> = ({ onFilterSelected }) => {
+  const [isSelected, setIsSelected] = useState(String);
+
+  const onFilterPressed = (name: string) => {
+    setIsSelected(name);
+  };
+
   return (
     <ScrollView horizontal>
       <View style={styles.frameWrapper10}>
         <View style={[styles.frameParent10, styles.frameParentFlexBox]}>
-          <View
+          <Pressable
             style={[
-              styles.filterSettingsSlidersIcon1Parent,
+              styles.filterParent,
               styles.sortByWrapperLayout,
+              isSelected === "Filter" && styles.filterSelected,
             ]}
+            onPress={() => {
+              onFilterPressed("Filter");
+              onFilterSelected();
+            }}
           >
             <Image
-              style={styles.filterSettingsSlidersIcon1}
+              style={styles.filterIcon}
               resizeMode="cover"
-              source={require("../../../assets/2738302-filter-settings-sliders-icon-1.png")}
+              source={
+                isSelected === "Filter"
+                  ? require("../../../assets/2738302-filter-settings-sliders-icon-1.png")
+                  : require("../../../assets/filter_default.png")
+              }
             />
-            <Text style={[styles.filter, styles.filterTypo]}>Filter</Text>
-          </View>
+            <Text
+              style={[
+                styles.filter,
+                styles.filterTypo,
+                isSelected === "Filter" && styles.filterTextSelected,
+              ]}
+            >
+              Filter
+            </Text>
+          </Pressable>
           {mockSortOption.map((item) => {
             return (
-              <View key={item} style={[styles.sortByWrapper, styles.sortByWrapperLayout]}>
-                <Text style={[styles.sortBy, styles.filterTypo]}>{item}</Text>
-              </View>
+              <Pressable
+                key={item}
+                style={[
+                  styles.sortByWrapper,
+                  styles.sortByWrapperLayout,
+                  isSelected === item && styles.sortWrapperSelected,
+                ]}
+                onPress={() => onFilterPressed(item)}
+              >
+                <Text
+                  style={[
+                    styles.sortBy,
+                    styles.filterTypo,
+                    isSelected === item && styles.sortText,
+                  ]}
+                >
+                  {item}
+                </Text>
+              </Pressable>
             );
           })}
         </View>

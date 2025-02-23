@@ -25,12 +25,14 @@ export const styles = StyleSheet.create({
         gap: Gap.gap_lg,
         flex: 1,
       },
-      filterSettingsSlidersIcon1Parent: {
+      filterParent: {
         paddingHorizontal: Padding.p_9xs,
-        paddingVertical: Padding.p_11xs,
-        borderColor: Color.colorOrangered_100,
+        borderColor: Color.colorLightslategray,
         height: 18,
         gap: Gap.gap_xs,
+      },
+      filterSelected: {
+        borderColor: Color.colorOrangered_100,
       },
       sortByWrapperLayout: {
         height: 18,
@@ -41,15 +43,17 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
       },
-      filterSettingsSlidersIcon1: {
+      filterIcon: {
         width: 14,
         height: 14,
         overflow: "hidden",
       },
       filter: {
+        color: Color.colorBlack,
+      },
+      filterTextSelected: {
         color: Color.colorOrangered_100,
       },
-    
       sortBy: {
         color: Color.colorBlack,
       },
@@ -59,10 +63,17 @@ export const styles = StyleSheet.create({
         paddingVertical: 0,
         paddingHorizontal: Padding.p_3xs,
       },
+      sortWrapperSelected: {
+        borderColor: Color.colorOrangered_100,
+      },
       filterTypo: {
         textAlign: "left",
         fontFamily: FontFamily.poppinsMedium,
         fontWeight: "500",
         fontSize: FontSize.size_3xs,
       },
+      sortText: {
+        color: Color.colorOrangered_100
+      }
+
 })

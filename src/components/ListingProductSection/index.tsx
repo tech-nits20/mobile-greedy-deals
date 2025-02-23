@@ -1,16 +1,17 @@
-import React, { FC, memo, useMemo } from "react";
-import { styles } from "./styles";
+import React, { FC, memo, useMemo } from 'react';
+import { styles } from './styles';
 import {
   View,
   Image,
   Text,
   ImageSourcePropType,
   Pressable,
-} from "react-native";
-import { getStyleValue } from "../../helper/Utils";
-import { ParamListBase, useNavigation } from "@react-navigation/core";
-import { PRODUCT_DETAILS_SCREEN } from "../../routes/Routes";
-import { StackNavigationProp } from "@react-navigation/stack";
+} from 'react-native';
+import { getImageURL, getStyleValue } from '../../helper/Utils';
+import { ParamListBase, useNavigation } from '@react-navigation/core';
+import { PRODUCT_DETAILS_SCREEN } from '../../routes/Routes';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { IProductInfo } from '../../redux/sagas/products/productsTypes';
 
 export interface ListingProductSectionProps {
   offerTitle?: string;
@@ -20,36 +21,21 @@ export interface ListingProductSectionProps {
   title: string;
   bgColor?: string;
 }
-const ListingProductSection: FC<ListingProductSectionProps> = ({
-  imgSrc,
-  title,
-  offerSubTitle,
-  offerTitle,
-  offerType,
-  bgColor,
-}) => {
+const ListingProductSection: FC<IProductInfo> = (props) => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
 
-  const frameViewStyle = useMemo(() => {
-    return {
-      ...getStyleValue("backgroundColor", bgColor),
-    };
-  }, [bgColor]);
-
   const onProductPressed = () => {
-    navigation.navigate(PRODUCT_DETAILS_SCREEN, {title, offerTitle,  offerSubTitle});
+    navigation.navigate(PRODUCT_DETAILS_SCREEN, {});
   };
 
   return (
     <Pressable onPress={onProductPressed} style={styles.frameParent}>
-      <View style={[styles.frameWrapper, styles.wrapperLayout, frameViewStyle]}>
-        <View
-          style={[styles.bodyShotOfADarkSkinnedFaWrapper, styles.wrapperLayout]}
-        >
+      <View style={[styles.frameWrapper, styles.wrapperLayout]}>
+        <View style={[styles.offerImageWrapper, styles.wrapperLayout]}>
           <Image
-            style={styles.bodyShotOfADarkSkinnedFaIcon}
+            style={styles.offerImage}
             resizeMode="cover"
-            source={imgSrc}
+            source={getImageURL(props.offerImages?.[0]?.url)}
           />
         </View>
       </View>
@@ -57,19 +43,19 @@ const ListingProductSection: FC<ListingProductSectionProps> = ({
         <Image
           style={[styles.frameChild, styles.framePosition]}
           resizeMode="cover"
-          source={require("../../../assets/rectangle-448.png")}
+          source={require('../../../assets/rectangle-448.png')}
         />
         <Image
           style={[styles.frameItem, styles.framePosition]}
           resizeMode="cover"
-          source={require("../../../assets/rectangle-446.png")}
+          source={require('../../../assets/rectangle-446.png')}
         />
         <Text style={styles.upto}>{offerTitle}</Text>
         <Text style={[styles.text, styles.offTypo]}>{offerSubTitle}</Text>
         <Text style={[styles.off, styles.offTypo]}>{offerType}</Text>
       </View>
-      <View style={styles.summerFashionWrapper}>
-        <Text style={styles.summerFashion}>{title}</Text>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.titleText}>{title}</Text>
       </View>
     </Pressable>
   );

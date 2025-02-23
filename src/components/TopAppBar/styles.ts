@@ -115,7 +115,6 @@ export const styles = StyleSheet.create({
   },
   locationUserBar: {
     backgroundColor: Color.colorOrangered_100,
-    width: 430,
     padding: Padding.p_3xs,
     gap: Gap.gap_sm,
     alignItems: "center",

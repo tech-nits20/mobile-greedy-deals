@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 0.3,
     borderColor: Color.colorLightslategray,
     shadowColor: Color.colorBlack,
     shadowOffset: {
@@ -28,8 +27,8 @@ export const styles = StyleSheet.create({
       height: 4,
     },
     shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 8,
+    shadowRadius: 4,
+    elevation: 6,
   },
   menuGrid: {
     flexDirection: "row",
@@ -48,8 +47,11 @@ export const styles = StyleSheet.create({
     height: "100%",
     width: '100%',
     paddingVertical: Padding.p_3xs,
-
     shadowOpacity: 1,
+  },
+  itemContainerHover: {
+    borderRadius: 10,
+    backgroundColor: Color.colorLightHover
   },
   menuItemTitle: {
     color: Color.colorLightslategray,
