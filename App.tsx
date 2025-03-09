@@ -7,6 +7,7 @@ import {
   HOME_TABS,
   LISTING_SCREEN,
   PRODUCT_DETAILS_SCREEN,
+  SEE_ALL_DEALS_SCREEN,
 } from './src/routes/Routes';
 import BottomTabBar from './src/components/BottomTabBar';
 import { Color } from './GlobalStyles';
@@ -16,6 +17,7 @@ import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import ListingScreen from './src/screens/ListingScreen';
 import ProductDetailsScreen from './src/screens/ProductDetailsScreen';
+import SeeAllScreen from './src/screens/SeeAllScreen';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
@@ -53,6 +55,11 @@ const App = () => {
                 <Stack.Screen
                   name={PRODUCT_DETAILS_SCREEN}
                   component={ProductDetailsScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name={SEE_ALL_DEALS_SCREEN}
+                  component={SeeAllScreen}
                   options={{ headerShown: false }}
                 />
               </Stack.Navigator>

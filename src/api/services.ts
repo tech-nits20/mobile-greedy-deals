@@ -204,10 +204,10 @@ export function* downloadOfferCouponCodeService(payload: string): SagaIterator {
     const response = yield call(
       axiosClient.post,
       `${DOWNLOAD_OFFER_COUPON_CODE}${payload}`,
-      '',
-      {
-        responseType: 'blob',
-      }
+      ''
+      // {
+      //   responseType: 'blob',
+      // }
     );
     return response;
   } catch (error) {
@@ -215,6 +215,14 @@ export function* downloadOfferCouponCodeService(payload: string): SagaIterator {
     throw error;
   }
 }
+
+const fetchCurrentLocation = async (latitude: number, longitude: number) => {
+  const response = await fetch(
+    `${GOOGLE_PLACES_BASE_URL}?latlng=${latitude},${longitude}&key=${GOOGLE_API_KEY}`
+  );
+  const locationRes = await response.json();
+  return locationRes;
+};
 
 export function* fetchCurrentLocationService(): SagaIterator {
   try {
@@ -228,11 +236,7 @@ export function* fetchCurrentLocationService(): SagaIterator {
     if (position) {
       const latitude = position?.coords?.latitude;
       const longitude = position?.coords?.longitude;
-
-      const locationRes = yield call(
-        axiosClient.get,
-        `${GOOGLE_PLACES_BASE_URL}?latlng=${latitude},${longitude}&key=${GOOGLE_API_KEY}`
-      );
+      const locationRes = yield call(fetchCurrentLocation, latitude, longitude);
 
       const result: ILocationType = {
         data: locationRes,

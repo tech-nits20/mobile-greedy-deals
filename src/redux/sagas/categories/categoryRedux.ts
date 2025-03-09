@@ -22,11 +22,11 @@ import {
 const initialState: ICategoriesBaseState = {
   categoriesData: [],
   subCategoriesData: undefined,
-  categoryProducts: undefined,
-  discountsAndOffers: undefined,
-  topCashbackDiscounts: undefined,
-  earlyDeals: undefined,
-  premiumBrandsOffers: undefined,
+  categoryProducts: [],
+  discountsAndOffers: [],
+  topCashbackDiscounts: [],
+  earlyDeals: [],
+  premiumBrandsOffers: [],
   allCategoriesList: [],
   categoriesState: {
     categoryLoading: false,

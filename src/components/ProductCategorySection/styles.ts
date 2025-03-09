@@ -62,6 +62,7 @@ export const styles = StyleSheet.create({
     height: 70,
   },
   womenFashionWrapper: {
+    flex: 1,
     borderRadius: Border.br_5xs,
     flexDirection: 'row',
     gap: Gap.gap_xl,

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from 'react-native';
 import {
   Padding,
   Gap,
@@ -6,20 +6,20 @@ import {
   Border,
   FontFamily,
   FontSize,
-} from "../../../GlobalStyles";
+} from '../../../GlobalStyles';
 
 export const styles = StyleSheet.create({
   container: {
-    display: "flex",
+    display: 'flex',
   },
   contentContainer: {
     padding: Padding.p_base,
-    gap: Gap.gap_xl
+    gap: Gap.gap_xl,
   },
   title: {
-    fontSize: FontSize.size_base,
-    color: Color.colorDimgray_100,
-    fontWeight: "500",
+    fontSize: FontSize.size_sm,
+    color: Color.colorBlack,
+    fontWeight: '500',
   },
   offerContainer: {
     display: 'flex',
@@ -30,35 +30,36 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: Color.colorGray_100,
+    backgroundColor: Color.colorWhiteSmoke,
     padding: Padding.p_3xs,
     marginBottom: Padding.p_7xs,
-    borderRadius: Border.br_5xs
+    borderRadius: Border.br_5xs,
   },
   offerText: {
-    color: Color.colorDimgray_100,
-    fontWeight: '500'
+    color: Color.colorDarkGray,
+    fontWeight: '500',
   },
   descriptionText: {
     color: Color.colorLightslategray,
-    fontSize: FontSize.size_xs
+    fontSize: FontSize.size_xs,
+    marginTop: 0,
   },
-  productsTitle : {
+  productsTitle: {
     color: Color.colorBlack,
-    fontSize: FontSize.size_base
+    fontSize: FontSize.size_base,
   },
-  productWrapper : {
+  productWrapper: {
     gap: Gap.gap_xl,
-    paddingTop: Padding.p_3xs
+    paddingTop: Padding.p_3xs,
   },
-  mapWrapper : {
+  mapWrapper: {
     backgroundColor: Color.colorGray_100,
-    height: 200,
+    height: 300,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
-  youtubeLinks : {
+  youtubeLinks: {
     flex: 1,
   },
   itemContainer: {
@@ -77,5 +78,70 @@ export const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  categoryWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: Gap.gap_sm,
+    alignItems: 'center',
+  },
+  categoryName: {
+    color: Color.colorDarkRed,
+    fontSize: FontSize.size_xs,
+    fontWeight: '500',
+  },
+  offerDeatail: {
+    color: Color.colorOrangered_100,
+    fontSize: FontSize.size_xs,
+    fontWeight: '500',
+  },
+  couponCodeWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: Gap.gap_xl,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+  ctaButton: {
+    height: 24,
+    paddingHorizontal: Padding.p_5xs,
+    width: 130,
+    paddingVertical: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+  },
+  titleStyle: {
+    fontSize: FontSize.size_3xs,
+  },
+  address: {
+    color: Color.colorBlueSecondary,
+    fontSize: FontSize.size_xs,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  addressField: {
+    color: Color.colorDarkGray,
+    fontSize: FontSize.size_xs,
+    textAlign: 'center',
+  },
+  descriptionView: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: Gap.gap_xs,
+    width: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  descriptionDetail: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: Gap.gap_xs,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  couponCode: {
+    paddingTop: Padding.p_3xs,
+    width: 120,
   },
 });

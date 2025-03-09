@@ -11,6 +11,12 @@
         android:allowBackup="false"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+        <!-- Google Maps API Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDsx0SruE9r5UMttIHfi5HgOYD0LvpPgl0"/>
+        <meta-data android:name="com.google.android.gms.version"
+          android:value="@integer/google_play_services_version"/>
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"

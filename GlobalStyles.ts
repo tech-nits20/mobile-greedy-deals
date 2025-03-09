@@ -1,10 +1,10 @@
 /* fonts */
 export const FontFamily = {
-  poppinsRegular: "Poppins-Regular",
-  poppinsLight: "Poppins-Light",
-  poppinsSemiBold: "Poppins-SemiBold",
-  poppinsMedium: "Poppins-Medium",
-  poppinsBold: "Poppins-Bold",
+  poppinsRegular: 'Poppins-Regular',
+  poppinsLight: 'Poppins-Light',
+  poppinsSemiBold: 'Poppins-SemiBold',
+  poppinsMedium: 'Poppins-Medium',
+  poppinsBold: 'Poppins-Bold',
 };
 /* font sizes */
 export const FontSize = {
@@ -19,25 +19,32 @@ export const FontSize = {
 };
 /* Colors */
 export const Color = {
-  colorWhite: "#fff",
-  colorGainsboro_100: "#e6e6e6",
-  colorGainsboro_200: "#e0e0e0",
-  colorGainsboro_300: "#dddbdb",
-  colorLightslategray: "#87929f",
-  colorDimgray_100: "#606060",
-  colorBlack: "#000",
-  colorGray_100: "rgba(0, 0, 0, 0.05)",
-  colorGray_200: "rgba(255, 255, 255, 0)",
-  colorGray_300: "rgba(0, 0, 0, 0.1)",
-  colorOrangered_100: "#ee2b00",
+  colorWhite: '#fff',
+  colorGainsboro_100: '#e6e6e6',
+  colorGainsboro_200: '#e0e0e0',
+  colorGainsboro_300: '#dddbdb',
+  colorLightslategray: '#87929f',
+  colorDimgray_100: '#606060',
+  colorBlack: '#000',
+  colorGray_100: 'rgba(0, 0, 0, 0.05)',
+  colorGray_200: 'rgba(255, 255, 255, 0)',
+  colorGray_300: 'rgba(0, 0, 0, 0.1)',
+  colorOrangered_100: '#ee2b00',
   colorOrangedHover: '#f57c62',
-  colorOrangered_200: "rgba(238, 43, 0, 0.1)",
-  colorCornflowerblue: "rgba(15, 123, 213, 0.1)",
-  colorGold: "#ffc700",
-  colorMistyrose: "#ffe7e2",
-  colorWhitesmoke_100: "#f9f9f9",
+  colorOrangered_200: 'rgba(238, 43, 0, 0.1)',
+  colorCornflowerblue: 'rgba(15, 123, 213, 0.1)',
+  colorGold: '#ffc700',
+  colorMistyrose: '#ffe7e2',
+  colorWhitesmoke_100: '#f9f9f9',
   colorTransparent: 'rgba(255,255,255,0.5)',
-  colorLightHover: '#f2f6f7'
+  colorLightHover: '#f2f6f7',
+  colorDarkRed: '#8B0000',
+  colorWhiteSmoke: '#fafaf5',
+  colorDarkGray: '#273746',
+  colorBlueSecondary: '#2874a6',
+  colorBrown: '#7b241c',
+  colorGray400: '#99a3a4',
+  colorLightGray: '#d0d3d4',
 };
 /* Gaps */
 export const Gap = {

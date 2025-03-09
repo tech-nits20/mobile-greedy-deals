@@ -26,6 +26,13 @@ export interface IOfferType {
   };
 }
 
+export interface IProductOfferText {
+  title?: string;
+  subTitle?: string;
+  sideText?: string;
+  gdDiscount?: IGDDealsOffer;
+}
+
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const mobileRegex = /^[6-9]\d{9}$/;
@@ -62,7 +69,7 @@ const getGDText = (gdType: IStoreOfferType): IGDDealsOffer => {
 
     default:
       return {
-        title: `Extra GD discount ${gdType.extraGreedyDealDiscount} off`,
+        title: `Extra GD discount ${gdType.extraGreedyDealDiscount}% off`,
       };
   }
 };
@@ -70,6 +77,9 @@ const getGDText = (gdType: IStoreOfferType): IGDDealsOffer => {
 export const getOfferType = (offer: IStoreOfferType): IOfferType => {
   switch (offer.selectedOfferType) {
     case OfferTypeEnum.BUY_GEY:
+      if (offer.buyX === 0 || offer.getY === 0) {
+        return { activeOffer: OfferTypeEnum.NONE };
+      }
       return {
         activeOffer: OfferTypeEnum.BUY_GEY,
         isBoGo: {
@@ -81,6 +91,9 @@ export const getOfferType = (offer: IStoreOfferType): IOfferType => {
         },
       };
     case OfferTypeEnum.UPTO:
+      if (offer.uptoXPercentOff === 0) {
+        return { activeOffer: OfferTypeEnum.NONE };
+      }
       return {
         activeOffer: OfferTypeEnum.UPTO,
         flatOrUpto: {
@@ -92,6 +105,9 @@ export const getOfferType = (offer: IStoreOfferType): IOfferType => {
         },
       };
     case OfferTypeEnum.FLAT:
+      if (offer.flatXPercentOff === 0) {
+        return { activeOffer: OfferTypeEnum.NONE };
+      }
       return {
         activeOffer: OfferTypeEnum.FLAT,
         flatOrUpto: {
@@ -103,6 +119,9 @@ export const getOfferType = (offer: IStoreOfferType): IOfferType => {
         },
       };
     case OfferTypeEnum.ORIGINAL_PRICE:
+      if (offer.originalPrice === 0) {
+        return { activeOffer: OfferTypeEnum.NONE };
+      }
       return {
         activeOffer: OfferTypeEnum.ORIGINAL_PRICE,
         originalPrice: {
@@ -167,4 +186,65 @@ export const getCategorySubCatName = (offerCategories: IOfferCategory[]) => {
 
 export const getImageURL = (url: string): ImageSourcePropType => {
   return { uri: `${IMAGE_BASE_URL}${url}` };
+};
+
+export const getProductOfferInfo = (
+  offer: IStoreOfferType,
+  offerPrice?: number
+): IProductOfferText | undefined => {
+  const offerType = getOfferType(offer);
+  switch (offerType.activeOffer) {
+    case OfferTypeEnum.BUY_GEY:
+      if (offer.buyX === 0 || offer.getY === 0) {
+        return;
+      }
+      return {
+        title: `Buy ${offerType.isBoGo.buyX}`,
+        subTitle: `Get ${offerType.isBoGo.getY}`,
+        sideText: 'free',
+        gdDiscount: offerType?.isBoGo?.gdDiscount,
+      };
+    case OfferTypeEnum.FLAT:
+    case OfferTypeEnum.UPTO:
+      return {
+        title: offerType.flatOrUpto.title,
+        subTitle: `${offerType.flatOrUpto.value}%`,
+        sideText: 'off',
+        gdDiscount: offerType?.flatOrUpto?.gdDiscount,
+      };
+    case OfferTypeEnum.ORIGINAL_PRICE:
+      return {
+        title: `${offerType.originalPrice.value}`,
+        subTitle: `${offerPrice}`,
+        gdDiscount: offerType?.originalPrice?.gdDiscount,
+      };
+    default:
+      return;
+  }
+};
+
+export const getRandomBGColor = (): string => {
+  const colors = [
+    'rgba(129, 195, 65, 0.1)',
+    'rgba(248, 152, 29, 0.1)',
+    'rgba(73, 89, 105, 0.1)',
+    'rgba(1, 126, 180, 0.1)',
+    'rgba(252, 39, 122, 0.1)',
+    'rgba(236, 0, 140, 0.1)',
+    'rgba(15, 123, 213, 0.1)',
+    '#fafaf5',
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
+
+export const getOfferInfo = (offer: IOfferType): string => {
+  switch (offer?.activeOffer) {
+    case OfferTypeEnum.BUY_GEY:
+      return `Buy ${offer.isBoGo?.buyX} get ${offer.isBoGo?.getY}`;
+    case OfferTypeEnum.FLAT:
+    case OfferTypeEnum.UPTO:
+      return `${offer.flatOrUpto?.title} ${offer.flatOrUpto?.value}% off`;
+    default:
+      return '';
+  }
 };

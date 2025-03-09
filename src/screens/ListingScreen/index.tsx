@@ -133,7 +133,7 @@ const ListingScreen = () => {
   const [updateSubCategories, setUpdateSubCategories] = useState<ICategory[]>(
     []
   );
-  const [activeSuCategory, setActiveSubCategory] = useState<ICategory>(
+  const [activeCategory, setActiveCategory] = useState<ICategory>(
     params.selectedSubcategory
   );
 
@@ -142,7 +142,7 @@ const ListingScreen = () => {
   };
 
   const onItemSelected = (item: ICategory) => {
-    setActiveSubCategory(item);
+    setActiveCategory(item);
   };
 
   useEffect(() => {
@@ -158,7 +158,7 @@ const ListingScreen = () => {
         !updateSubCategories.includes({ name: 'All', id: params.category.id })
       ) {
         mappedData.unshift(data);
-        setActiveSubCategory(data);
+        setActiveCategory(data);
         setUpdateSubCategories(mappedData);
       }
     } else {
@@ -174,14 +174,25 @@ const ListingScreen = () => {
     if (filteredResult.data.length === 0 && !filteredResult.error) {
       const req: IListingFilters = {
         filters: {
-          lat: location.lat,
-          lng: location.lng,
-          categoryId: activeSuCategory.id,
+          // lat: location.lat,
+          // lng: location.lng,
+          categoryId: activeCategory.id,
         },
       };
-      dispatch(fetchFilteredProductAction(req));
+      // dispatch(fetchFilteredProductAction(req));
     }
   }, [filteredResult.data, filteredResult.error]);
+
+  useEffect(() => {
+    const req: IListingFilters = {
+      filters: {
+        // lat: location.lat,
+        // lng: location.lng,
+        categoryId: activeCategory.id,
+      },
+    };
+    dispatch(fetchFilteredProductAction(req));
+  }, [activeCategory]);
 
   return (
     <View style={styles.listingPage}>
@@ -197,7 +208,7 @@ const ListingScreen = () => {
             <View style={styles.frameGroup}>
               <ListingSideRow
                 subCategories={updateSubCategories}
-                selectedCat={activeSuCategory}
+                selectedCat={activeCategory}
                 onSelectedItem={onItemSelected}
               />
             </View>

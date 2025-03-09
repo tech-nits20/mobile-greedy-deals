@@ -5,6 +5,7 @@ import {
   Reducer,
 } from '@reduxjs/toolkit';
 import {
+  ICouponCodeType,
   IFilterProductType,
   IMappedBrandVendor,
   IMappedFilterTypes,
@@ -22,7 +23,7 @@ const initialState: IProductsBaseState = {
   },
   offerTypesByCategory: [],
   brandsVendor: [],
-  offerCouponCode: '',
+  offerCouponCode: {},
   filterModel: {},
   GDOffersData: [],
 };
@@ -53,7 +54,7 @@ const productsSlice = createSlice({
     },
     setOfferCouponCode: (
       state: IProductsBaseState,
-      action: PayloadAction<string>
+      action: PayloadAction<ICouponCodeType>
     ) => {
       state.offerCouponCode = action.payload;
     },
@@ -99,8 +100,8 @@ export const getBrandsVendor: (state: {
 
 export const getOfferCouponCode: (state: {
   products: IProductsBaseState;
-}) => string = (state: { products: IProductsBaseState }) => {
-  return state.products.offerCouponCode || '';
+}) => ICouponCodeType = (state: { products: IProductsBaseState }) => {
+  return state.products.offerCouponCode;
 };
 
 export const getFilterModel: (state: {

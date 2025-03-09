@@ -7,13 +7,19 @@ import ProductCategorySectionItem, {
 import { ParamListBase, useNavigation } from '@react-navigation/core';
 import { LISTING_SCREEN } from '../../routes/Routes';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native-gesture-handler';
 import {
   ICategory,
   ICategoryProducts,
   ISubCategory,
 } from '../../redux/sagas/categories/categoriesTypes';
 import Loader from '../Loader';
+import { useDispatch } from 'react-redux';
+import { refreshListingStateAction } from '../../redux/sagas/products/productsRedux';
 
 export interface ProductCategorySectionProps {
   category: ICategory;
@@ -26,9 +32,11 @@ const ProductCategorySection: FC<ProductCategorySectionProps> = ({
   products,
 }) => {
   const [productsSections, setProductsSection] = useState<ICategory[]>([]);
+  const dispatch = useDispatch();
 
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   const onItemPressed = (selectedCat: ICategory, viewAll?: boolean) => {
+    dispatch(refreshListingStateAction());
     navigation.navigate(LISTING_SCREEN, {
       subCategories: productsSections,
       category,
@@ -61,9 +69,9 @@ const ProductCategorySection: FC<ProductCategorySectionProps> = ({
     <View style={styles.frameView}>
       <View style={styles.fashionParent}>
         <Text style={styles.fashion1Typo}>{category.name}</Text>
-        <Pressable onPress={() => onItemPressed(category, true)}>
+        <TouchableOpacity onPress={() => onItemPressed(category, true)}>
           <Text style={styles.viewAll}>View all</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View style={styles.lineView} />
       <View style={styles.frameParent1}>
@@ -73,18 +81,37 @@ const ProductCategorySection: FC<ProductCategorySectionProps> = ({
             <Loader />
           </View>
         )}
-        <ScrollView horizontal>
+        <ScrollView horizontal nestedScrollEnabled>
           <View style={styles.womenFashionWrapper}>
-            {productsSections?.length > 0 &&
-              productsSections.map((item, index) => {
-                return (
+            {productsSections?.length > 0 && (
+              <FlatList
+                data={productsSections}
+                horizontal
+                keyExtractor={(item) => item.id}
+                nestedScrollEnabled
+                scrollEnabled={productsSections.length < 4}
+                keyboardShouldPersistTaps="handled"
+                ItemSeparatorComponent={() => (
+                  <View style={{ paddingEnd: 16 }} />
+                )}
+                contentContainerStyle={{
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                }}
+                renderItem={({ item }) => (
                   <ProductCategorySectionItem
-                    key={`${item.id}${index}`}
+                    key={`${item.id}}`}
                     {...item}
                     onPress={() => onItemPressed(item)}
                   />
-                );
-              })}
+                )}
+                getItemLayout={(data, index) => ({
+                  length: 84,
+                  offset: 84 * index,
+                  index,
+                })}
+              />
+            )}
           </View>
         </ScrollView>
       </View>

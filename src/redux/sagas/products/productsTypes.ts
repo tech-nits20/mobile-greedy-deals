@@ -97,11 +97,15 @@ export interface IFilterProductType {
   loading: boolean;
   error: string | undefined;
 }
+export interface ICouponCodeType {
+  error?: string;
+  url?: string;
+}
 export interface IProductsBaseState {
   filteredProducts?: IFilterProductType;
   offerTypesByCategory?: IMappedFilterTypes[];
   brandsVendor?: IMappedBrandVendor[];
-  offerCouponCode?: string;
+  offerCouponCode?: ICouponCodeType;
   filterModel?: IListingFilters;
   GDOffersData?: IProductInfo[];
 }

@@ -7,6 +7,7 @@ import { ICategory } from '../../redux/sagas/categories/categoriesTypes';
 import defaultImage from '../../../assets/bodyshotofadarkskinnedfashionpng-11.png';
 import { CustomIcon } from '../../helper/Icons';
 import { Color } from '../../../GlobalStyles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export interface ProductCategoryItemType extends ICategory {
   onPress?: () => void;

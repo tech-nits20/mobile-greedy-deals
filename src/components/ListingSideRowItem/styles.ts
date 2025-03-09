@@ -56,6 +56,7 @@ export const styles = StyleSheet.create({
   },
   productImageWrapper: {
     width: 40,
+    height: 50,
     alignItems: 'center',
   },
   wrapperLayout: {

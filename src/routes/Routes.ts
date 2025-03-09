@@ -6,4 +6,5 @@ export const LISTING_SCREEN = 'ListingScreen';
 export const PROFILE_SCREEN = 'ProfileScreen';
 export const PRODUCT_DETAILS_SCREEN = 'ProductDetailsScreen';
 export const MENU_SCREEN = 'MenuScreen';
-export const CATEGORY_PRODUCTS_FILTER_SCREEN = 'CategoryProductsFilterScreen'
+export const CATEGORY_PRODUCTS_FILTER_SCREEN = 'CategoryProductsFilterScreen';
+export const SEE_ALL_DEALS_SCREEN = 'SeeAllDeals';

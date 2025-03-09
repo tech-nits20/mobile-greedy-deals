@@ -1,91 +1,77 @@
-import React, { FC, useMemo } from "react";
+import React, { FC } from 'react';
+import { View, Text } from 'react-native';
+import { styles } from './styles';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import {
-  View,
-  Text,
-  Image,
-  ImageSourcePropType,
-} from "react-native";
-import { styles } from "./styles";
-import { getStyleValue } from "../../helper/Utils";
-import { ScrollView } from "react-native-gesture-handler";
-
-export type SectionCategoryItemType = {
-  imgSrc?: ImageSourcePropType;
-  title?: string;
-  subTitle?: string;
-  bgColor?: string;
-};
+  IDiscountsOffersItem,
+  ICategory,
+} from '../../redux/sagas/categories/categoriesTypes';
+import { Padding } from '../../../GlobalStyles';
+import CategorySectionItem from '../CategorySectionItem';
+import { ParamListBase, useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { LISTING_SCREEN } from '../../routes/Routes';
 
 export interface DealsAndOffersSectionType {
   sectionTitle: string;
-  items: SectionCategoryItemType[];
+  items: IDiscountsOffersItem[];
+  onSeeAllPressed: () => void;
 }
-
-const CategorySectionItem: FC<SectionCategoryItemType> = ({
-  title,
-  bgColor,
-  imgSrc,
-  subTitle,
-}) => {
-  const frameView1Style = useMemo(() => {
-    return {
-      ...getStyleValue("backgroundColor", bgColor),
-    };
-  }, [bgColor]);
-  return (
-    <View style={styles.frameParent2}>
-      <View style={styles.frameParent3}>
-        <View style={[styles.frameWrapper, frameView1Style]}>
-          <View style={[styles.frameParent, styles.parentFlexBox]}>
-            <View style={[styles.iconWrapper, styles.parentFlexBox]}>
-              <Image
-                style={styles.logoIcon}
-                resizeMode="contain"
-                source={imgSrc}
-              />
-            </View>
-            <View style={[styles.offParent, styles.parentFlexBox]}>
-              <Text style={styles.off}>{title}</Text>
-              <Text style={styles.offers}>{subTitle}</Text>
-            </View>
-          </View>
-        </View>
-        <Image
-          style={[styles.frameIcon, styles.frameLayout]}
-          resizeMode="cover"
-          source={require("../../../assets/frame-1068.png")}
-        />
-        <Image
-          style={[styles.frameChild1, styles.frameLayout]}
-          resizeMode="cover"
-          source={require("../../../assets/frame-1069.png")}
-        />
-      </View>
-    </View>
-  );
-};
 
 const DealsAndOffersSection: FC<DealsAndOffersSectionType> = ({
   sectionTitle,
   items,
+  onSeeAllPressed,
 }) => {
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+
+  const onCardPressed = (res: IDiscountsOffersItem) => {
+    const item: ICategory = {
+      name: res.offerCategories[res.offerCategories.length - 1]?.name,
+      id: res.id,
+    };
+    navigation.navigate(LISTING_SCREEN, {
+      subCategories: [item],
+      category: item,
+      selectedSubcategory: item,
+    });
+  };
+
+  const renderDealsCard = (item: IDiscountsOffersItem) => {
+    return (
+      <CategorySectionItem
+        key={`${item.id}`}
+        bgImage={item.offerImages}
+        offerCategories={item?.offerCategories}
+        offerPrice={item.offerPrice}
+        expiryDate={item?.expiryEndDate}
+        offerType={item?.offerType}
+        storeName={item?.storeOffers?.[0]?.name}
+        onCTAClick={() => onCardPressed(item)}
+      />
+    );
+  };
+
   return (
     <View style={[styles.sectionParent, styles.parentFlexBox1]}>
-      <Text style={[styles.sectionContainer, styles.sectionTitle]}>
-        {sectionTitle}
-      </Text>
+      <View style={styles.headerWrapper}>
+        <Text style={[styles.sectionContainer, styles.sectionTitle]}>
+          {sectionTitle}
+        </Text>
+        <TouchableOpacity onPress={onSeeAllPressed}>
+          <Text style={styles.seeAllDeals}>{'See all Deals'}</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.frameChild} />
-      <ScrollView horizontal>
-        <View style={styles.frameParent2}>
-          <View style={styles.frameParent3}>
-            {items.map((item, index) => {
-              return (
-                <CategorySectionItem key={`${item.title}${index}`} {...item} />
-              );
-            })}
-          </View>
-        </View>
-      </ScrollView>
+      <FlatList
+        data={items}
+        renderItem={({ item }) => renderDealsCard(item)}
+        horizontal
+        nestedScrollEnabled
+        ItemSeparatorComponent={() => (
+          <View style={{ paddingEnd: Padding.p_base }} />
+        )}
+      />
     </View>
   );
 };

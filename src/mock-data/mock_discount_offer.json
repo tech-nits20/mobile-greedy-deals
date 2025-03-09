@@ -1,0 +1,582 @@
+[
+    {
+      "id": "ba0fc255-1a7b-4ca5-440b-08dd51d7e3c9",
+      "title": "sarees offers",
+      "description": "cotton sarees offers",
+      "couponCode": "COTTON30",
+      "offerImages": [
+        {
+          "imageId": "a2a7e6ca-93c0-4c42-c2d7-08dd51d868c4",
+          "name": "sarees offers-2025-20-02-18-00-06",
+          "url": "/Uploads/Image-2025-20-02-18-00-06-Ram_Chigurupati_We_Are_in_GreedyDeals.com_cdd7f1b5-a321-4682-b143-3d37e58b9852.png",
+          "isLogo": false
+        }
+      ],
+      "offerCategories": [
+        {
+          "id": "c7615739-b195-4a05-c251-08dcf987133e",
+          "name": "FASHION",
+          "cssClass": null,
+          "parentId": null
+        },
+        {
+          "id": "14df534f-c6ca-4690-a1fb-08dd4dca7c6d",
+          "name": "Women's Fashion",
+          "cssClass": null,
+          "parentId": "c7615739-b195-4a05-c251-08dcf987133e"
+        }
+      ],
+      "storeOffers": [
+        {
+          "id": "ec5538a7-e385-46eb-c5d8-08dd51d911ef",
+          "name": "southindia shopping mall",
+          "address": "Punjagutta Rd Irram Manzil Colony, Punjagutta Hyderabad, Telangana 500082 India",
+          "geoLocation": "17,78",
+          "rank": 0,
+          "storeImages": [],
+          "storeOffers": null,
+          "storeCategories": [],
+          "vendor": null,
+          "shopManagerId": null,
+          "ownerPhone": "8977763103",
+          "managerPhone": "",
+          "image": null
+        },
+        {
+          "id": "585fc408-b42d-43f9-eb8b-08dd527a21ba",
+          "name": "southindia shopping mall",
+          "address": "10-112/4, Navajeevan Nagar, Saraband Nagar, Balanagar, Hyderabad, Telangana 500011",
+          "geoLocation": "17.467312,78.458187",
+          "rank": 0,
+          "storeImages": [],
+          "storeOffers": null,
+          "storeCategories": [],
+          "vendor": null,
+          "shopManagerId": null,
+          "ownerPhone": "8977763103",
+          "managerPhone": "",
+          "image": null
+        }
+      ],
+      "isActive": true,
+      "downloadCount": 99,
+      "expiryDate": "2025-02-20T00:00:00",
+      "expiryEndDate": "2025-03-27T00:00:00",
+      "startTime": "23:31:00",
+      "endTime": "23:30:00",
+      "vendorId": "a85f80b0-66aa-4e76-892c-113116b1e586",
+      "offerType": {
+        "id": "4b99cdc7-4823-443e-8511-08dd51d7e3d3",
+        "selectedOfferType": 0,
+        "buyX": 1,
+        "getY": 1,
+        "uptoXPercentOff": 0,
+        "flatXPercentOff": 0,
+        "extraGreedyDealDiscount": 500,
+        "isExtraGreedyDealsAvail": true,
+        "extraGreedyDealsType": 0,
+        "originalPrice": 0
+      },
+      "offerPrice": 0,
+      "additionalDescription": "<p>this is shopping mall</p>",
+      "youtubeLink": null
+    },
+    {
+        "id": "ba0fc255-1a7b-4ca5-440b-08dd51d7e3c",
+        "title": "sarees offers1",
+        "description": "cotton sarees offers",
+        "couponCode": "COTTON30",
+        "offerImages": [
+          {
+            "imageId": "a2a7e6ca-93c0-4c42-c2d7-08dd51d868c4",
+            "name": "sarees offers-2025-20-02-18-00-06",
+            "url": "/Uploads/Image-2025-20-02-18-00-06-Ram_Chigurupati_We_Are_in_GreedyDeals.com_cdd7f1b5-a321-4682-b143-3d37e58b9852.png",
+            "isLogo": false
+          }
+        ],
+        "offerCategories": [
+          {
+            "id": "c7615739-b195-4a05-c251-08dcf987133e",
+            "name": "FASHION",
+            "cssClass": null,
+            "parentId": null
+          },
+          {
+            "id": "14df534f-c6ca-4690-a1fb-08dd4dca7c6d",
+            "name": "Women's Fashion",
+            "cssClass": null,
+            "parentId": "c7615739-b195-4a05-c251-08dcf987133e"
+          }
+        ],
+        "storeOffers": [
+          {
+            "id": "ec5538a7-e385-46eb-c5d8-08dd51d911ef",
+            "name": "southindia shopping mall",
+            "address": "Punjagutta Rd Irram Manzil Colony, Punjagutta Hyderabad, Telangana 500082 India",
+            "geoLocation": "17,78",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          },
+          {
+            "id": "585fc408-b42d-43f9-eb8b-08dd527a21ba",
+            "name": "southindia shopping mall",
+            "address": "10-112/4, Navajeevan Nagar, Saraband Nagar, Balanagar, Hyderabad, Telangana 500011",
+            "geoLocation": "17.467312,78.458187",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          }
+        ],
+        "isActive": true,
+        "downloadCount": 99,
+        "expiryDate": "2025-02-20T00:00:00",
+        "expiryEndDate": "2025-03-27T00:00:00",
+        "startTime": "23:31:00",
+        "endTime": "23:30:00",
+        "vendorId": "a85f80b0-66aa-4e76-892c-113116b1e586",
+        "offerType": {
+          "id": "4b99cdc7-4823-443e-8511-08dd51d7e3d3",
+          "selectedOfferType": 1,
+          "buyX": 0,
+          "getY": 0,
+          "uptoXPercentOff": 40,
+          "flatXPercentOff": 0,
+          "extraGreedyDealDiscount": 0,
+          "isExtraGreedyDealsAvail": false,
+          "extraGreedyDealsType": 0,
+          "originalPrice": 0
+        },
+        "offerPrice": 0,
+        "additionalDescription": "<p>this is shopping mall</p>",
+        "youtubeLink": null
+      },
+      {
+        "id": "ba0fc255-1a7b-4ca5-440b-08dd51d7e3c9q",
+        "title": "sarees offers2",
+        "description": "cotton sarees offers",
+        "couponCode": "COTTON30",
+        "offerImages": [
+          {
+            "imageId": "a2a7e6ca-93c0-4c42-c2d7-08dd51d868c4",
+            "name": "sarees offers-2025-20-02-18-00-06",
+            "url": "/Uploads/Image-2025-20-02-18-00-06-Ram_Chigurupati_We_Are_in_GreedyDeals.com_cdd7f1b5-a321-4682-b143-3d37e58b9852.png",
+            "isLogo": false
+          }
+        ],
+        "offerCategories": [
+          {
+            "id": "c7615739-b195-4a05-c251-08dcf987133e",
+            "name": "FASHION",
+            "cssClass": null,
+            "parentId": null
+          },
+          {
+            "id": "14df534f-c6ca-4690-a1fb-08dd4dca7c6d",
+            "name": "Women's Fashion",
+            "cssClass": null,
+            "parentId": "c7615739-b195-4a05-c251-08dcf987133e"
+          },
+          {
+            "id": "14df534f-c6ca-4690-a1fb-08dd4dca7c6d",
+            "name": "Men's Fashion",
+            "cssClass": null,
+            "parentId": "c7615739-b195-4a05-c251-08dcf987133e"
+          }
+        ],
+        "storeOffers": [
+          {
+            "id": "ec5538a7-e385-46eb-c5d8-08dd51d911ef",
+            "name": "southindia",
+            "address": "Punjagutta Rd Irram Manzil Colony, Punjagutta Hyderabad, Telangana 500082 India",
+            "geoLocation": "17,78",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          },
+          {
+            "id": "585fc408-b42d-43f9-eb8b-08dd527a21ba",
+            "name": "southindia shopping mall",
+            "address": "10-112/4, Navajeevan Nagar, Saraband Nagar, Balanagar, Hyderabad, Telangana 500011",
+            "geoLocation": "17.467312,78.458187",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          }
+        ],
+        "isActive": true,
+        "downloadCount": 99,
+        "expiryDate": "2025-02-20T00:00:00",
+        "expiryEndDate": "2025-03-27T00:00:00",
+        "startTime": "23:31:00",
+        "endTime": "23:30:00",
+        "vendorId": "a85f80b0-66aa-4e76-892c-113116b1e586",
+        "offerType": {
+          "id": "4b99cdc7-4823-443e-8511-08dd51d7e3d3",
+          "selectedOfferType": 2,
+          "buyX": 0,
+          "getY": 0,
+          "uptoXPercentOff": 0,
+          "flatXPercentOff": 20,
+          "extraGreedyDealDiscount": 0,
+          "isExtraGreedyDealsAvail": false,
+          "extraGreedyDealsType": 0,
+          "originalPrice": 0
+        },
+        "offerPrice": 0,
+        "additionalDescription": "<p>this is shopping mall</p>",
+        "youtubeLink": null
+      },
+      {
+        "id": "ba0fc255-1a7b-4ca5-440b-08dd51d7e3c91",
+        "title": "sarees offers3",
+        "description": "cotton sarees offers",
+        "couponCode": "COTTON30",
+        "offerImages": [
+          {
+            "imageId": "a2a7e6ca-93c0-4c42-c2d7-08dd51d868c4",
+            "name": "sarees offers-2025-20-02-18-00-06",
+            "url": "/Uploads/Image-2025-20-02-18-00-06-Ram_Chigurupati_We_Are_in_GreedyDeals.com_cdd7f1b5-a321-4682-b143-3d37e58b9852.png",
+            "isLogo": false
+          }
+        ],
+        "offerCategories": [
+          {
+            "id": "c7615739-b195-4a05-c251-08dcf987133e",
+            "name": "FASHION",
+            "cssClass": null,
+            "parentId": null
+          },
+          {
+            "id": "14df534f-c6ca-4690-a1fb-08dd4dca7c6d",
+            "name": "Women's Fashion",
+            "cssClass": null,
+            "parentId": "c7615739-b195-4a05-c251-08dcf987133e"
+          }
+        ],
+        "storeOffers": [
+          {
+            "id": "ec5538a7-e385-46eb-c5d8-08dd51d911ef",
+            "name": "Firstcry",
+            "address": "Punjagutta Rd Irram Manzil Colony, Punjagutta Hyderabad, Telangana 500082 India",
+            "geoLocation": "17,78",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          },
+          {
+            "id": "585fc408-b42d-43f9-eb8b-08dd527a21ba",
+            "name": "southindia shopping mall",
+            "address": "10-112/4, Navajeevan Nagar, Saraband Nagar, Balanagar, Hyderabad, Telangana 500011",
+            "geoLocation": "17.467312,78.458187",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          }
+        ],
+        "isActive": true,
+        "downloadCount": 99,
+        "expiryDate": "2025-02-20T00:00:00",
+        "expiryEndDate": "2025-03-27T00:00:00",
+        "startTime": "23:31:00",
+        "endTime": "23:30:00",
+        "vendorId": "a85f80b0-66aa-4e76-892c-113116b1e586",
+        "offerType": {
+          "id": "4b99cdc7-4823-443e-8511-08dd51d7e3d3",
+          "selectedOfferType": 3,
+          "buyX": 0,
+          "getY": 0,
+          "uptoXPercentOff": 0,
+          "flatXPercentOff": 0,
+          "extraGreedyDealDiscount": 0,
+          "isExtraGreedyDealsAvail": false,
+          "extraGreedyDealsType": 0,
+          "originalPrice": 2000
+        },
+        "offerPrice": 1000,
+        "additionalDescription": "<p>this is shopping mall</p>",
+        "youtubeLink": null
+      },
+      {
+        "id": "ba0fc255-1a7b-4ca5-440b-08dd51d7e3c92",
+        "title": "sarees offers4",
+        "description": "cotton sarees offers",
+        "couponCode": "COTTON30",
+        "offerImages": [
+          {
+            "imageId": "a2a7e6ca-93c0-4c42-c2d7-08dd51d868c4",
+            "name": "sarees offers-2025-20-02-18-00-06",
+            "url": "/Uploads/Image-2025-20-02-18-00-06-Ram_Chigurupati_We_Are_in_GreedyDeals.com_cdd7f1b5-a321-4682-b143-3d37e58b9852.png",
+            "isLogo": false
+          }
+        ],
+        "offerCategories": [
+          {
+            "id": "c7615739-b195-4a05-c251-08dcf987133e",
+            "name": "FASHION",
+            "cssClass": null,
+            "parentId": null
+          },
+          {
+            "id": "14df534f-c6ca-4690-a1fb-08dd4dca7c6d",
+            "name": "Women's Fashion",
+            "cssClass": null,
+            "parentId": "c7615739-b195-4a05-c251-08dcf987133e"
+          }
+        ],
+        "storeOffers": [
+          {
+            "id": "ec5538a7-e385-46eb-c5d8-08dd51d911ef",
+            "name": "KFC store",
+            "address": "Punjagutta Rd Irram Manzil Colony, Punjagutta Hyderabad, Telangana 500082 India",
+            "geoLocation": "17,78",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          },
+          {
+            "id": "585fc408-b42d-43f9-eb8b-08dd527a21ba",
+            "name": "southindia shopping mall",
+            "address": "10-112/4, Navajeevan Nagar, Saraband Nagar, Balanagar, Hyderabad, Telangana 500011",
+            "geoLocation": "17.467312,78.458187",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          }
+        ],
+        "isActive": true,
+        "downloadCount": 99,
+        "expiryDate": "2025-02-20T00:00:00",
+        "expiryEndDate": "2025-03-27T00:00:00",
+        "startTime": "23:31:00",
+        "endTime": "23:30:00",
+        "vendorId": "a85f80b0-66aa-4e76-892c-113116b1e586",
+        "offerType": {
+          "id": "4b99cdc7-4823-443e-8511-08dd51d7e3d3",
+          "selectedOfferType": 0,
+          "buyX": 1,
+          "getY": 4,
+          "uptoXPercentOff": 0,
+          "flatXPercentOff": 0,
+          "extraGreedyDealDiscount": 50,
+          "isExtraGreedyDealsAvail": true,
+          "extraGreedyDealsType": 1,
+          "originalPrice": 0
+        },
+        "offerPrice": 0,
+        "additionalDescription": "<p>this is shopping mall</p>",
+        "youtubeLink": null
+      },
+      {
+        "id": "ba0fc255-1a7b-4ca5-440b-08dd51d7e3c9j",
+        "title": "sarees offers5",
+        "description": "cotton sarees offers",
+        "couponCode": "COTTON30",
+        "offerImages": [
+          {
+            "imageId": "a2a7e6ca-93c0-4c42-c2d7-08dd51d868c4",
+            "name": "sarees offers-2025-20-02-18-00-06",
+            "url": "/Uploads/Image-2025-20-02-18-00-06-Ram_Chigurupati_We_Are_in_GreedyDeals.com_cdd7f1b5-a321-4682-b143-3d37e58b9852.png",
+            "isLogo": false
+          }
+        ],
+        "offerCategories": [
+          {
+            "id": "c7615739-b195-4a05-c251-08dcf987133e",
+            "name": "FASHION",
+            "cssClass": null,
+            "parentId": null
+          },
+          {
+            "id": "14df534f-c6ca-4690-a1fb-08dd4dca7c6d",
+            "name": "Women's Fashion",
+            "cssClass": null,
+            "parentId": "c7615739-b195-4a05-c251-08dcf987133e"
+          }
+        ],
+        "storeOffers": [
+          {
+            "id": "ec5538a7-e385-46eb-c5d8-08dd51d911ef",
+            "name": "southindia shopping mall",
+            "address": "Punjagutta Rd Irram Manzil Colony, Punjagutta Hyderabad, Telangana 500082 India",
+            "geoLocation": "17,78",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          },
+          {
+            "id": "585fc408-b42d-43f9-eb8b-08dd527a21ba",
+            "name": "southindia shopping mall",
+            "address": "10-112/4, Navajeevan Nagar, Saraband Nagar, Balanagar, Hyderabad, Telangana 500011",
+            "geoLocation": "17.467312,78.458187",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          }
+        ],
+        "isActive": true,
+        "downloadCount": 99,
+        "expiryDate": "2025-02-20T00:00:00",
+        "expiryEndDate": "2025-03-27T00:00:00",
+        "startTime": "23:31:00",
+        "endTime": "23:30:00",
+        "vendorId": "a85f80b0-66aa-4e76-892c-113116b1e586",
+        "offerType": {
+          "id": "4b99cdc7-4823-443e-8511-08dd51d7e3d3",
+          "selectedOfferType": 1,
+          "buyX": 0,
+          "getY": 0,
+          "uptoXPercentOff": 15,
+          "flatXPercentOff": 0,
+          "extraGreedyDealDiscount": 30,
+          "isExtraGreedyDealsAvail": true,
+          "extraGreedyDealsType": 1,
+          "originalPrice": 0
+        },
+        "offerPrice": 0,
+        "additionalDescription": "<p>this is shopping mall</p>",
+        "youtubeLink": null
+      },
+      {
+        "id": "ba0fc255-1a7b-4ca5-440b-08dd51d7e3c9o",
+        "title": "sarees offers6",
+        "description": "cotton sarees offers",
+        "couponCode": "COTTON30",
+        "offerImages": [
+          {
+            "imageId": "a2a7e6ca-93c0-4c42-c2d7-08dd51d868c4",
+            "name": "sarees offers-2025-20-02-18-00-06",
+            "url": "/Uploads/Image-2025-20-02-18-00-06-Ram_Chigurupati_We_Are_in_GreedyDeals.com_cdd7f1b5-a321-4682-b143-3d37e58b9852.png",
+            "isLogo": false
+          }
+        ],
+        "offerCategories": [
+          {
+            "id": "c7615739-b195-4a05-c251-08dcf987133e",
+            "name": "FASHION",
+            "cssClass": null,
+            "parentId": null
+          },
+          {
+            "id": "14df534f-c6ca-4690-a1fb-08dd4dca7c6d",
+            "name": "Women's Fashion",
+            "cssClass": null,
+            "parentId": "c7615739-b195-4a05-c251-08dcf987133e"
+          }
+        ],
+        "storeOffers": [
+          {
+            "id": "ec5538a7-e385-46eb-c5d8-08dd51d911ef",
+            "name": "southindia shopping mall",
+            "address": "Punjagutta Rd Irram Manzil Colony, Punjagutta Hyderabad, Telangana 500082 India",
+            "geoLocation": "17,78",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          },
+          {
+            "id": "585fc408-b42d-43f9-eb8b-08dd527a21ba",
+            "name": "southindia shopping mall",
+            "address": "10-112/4, Navajeevan Nagar, Saraband Nagar, Balanagar, Hyderabad, Telangana 500011",
+            "geoLocation": "17.467312,78.458187",
+            "rank": 0,
+            "storeImages": [],
+            "storeOffers": null,
+            "storeCategories": [],
+            "vendor": null,
+            "shopManagerId": null,
+            "ownerPhone": "8977763103",
+            "managerPhone": "",
+            "image": null
+          }
+        ],
+        "isActive": true,
+        "downloadCount": 99,
+        "expiryDate": "2025-02-20T00:00:00",
+        "expiryEndDate": "2025-03-27T00:00:00",
+        "startTime": "23:31:00",
+        "endTime": "23:30:00",
+        "vendorId": "a85f80b0-66aa-4e76-892c-113116b1e586",
+        "offerType": {
+          "id": "4b99cdc7-4823-443e-8511-08dd51d7e3d3",
+          "selectedOfferType": 0,
+          "buyX": 0,
+          "getY": 0,
+          "uptoXPercentOff": 0,
+          "flatXPercentOff": 0,
+          "extraGreedyDealDiscount": 0,
+          "isExtraGreedyDealsAvail": false,
+          "extraGreedyDealsType": 0,
+          "originalPrice": 0
+        },
+        "offerPrice": 0,
+        "additionalDescription": "<p>this is shopping mall</p>",
+        "youtubeLink": null
+      }
+  ]

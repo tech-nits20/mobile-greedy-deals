@@ -38,6 +38,7 @@ import {
   ILatLongType,
   ISubCategory,
 } from './categoriesTypes';
+import mockData from '../../../mock-data/mock_discount_offer.json';
 
 export function* fetchCategoriesSaga(): SagaIterator {
   try {
@@ -62,33 +63,49 @@ export function* fetchCategoriesSaga(): SagaIterator {
       const categoryProducts: ICategoryProducts[] = [];
 
       if (filteredCategories.length > 0) {
-        // filteredCategories.forEach((category: { id: string }) => {
-        //   const subCategory = response.filter(
-        //     (item: { parentId: string }) => item.parentId === category.id
-        //   );
-        //   if (subCategory.length > 0) {
-        //     subCategories.push({
-        //       categoryId: category.id,
-        //       subCategories: subCategory,
-        //     });
-        //   }
-        // });
-        const response = yield all(
-          filteredCategories.map((category: { id: string }) =>
-            call(fetchCategoryService, category.id)
-          )
-        );
-        const subCategory = response.filter(
-          (res: { children: string | any[] }) => res.children.length > 0
-        );
-        subCategory.forEach((item: { children: []; id: string }) => {
-          subCategories.push({
-            categoryId: item.id,
-            subCategories: item.children,
-          });
+        filteredCategories.forEach((category: { id: string }) => {
+          const subCategory = response.filter(
+            (item: { parentId: string }) => item.parentId === category.id
+          );
+          if (subCategory.length > 0) {
+            subCategories.push({
+              categoryId: category.id,
+              subCategories: subCategory,
+            });
+          }
         });
 
+        // const response = yield all(
+        //   filteredCategories.map((category: { id: string }) =>
+        //     call(fetchCategoryService, category.id)
+        //   )
+        // );
+        // const subCategory = response.filter(
+        //   (res: { children: string | any[] }) => res.children.length > 0
+        // );
+        // subCategory.forEach((item: { children: []; id: string }) => {
+        //   subCategories.push({
+        //     categoryId: item.id,
+        //     subCategories: item.children,
+        //   });
+        // });
+
         if (subCategories.length > 0) {
+          subCategories.flatMap((subItem) =>
+            subItem.subCategories.map((res: { id: string }) => {
+              const subProduct = response.filter(
+                (item: { parentId: string }) => res.id === item.parentId
+              );
+
+              if (subProduct.length > 0) {
+                categoryProducts.push({
+                  categoryId: res.id,
+                  products: subProduct,
+                });
+              }
+            })
+          );
+
           // subCategories.forEach((subItem) => {
           //   subItem.subCategories.forEach((res: { id: string }) => {
           //     const subProduct = response.filter(
@@ -97,28 +114,27 @@ export function* fetchCategoriesSaga(): SagaIterator {
           //     if (subProduct.length > 0) {
           //       categoryProducts.push({
           //         categoryId: subItem.categoryId,
-          //         subCategories: subProduct,
+          //         products: subProduct,
           //       });
           //     }
           //   });
           // });
-
-          const categoryResponse = yield all(
-            subCategories.flatMap((subItem) =>
-              subItem.subCategories.map((res: { id: string }) =>
-                call(fetchCategoryService, res.id)
-              )
-            )
-          );
-          const category = categoryResponse.filter(
-            (res: { children: string | any[] }) => res.children.length > 0
-          );
-          category.forEach((item: { children: []; id: string }) => {
-            categoryProducts.push({
-              categoryId: item.id,
-              products: item.children,
-            });
-          });
+          // const categoryResponse = yield all(
+          //   subCategories.flatMap((subItem) =>
+          //     subItem.subCategories.map((res: { id: string }) =>
+          //       call(fetchCategoryService, res.id)
+          //     )
+          //   )
+          // );
+          // const category = categoryResponse.filter(
+          //   (res: { children: string | any[] }) => res.children.length > 0
+          // );
+          // category.forEach((item: { children: []; id: string }) => {
+          //   categoryProducts.push({
+          //     categoryId: item.id,
+          //     products: item.children,
+          //   });
+          // });
         }
 
         yield put(setSubCategoriesData(subCategories));
@@ -149,7 +165,8 @@ export function* fetchDiscountsOffersSaga({
         isFetched: false,
       })
     );
-    const response = yield call(fetchDiscountsAndOffersService, payload);
+    // const response = yield call(fetchDiscountsAndOffersService, payload);
+    const response = mockData;
     if (response) {
       yield put(setDiscountsAndOffers(response));
     }
@@ -185,7 +202,8 @@ export function* fetchTopCashbackDiscountsSaga({
         isFetched: false,
       })
     );
-    const response = yield call(fetchTopCashbackDiscountsService, payload);
+    // const response = yield call(fetchTopCashbackDiscountsService, payload);
+    const response = mockData;
     if (response) {
       yield put(setTopCashbackDiscounts(response));
     }
@@ -221,7 +239,8 @@ export function* fetchEarlyDealsSaga({
         isFetched: false,
       })
     );
-    const response = yield call(fetchEarlyDealsService, payload);
+    // const response = yield call(fetchEarlyDealsService, payload);
+    const response = mockData;
     if (response) {
       yield put(setEarlyDeals(response));
     }
@@ -257,7 +276,8 @@ export function* fetchPremiumBrandsOffersSaga({
         isFetched: false,
       })
     );
-    const response = yield call(fetchPremiumBrandsOffersService, payload);
+    // const response = yield call(fetchPremiumBrandsOffersService, payload);
+    const response = mockData;
     if (response) {
       yield put(setPremiumBrandsOffers(response));
     }
@@ -282,7 +302,12 @@ export function* fetchPremiumBrandsOffersSaga({
 
 export function* fetchCurrentLocationSaga(): SagaIterator {
   try {
-    const response: ILocationType = yield call(fetchCurrentLocationService);
+    // const response: ILocationType = yield call(fetchCurrentLocationService);
+    const response: ILocationType = {
+      lat: 28.7041,
+      lng: 77.1025,
+      data: [],
+    };
     if (response) {
       const addressComponents = response.data.results[0].address_components;
       const locality = addressComponents.find(

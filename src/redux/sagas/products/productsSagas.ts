@@ -31,6 +31,7 @@ import {
 } from './productsTypes';
 import { IStoreOfferType } from '../categories/categoriesTypes';
 import { OfferTypeEnum } from '../../../types/listingTypes';
+import { Buffer } from 'buffer';
 
 export function* fetchFilteredProductsSaga({
   payload,
@@ -222,13 +223,19 @@ export function* fetchOfferCouponCodeSaga({
   try {
     const response = yield call(downloadOfferCouponCodeService, payload);
     if (response) {
-      const imageObjectURL = URL.createObjectURL(response);
-      console.log(`==COPUN CODE: ${imageObjectURL}`);
+      console.log(`==response: ${JSON.stringify(response)}`);
 
-      yield put(setOfferCouponCode(imageObjectURL));
+      const imageObjectURL = `data:image/png;base64,${Buffer.from(
+        response,
+        'binary'
+      ).toString('base64')}`;
+      console.log(`==imageObjectURL: ${imageObjectURL}`);
+
+      yield put(setOfferCouponCode({ url: imageObjectURL }));
     }
   } catch (error) {
     console.log(`==Error on fetchOfferCouponCodeSaga: ${error}`);
+    yield put(setOfferCouponCode({ error: JSON.stringify(error) }));
   }
 }
 
