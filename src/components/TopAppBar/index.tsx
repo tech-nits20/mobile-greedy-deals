@@ -61,7 +61,7 @@ const TopAppBar: React.FC<TopAppBarProps> = ({
     return true;
   };
 
-  console.log(`==CURRENT: ${JSON.stringify(currentLocation)}`);
+  // console.log(`==CURRENT: ${JSON.stringify(currentLocation)}`);
 
   useEffect(() => {
     async function getLocation() {

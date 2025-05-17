@@ -11,6 +11,7 @@ import {
   setFilterModel,
 } from '../../../redux/sagas/products/productsRedux';
 import { IListingFilters, SortTypeEnum } from '../../../types/FilterTypes';
+import { getOffersValues } from '../../../helper/Utils';
 
 interface SortOption {
   label: string;
@@ -88,6 +89,7 @@ const FilterAndSort: FC<FilterAndSortProps> = ({
       filters: {
         ...filterDataModel.filters,
         range: getRangeValues(filterDataModel?.filters?.range),
+        offerTypeIds: getOffersValues(filterDataModel?.filters?.offerTypeIds),
       },
     };
     dispatch(fetchFilteredProductAction(req));

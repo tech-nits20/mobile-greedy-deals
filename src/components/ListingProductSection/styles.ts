@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
   },
   upto: {
     top: 3,
-    fontWeight: '500',
+    fontWeight: 'bold',
     fontFamily: FontFamily.poppinsMedium,
     textAlign: 'left',
     textTransform: 'uppercase',
@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
     top: 14,
     color: Color.colorGold,
     lineHeight: 12,
-    fontWeight: '700',
+    fontWeight: 'bold',
     fontSize: FontSize.size_3xs,
     left: 12,
   },
@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
     ],
     color: Color.colorWhite,
     lineHeight: 10,
-    fontWeight: '700',
+    fontWeight: 'bold',
   },
   vectorParent: {
     top: 4,

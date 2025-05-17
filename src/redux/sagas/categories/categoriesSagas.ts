@@ -203,7 +203,6 @@ export function* fetchDiscountsOffersSaga({
         order: SortTypeEnum.Popularity,
       },
     };
-    console.log(`==DIS REQ: ${JSON.stringify(requestPayload)}`);
 
     const response = yield call(fetchDiscountsAndOffersService, requestPayload);
     if (response) {
@@ -387,7 +386,6 @@ export function* fetchPremiumBrandsOffersSaga({
 export function* fetchCurrentLocationSaga(): SagaIterator {
   try {
     const response: ILocationType = yield call(fetchCurrentLocationService);
-    console.log(`==IS LOCATION CALLED`);
     let route = undefined;
     let premises = undefined;
     let streetAddress = undefined;

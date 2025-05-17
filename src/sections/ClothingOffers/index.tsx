@@ -39,8 +39,6 @@ const ClothingOffers: React.FC = () => {
 
   useEffect(() => {
     if (isLocationChange) {
-      console.log(`==CALL CLOTH`);
-
       dispatch(fetchClothingOffersAction(req));
     }
   }, [location, allCategories]);

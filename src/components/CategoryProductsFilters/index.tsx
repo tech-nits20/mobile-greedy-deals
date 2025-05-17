@@ -26,6 +26,7 @@ import FilterItem from '../ListingFilter/FilterItem';
 import { IListingFilters } from '../../types/FilterTypes';
 import Loader from '../Loader';
 import { ScrollView } from 'react-native-gesture-handler';
+import { getOffersValues } from '../../helper/Utils';
 
 enum FilterType {
   LOCATION,
@@ -103,16 +104,17 @@ const CategoryProductsFilters: FC = () => {
     return range;
   };
 
-  useEffect(() => {
-    const req: IListingFilters = {
-      ...filterDataModel,
-      filters: {
-        ...filterDataModel.filters,
-        range: getRangeValues(filterDataModel.filters.range),
-      },
-    };
-    dispatch(fetchFilteredProductAction(req));
-  }, [filterDataModel]);
+  // useEffect(() => {
+  //   const req: IListingFilters = {
+  //     ...filterDataModel,
+  //     filters: {
+  //       ...filterDataModel.filters,
+  //       range: getRangeValues(filterDataModel.filters.range),
+  //       offerTypeIds: getOffersValues(filterDataModel.filters.offerTypeIds),
+  //     },
+  //   };
+  //   dispatch(fetchFilteredProductAction(req));
+  // }, [filterDataModel]);
 
   useEffect(() => {
     if (filterOptionTypes.length > 0) {
@@ -158,6 +160,9 @@ const CategoryProductsFilters: FC = () => {
     setTimeout(() => {
       const model: IListingFilters = {
         filters: {
+          lat: filterDataModel.filters.lat,
+          lng: filterDataModel.filters.lng,
+          range: filterDataModel.filters.range,
           categoryId: filterDataModel.filters.categoryId,
         },
         sort: {
@@ -195,12 +200,10 @@ const CategoryProductsFilters: FC = () => {
   };
 
   const onChangeOffers = (value: IOffersTypesFilterItem) => {
-    if (!selectedOffers?.find((item) => item.name === value.name)) {
+    if (!selectedOffers?.find((item) => item.id === value.id)) {
       setSelectedOffers([...(selectedOffers ?? []), value]);
     } else {
-      setSelectedOffers(
-        selectedOffers?.filter((item) => item.name !== value.name)
-      );
+      setSelectedOffers(selectedOffers?.filter((item) => item.id !== value.id));
     }
   };
 

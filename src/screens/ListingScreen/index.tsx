@@ -35,6 +35,7 @@ import { getCurrentLocation } from '../../redux/sagas/categories/categoryRedux';
 import Loader from '../../components/Loader';
 import { IOffersByCategoryId } from '../../api/services';
 import { mockCarouselData } from '../../helper/Constants';
+import { getOffersValues } from '../../helper/Utils';
 
 const ListingScreen = () => {
   const route = useRoute();
@@ -102,23 +103,34 @@ const ListingScreen = () => {
   };
 
   useEffect(() => {
-    if (location.locationName) {
-      const req: IListingFilters = {
-        filters: {
-          lat: location.lat,
-          lng: location.lng,
-          categoryId: activeCategory.id,
-          localOrBrand: LocalOrBrandEnum.NoFilter,
-          extraDealType: ExtraDealTypeEnum.NoFilter,
-        },
-        sort: { order: 0 },
-      };
+    if (location.locationName && filteredResult?.data?.length === 0) {
+      let req: IListingFilters;
+      let filterRequest: IListingFilters;
+      if (JSON.stringify(filterModel) === '{}') {
+        req = {
+          filters: {
+            lat: location.lat,
+            lng: location.lng,
+            range: { min: 0, max: 4 },
+            categoryId: activeCategory.id,
+            localOrBrand: LocalOrBrandEnum.NoFilter,
+            extraDealType: ExtraDealTypeEnum.NoFilter,
+          },
+          sort: { order: 0 },
+        };
+        filterRequest = req;
+      } else {
+        req = filterModel;
+        filterRequest = {
+          ...filterModel,
+          filters: {
+            ...filterModel.filters,
+            offerTypeIds: getOffersValues(filterModel.filters.offerTypeIds),
+          },
+        };
+      }
       dispatch(setFilterModel(req));
-      const filterReq = {
-        ...req,
-        range: getRangeValues(filterModel?.filters?.range),
-      };
-      dispatch(fetchFilteredProductAction(filterReq));
+      dispatch(fetchFilteredProductAction(filterRequest));
     }
   }, [activeCategory, location]);
 

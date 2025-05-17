@@ -272,7 +272,7 @@ const ProductDetailsScreen: FC = () => {
           <View style={styles.descriptionView}>
             <View style={styles.descriptionDetail}>
               {productDetails?.loading ? (
-                <CustomSkeleton width={'80%'} height={120} style={{}} />
+                <CustomSkeleton width={'100%'} height={120} style={{}} />
               ) : (
                 productDetails?.data?.additionalDescription && (
                   <View>
@@ -296,7 +296,7 @@ const ProductDetailsScreen: FC = () => {
                         }}
                         baseStyle={{
                           color: Color.colorDarkGray,
-                          width: dimensions.width - 150,
+                          width: dimensions.width - 32,
                         }}
                         tagsStyles={customStyles}
                       />

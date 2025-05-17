@@ -281,3 +281,9 @@ export const getSectionPadding = () => {
       return 16;
   }
 };
+
+export const getOffersValues = (data: string[] | undefined) => {
+  const offers: string[] = data?.[0]?.split(',') ?? [];
+  const offerTypeIds: string[] = offers.map((item) => item);
+  return offerTypeIds;
+};

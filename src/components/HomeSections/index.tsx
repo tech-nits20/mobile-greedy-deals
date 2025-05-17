@@ -21,7 +21,10 @@ import {
 } from '../../redux/sagas/categories/categoriesTypes';
 import { CustomIcon, getIcons } from '../../helper/Icons';
 import Loader from '../Loader';
-import { setFilteredData } from '../../redux/sagas/products/productsRedux';
+import {
+  setFilteredData,
+  setFilterModel,
+} from '../../redux/sagas/products/productsRedux';
 import { mockCarouselData } from '../../helper/Constants';
 
 export interface HomeSectionItemProps extends ICategory {
@@ -87,6 +90,7 @@ const HomeSections = () => {
       subProducts.map((item) => filteredProducts.push(...item?.products));
     }
     const productSections = [...filteredSubCategories, ...filteredProducts];
+    dispatch(setFilterModel({}));
     dispatch(setFilteredData({ data: [], error: undefined, loading: false }));
     navigation.navigate(LISTING_SCREEN, {
       subCategories: productSections,

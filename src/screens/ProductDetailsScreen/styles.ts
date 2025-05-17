@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
     color: Color.colorLightslategray,
     fontSize: FontSize.size_xs,
     marginTop: 0,
-    width: '80%',
+    width: '100%',
   },
   productsTitle: {
     color: Color.colorBlack,
@@ -108,7 +108,8 @@ export const styles = StyleSheet.create({
     gap: Gap.gap_xl,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
-    width: '20%',
+    paddingTop: Padding.p_5xs,
+    width: '100%',
   },
   ctaButton: {
     height: 24,
@@ -135,11 +136,11 @@ export const styles = StyleSheet.create({
   },
   descriptionView: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'center',
     gap: Gap.gap_xs,
     width: '100%',
     alignItems: 'flex-start',
-    justifyContent: 'space-between',
   },
   descriptionDetail: {
     display: 'flex',
@@ -147,7 +148,7 @@ export const styles = StyleSheet.create({
     gap: Gap.gap_xs,
     alignItems: 'flex-start',
     justifyContent: 'center',
-    width: '80%',
+    width: '100%',
     flexWrap: 'wrap',
   },
   couponCode: {

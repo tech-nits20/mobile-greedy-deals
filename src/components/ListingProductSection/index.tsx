@@ -62,31 +62,33 @@ const ListingProductSection: FC<IProductInfo> = (props) => {
             </View>
           )}
         </View>
-        <View style={styles.vectorParent}>
-          <Image
-            style={[styles.frameChild, styles.framePosition]}
-            resizeMode="cover"
-            source={require('../../../assets/rectangle-448.png')}
-          />
-          <Image
-            style={[styles.frameItem, styles.framePosition]}
-            resizeMode="cover"
-            source={require('../../../assets/rectangle-446.png')}
-          />
-          {offerType?.title && (
-            <Text style={styles.upto}>{offerType.title}</Text>
-          )}
-          {offerType?.subTitle && (
-            <Text style={[styles.text, styles.offTypo]}>
-              {offerType.subTitle}
-            </Text>
-          )}
-          {offerType?.sideText && (
-            <Text style={[styles.off, styles.offTypo]}>
-              {offerType.sideText}
-            </Text>
-          )}
-        </View>
+        {offerType?.title && (
+          <View style={styles.vectorParent}>
+            <Image
+              style={[styles.frameChild, styles.framePosition]}
+              resizeMode="cover"
+              source={require('../../../assets/rectangle-448.png')}
+            />
+            <Image
+              style={[styles.frameItem, styles.framePosition]}
+              resizeMode="cover"
+              source={require('../../../assets/rectangle-446.png')}
+            />
+            {offerType?.title && (
+              <Text style={styles.upto}>{offerType.title}</Text>
+            )}
+            {offerType?.subTitle && (
+              <Text style={[styles.text, styles.offTypo]}>
+                {offerType.subTitle}
+              </Text>
+            )}
+            {offerType?.sideText && (
+              <Text style={[styles.off, styles.offTypo]}>
+                {offerType.sideText}
+              </Text>
+            )}
+          </View>
+        )}
         <View style={styles.titleWrapper}>
           <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
             {props?.stores?.[0]?.storeName}
