@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   FontSize,
   FontFamily,
@@ -6,36 +6,36 @@ import {
   Color,
   Padding,
   Gap,
-} from "../../../GlobalStyles";
+} from '../../../GlobalStyles';
 
 export const styles = StyleSheet.create({
   categoriesLayout: {
-    width: "100%",
+    width: '100%',
     flex: 1,
   },
   womenFashionTypo: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: FontSize.size_2xs,
     fontFamily: FontFamily.poppinsRegular,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
   },
   subtractIcon: {
     width: 430,
     height: 182,
-    display: "none",
+    display: 'none',
     borderRadius: Border.br_5xs,
   },
   image122Icon: {
-    maxWidth: "100%",
-    maxHeight: "100%",
-    overflow: "hidden",
-    alignSelf: "stretch",
+    maxWidth: '100%',
+    maxHeight: '100%',
+    overflow: 'hidden',
+    alignSelf: 'stretch',
   },
   component2Wrapper: {
-    flexDirection: "row",
-    overflow: "hidden",
-    justifyContent: "center",
-    alignSelf: "stretch",
+    flexDirection: 'row',
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignSelf: 'stretch',
     backgroundColor: Color.colorWhite,
   },
   frameChild: {
@@ -49,20 +49,20 @@ export const styles = StyleSheet.create({
     paddingVertical: Padding.p_11xs,
     gap: Gap.gap_xs,
     marginTop: -4,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   component2: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     flex: 1,
   },
   frameGroup: {
-    width: '100%'
+    width: '100%',
   },
   categoriesPage: {
     fontSize: FontSize.size_lg,
-    textAlign: "left",
+    textAlign: 'left',
     fontFamily: FontFamily.poppinsRegular,
     color: Color.colorBlack,
   },
@@ -72,14 +72,14 @@ export const styles = StyleSheet.create({
   },
   categoriesPageParent: {
     padding: Padding.p_3xs,
-    overflow: "hidden",
+    overflow: 'hidden',
     gap: Gap.gap_lg,
-    alignItems: "center",
-    alignSelf: "stretch",
+    alignItems: 'center',
+    alignSelf: 'stretch',
     borderRadius: Border.br_5xs,
     backgroundColor: Color.colorWhite,
   },
- 
+
   womenFashion: {
     lineHeight: 12,
     color: Color.colorBlack,
@@ -88,29 +88,29 @@ export const styles = StyleSheet.create({
 
   framePressable: {
     width: 95,
-    justifyContent: "center",
+    justifyContent: 'center',
     gap: Gap.gap_lg,
   },
 
   frameContainer: {
     width: 410,
     gap: 32,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   midRow: {
     zIndex: 0,
     gap: Gap.gap_lg,
-    alignItems: "center",
-    alignSelf: "stretch",
+    alignItems: 'center',
+    alignSelf: 'stretch',
     flex: 1,
   },
   frameParent: {
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
     flex: 1,
   },
   categoriesChild: {
-    alignSelf: "stretch",
-    display: "none",
+    alignSelf: 'stretch',
+    display: 'none',
     flex: 1,
   },
   categories: {
@@ -118,6 +118,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Color.colorWhite,
   },
   sectionContainer: {
-    paddingBottom: 24
-  }
+    paddingBottom: 24,
+    paddingHorizontal: 24,
+  },
 });

@@ -1,9 +1,12 @@
 import React, { FC, memo } from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Pressable } from 'react-native';
 import {
   getProductOfferInfo,
   getCategorySubCatName,
   getFormattedExpiryDate,
+  getImageURL,
+  getVendorLogoURL,
+  screenWidth,
 } from '../../helper/Utils';
 import { styles } from './styles';
 import {
@@ -12,15 +15,17 @@ import {
   IStoreOfferType,
 } from '../../redux/sagas/categories/categoriesTypes';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Color } from '../../../GlobalStyles';
 
 export type SectionCategoryItemType = {
-  bgImage?: IOfferImages[];
+  bgImage?: string;
   offerCategories?: IOfferCategory[];
   expiryDate?: string;
   offerType: IStoreOfferType;
   offerPrice?: number;
   storeName?: string;
   isSeeAll?: boolean;
+  location: string;
   onCTAClick?: () => void;
 };
 
@@ -32,6 +37,7 @@ const CategorySectionItem: FC<SectionCategoryItemType> = ({
   offerPrice,
   onCTAClick,
   storeName,
+  location,
   isSeeAll = false,
 }) => {
   // const frameView1Style = useMemo(() => {
@@ -42,11 +48,24 @@ const CategorySectionItem: FC<SectionCategoryItemType> = ({
   const offerTypeInfo = getProductOfferInfo(offerType, offerPrice);
 
   return (
-    <TouchableOpacity style={styles.frameParent3} onPress={onCTAClick}>
+    <Pressable
+      style={({ pressed }) => [
+        styles.frameParent3,
+        {
+          backgroundColor: pressed
+            ? Color.colorLightHover
+            : Color.colorTransparent,
+        },
+      ]}
+      onPress={onCTAClick}
+    >
       <View
         style={[
           styles.frameWrapper,
-          { width: isSeeAll ? 180 : 150, height: isSeeAll ? 232 : 224 },
+          {
+            width: isSeeAll ? screenWidth * 0.42 : 150,
+            height: isSeeAll ? 233 : 224,
+          },
         ]}
       >
         <View style={[styles.frameParent]}>
@@ -55,10 +74,9 @@ const CategorySectionItem: FC<SectionCategoryItemType> = ({
               style={styles.logoIcon}
               resizeMode="stretch"
               source={
-                require('../../../assets/default_image.png')
-                // props?.bgImage.length > 0
-                //   ? props.bgImage[0].url
-                //   : require('../../../assets/adidas-logosvg-1.png')}
+                bgImage
+                  ? { uri: getVendorLogoURL(bgImage) }
+                  : require('../../../assets/default_section.png')
               }
             />
             {offerTypeInfo?.gdDiscount?.title && (
@@ -96,7 +114,13 @@ const CategorySectionItem: FC<SectionCategoryItemType> = ({
             </Text>
             <Text style={styles.couponCode}>{'Get coupon code'}</Text>
             <View style={styles.expiredView}>
-              <Text style={styles.expired}>{'Expired'}</Text>
+              <Text
+                style={styles.expired}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {location}
+              </Text>
               <Text style={styles.expiryDate}>
                 {getFormattedExpiryDate(expiryDate)}
               </Text>
@@ -154,12 +178,15 @@ const CategorySectionItem: FC<SectionCategoryItemType> = ({
         style={[
           styles.frameChild1,
           styles.frameLayout,
-          { left: isSeeAll ? 172 : 142, top: isSeeAll ? 132 : 124 },
+          {
+            left: isSeeAll ? screenWidth * 0.4 : 142,
+            top: isSeeAll ? 132 : 124,
+          },
         ]}
         resizeMode="cover"
         source={require('../../../assets/frame-1069.png')}
       />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

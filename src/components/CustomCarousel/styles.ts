@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   Border,
   FontFamily,
@@ -6,36 +6,40 @@ import {
   FontSize,
   Gap,
   Padding,
-} from "../../../GlobalStyles";
+} from '../../../GlobalStyles';
+import { screenWidth } from '../../helper/Utils';
 
 export const styles = StyleSheet.create({
   container: {
-    display: "flex",
+    display: 'flex',
   },
   imageContainer: {
     borderRadius: Padding.p_5xs,
+    width: screenWidth - 20,
+    height: '100%',
+    objectFit: 'fill',
   },
   imageContainerFull: {
     borderRadius: 0,
-    width: '100%'
+    width: '100%',
   },
   pagination: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: -30,
     borderRadius: 4,
     backgroundColor: Color.colorOrangered_100,
     gap: Gap.gap_xs,
     paddingHorizontal: Padding.p_5xs,
     paddingVertical: Padding.p_11xs,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   paginationContainer: {
-    display: "flex",
+    display: 'flex',
     backgroundColor: Color.colorTransparent,
-    width: "100%",
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   dot: {
     width: 10,
@@ -44,12 +48,12 @@ export const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   activeDot: {
-    backgroundColor: "blue",
+    backgroundColor: 'blue',
   },
   inactiveDot: {
-    backgroundColor: "gray",
+    backgroundColor: 'gray',
   },
   imageWrapper: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 });

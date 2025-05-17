@@ -2,36 +2,47 @@ import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import {
   fetchBrandsVendorAction,
+  fetchEndingSoonDealsAction,
   fetchFilteredProductAction,
   fetchGDOffersDealsAction,
   fetchOfferCouponCodeAction,
   fetchOfferTypesByCategoryAction,
+  fetchProductDetailsAction,
   getFilteredProducts,
   refreshListingStateAction,
+  setEndingSoonDeals,
   setFilterBrandsVendor,
   setFilteredData,
   setFilterModel,
   setFilterOfferTypesByCategory,
   setGDOffers,
   setOfferCouponCode,
+  setProductDetails,
   setResetListingState,
 } from './productsRedux';
 import {
   downloadOfferCouponCodeService,
-  fetchCategoriesFilterService,
+  fetchFilterAPIService,
   fetchFilterBrandsVendorService,
   fetchOfferByCategoryService,
+  fetchProductDetailsService,
   IOffersByCategoryId,
 } from '../../../api/services';
-import { IListingFilters } from '../../../types/FilterTypes';
+import {
+  ExtraDealTypeEnum,
+  IListingFilters,
+  LocalOrBrandEnum,
+  SortTypeEnum,
+} from '../../../types/FilterTypes';
 import {
   IFilterBrandsVendor,
   IMappedBrandVendor,
   IMappedFilterTypes,
 } from './productsTypes';
-import { IStoreOfferType } from '../categories/categoriesTypes';
+import { ILatLongType, IStoreOfferType } from '../categories/categoriesTypes';
 import { OfferTypeEnum } from '../../../types/listingTypes';
 import { Buffer } from 'buffer';
+import { MAX_RANGE } from '../../../api/client';
 
 export function* fetchFilteredProductsSaga({
   payload,
@@ -43,7 +54,9 @@ export function* fetchFilteredProductsSaga({
     yield put(
       setFilteredData({ data: prevData.data, loading: true, error: undefined })
     );
-    const response = yield call(fetchCategoriesFilterService, payload);
+    console.log(`==PAY: ${JSON.stringify(payload)}`);
+
+    const response = yield call(fetchFilterAPIService, payload);
     if (response) {
       yield put(
         setFilteredData({ data: response, loading: false, error: undefined })
@@ -71,10 +84,28 @@ export function* fetchOfferByCategorySaga({
   payload: IOffersByCategoryId;
 }): SagaIterator {
   try {
-    const response = yield call(fetchOfferByCategoryService, payload);
+    const requestPayload: IListingFilters = {
+      filters: {
+        lat: payload.lat,
+        lng: payload.lng,
+        range: {
+          min: 0,
+          max: MAX_RANGE,
+        },
+        extraDealType: ExtraDealTypeEnum.NoFilter,
+        localOrBrand: LocalOrBrandEnum.NoFilter,
+        categoryId: payload.categoryId,
+      },
+      sort: {
+        order: SortTypeEnum.Popularity,
+      },
+    };
+    const response = yield call(fetchOfferByCategoryService, requestPayload);
 
     if (response) {
-      const data: IStoreOfferType[] = response;
+      const data: IStoreOfferType[] = response.map(
+        (item: { offerType: any }) => item.offerType
+      );
       const offerTypes: IStoreOfferType[] = [];
       data.map((item) => {
         switch (item.selectedOfferType) {
@@ -92,6 +123,16 @@ export function* fetchOfferByCategorySaga({
                 extraGreedyDealDiscount: item.extraGreedyDealDiscount,
                 extraGreedyDealsType: item.extraGreedyDealsType,
               });
+            } else if (
+              existing?.buyX === item.buyX &&
+              existing?.getY === item.getY
+            ) {
+              const existingIndex = offerTypes.findIndex(
+                (val) => val.selectedOfferType === item.selectedOfferType
+              );
+              offerTypes[existingIndex].id = offerTypes[
+                existingIndex
+              ].id.concat(`,${item.id}`);
             }
             break;
           case OfferTypeEnum.UPTO:
@@ -107,6 +148,13 @@ export function* fetchOfferByCategorySaga({
                 extraGreedyDealDiscount: item.extraGreedyDealDiscount,
                 extraGreedyDealsType: item.extraGreedyDealsType,
               });
+            } else if (existingUpto?.uptoXPercentOff === item.uptoXPercentOff) {
+              const existingIndex = offerTypes.findIndex(
+                (val) => val.selectedOfferType === item.selectedOfferType
+              );
+              offerTypes[existingIndex].id = offerTypes[
+                existingIndex
+              ].id.concat(`,${item.id}`);
             }
             break;
           case OfferTypeEnum.FLAT:
@@ -122,6 +170,13 @@ export function* fetchOfferByCategorySaga({
                 extraGreedyDealDiscount: item.extraGreedyDealDiscount,
                 extraGreedyDealsType: item.extraGreedyDealsType,
               });
+            } else if (existingFlat?.flatXPercentOff === item.flatXPercentOff) {
+              const existingIndex = offerTypes.findIndex(
+                (val) => val.selectedOfferType === item.selectedOfferType
+              );
+              offerTypes[existingIndex].id = offerTypes[
+                existingIndex
+              ].id.concat(`,${item.id}`);
             }
             break;
           // case 3:
@@ -185,7 +240,7 @@ export function* fetchOfferByCategorySaga({
             return { name: '', id: '' };
         }
       });
-      console.log(`==mappedData: ${JSON.stringify(mappedData)}`);
+      // console.log(`==mappedData: ${JSON.stringify(mappedData)}`);
 
       yield put(setFilterOfferTypesByCategory(mappedData));
     }
@@ -200,14 +255,31 @@ export function* fetchBrandsVendorSaga({
   payload: IOffersByCategoryId;
 }): SagaIterator {
   try {
-    const response = yield call(fetchFilterBrandsVendorService, payload);
+    const requestPayload: IListingFilters = {
+      filters: {
+        lat: payload.lat,
+        lng: payload.lng,
+        range: {
+          min: 0,
+          max: MAX_RANGE,
+        },
+        extraDealType: ExtraDealTypeEnum.NoFilter,
+        localOrBrand: LocalOrBrandEnum.NoFilter,
+        categoryId: payload.categoryId,
+      },
+      sort: {
+        order: SortTypeEnum.Popularity,
+      },
+    };
+    const response = yield call(fetchFilterBrandsVendorService, requestPayload);
     if (response) {
       const data: IFilterBrandsVendor[] = response;
-      const mappedData: IMappedBrandVendor[] = data.map((item) => ({
-        name: item.name,
-        id: item.id,
+      const mappedData = Array.from(
+        new Map(data.map((item) => [item.vendorId, item])).values()
+      ).map((item) => ({
+        name: item.vendorName,
+        id: item.vendorId,
       }));
-
       yield put(setFilterBrandsVendor(mappedData));
     }
   } catch (error) {
@@ -225,7 +297,7 @@ export function* fetchOfferCouponCodeSaga({
     if (response) {
       console.log(`==response: ${JSON.stringify(response)}`);
 
-      const imageObjectURL = `data:image/png;base64,${Buffer.from(
+      const imageObjectURL = `data:image/jpeg;base64,${Buffer.from(
         response,
         'binary'
       ).toString('base64')}`;
@@ -250,25 +322,80 @@ export function* refreshListingStateSaga(): SagaIterator {
 export function* fetchGDOffersDealsSaga({
   payload,
 }: {
-  payload: IListingFilters;
+  payload: ILatLongType;
 }): SagaIterator {
   try {
-    const model: IListingFilters = {
+    const requestPayload: IListingFilters = {
       filters: {
-        lat: payload?.filters?.lat,
-        lng: payload?.filters?.lng,
-        offerType: [3],
+        lat: payload.lat,
+        lng: payload.lng,
+        range: {
+          min: 0,
+          max: MAX_RANGE,
+        },
+        extraDealType: ExtraDealTypeEnum.NoFilter,
+        localOrBrand: LocalOrBrandEnum.NoFilter,
       },
       sort: {
-        order: 2,
+        order: SortTypeEnum.ExtraGreedyDealsDiscount,
       },
     };
-    const response = yield call(fetchCategoriesFilterService, model);
+    const response = yield call(fetchFilterAPIService, requestPayload);
     if (response) {
       yield put(setGDOffers(response));
     }
   } catch (error) {
     console.log(`==Error on fetchGDOffersDealsSaga: ${error}`);
+  }
+}
+export function* fetchEndingSoonDealsSaga({
+  payload,
+}: {
+  payload: ILatLongType;
+}): SagaIterator {
+  try {
+    const requestPayload: IListingFilters = {
+      filters: {
+        lat: payload.lat,
+        lng: payload.lng,
+        range: {
+          min: 0,
+          max: MAX_RANGE,
+        },
+        extraDealType: ExtraDealTypeEnum.NoFilter,
+        localOrBrand: LocalOrBrandEnum.NoFilter,
+      },
+      sort: {
+        order: SortTypeEnum.ExpiringSoon,
+      },
+    };
+    const response = yield call(fetchFilterAPIService, requestPayload);
+    if (response) {
+      yield put(setEndingSoonDeals(response));
+    }
+  } catch (error) {
+    console.log(`==Error on fetchGDOffersDealsSaga: ${error}`);
+  }
+}
+
+export function* fetchProductDetailsSaga({
+  payload,
+}: {
+  payload: string;
+}): SagaIterator {
+  try {
+    yield put(setProductDetails({ loading: true }));
+    const response = yield call(fetchProductDetailsService, payload);
+    if (response) {
+      yield put(setProductDetails({ data: response, loading: false }));
+    } else {
+      yield put(setProductDetails({ loading: false }));
+    }
+  } catch (error) {
+    console.log(`Error on fetchProductDetailsSaga: ${error}`);
+    yield put(
+      setProductDetails({ loading: false, error: JSON.stringify(error) })
+    );
   }
 }
 
@@ -279,4 +406,6 @@ export function* initProductsSaga(): SagaIterator {
   yield takeLatest(fetchOfferCouponCodeAction, fetchOfferCouponCodeSaga);
   yield takeLatest(refreshListingStateAction, refreshListingStateSaga);
   yield takeLatest(fetchGDOffersDealsAction, fetchGDOffersDealsSaga);
+  yield takeLatest(fetchEndingSoonDealsAction, fetchEndingSoonDealsSaga);
+  yield takeLatest(fetchProductDetailsAction, fetchProductDetailsSaga);
 }

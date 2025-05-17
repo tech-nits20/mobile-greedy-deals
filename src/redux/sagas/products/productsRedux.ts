@@ -9,11 +9,16 @@ import {
   IFilterProductType,
   IMappedBrandVendor,
   IMappedFilterTypes,
+  IProductDetailsType,
   IProductInfo,
   IProductsBaseState,
 } from './productsTypes';
 import { IListingFilters } from '../../../types/FilterTypes';
 import { IOffersByCategoryId } from '../../../api/services';
+import {
+  IDiscountsOffersItem,
+  ILatLongType,
+} from '../categories/categoriesTypes';
 
 const initialState: IProductsBaseState = {
   filteredProducts: {
@@ -26,6 +31,12 @@ const initialState: IProductsBaseState = {
   offerCouponCode: {},
   filterModel: {},
   GDOffersData: [],
+  endingSoonDeals: [],
+  productDetailsData: {
+    data: undefined,
+    loading: false,
+    error: undefined,
+  },
 };
 
 const name = 'products';
@@ -66,9 +77,21 @@ const productsSlice = createSlice({
     },
     setGDOffers: (
       state: IProductsBaseState,
-      action: PayloadAction<IProductInfo[]>
+      action: PayloadAction<IDiscountsOffersItem[]>
     ) => {
       state.GDOffersData = action.payload;
+    },
+    setEndingSoonDeals: (
+      state: IProductsBaseState,
+      action: PayloadAction<IDiscountsOffersItem[]>
+    ) => {
+      state.endingSoonDeals = action.payload;
+    },
+    setProductDetails: (
+      state: IProductsBaseState,
+      action: PayloadAction<IProductDetailsType>
+    ) => {
+      state.productDetailsData = action.payload;
     },
     setResetListingState: () => initialState,
   },
@@ -116,6 +139,20 @@ export const getGDOffersData: (state: {
   return state.products.GDOffersData || [];
 };
 
+export const getEndingSoonDeals: (state: {
+  products: IProductsBaseState;
+}) => IDiscountsOffersItem[] = (state: { products: IProductsBaseState }) => {
+  return state.products.endingSoonDeals || [];
+};
+
+export const getProductDetails: (state: {
+  products: IProductsBaseState;
+}) => IProductDetailsType | undefined = (state: {
+  products: IProductsBaseState;
+}) => {
+  return state.products.productDetailsData;
+};
+
 export const fetchFilteredProductAction = createAction(
   `${name}/fetchFilteredProductAction`,
   (payload: IListingFilters) => {
@@ -127,7 +164,16 @@ export const fetchFilteredProductAction = createAction(
 
 export const fetchGDOffersDealsAction = createAction(
   `${name}/fetchGDOffersDealsAction`,
-  (payload: IListingFilters) => {
+  (payload: ILatLongType) => {
+    return {
+      payload,
+    };
+  }
+);
+
+export const fetchEndingSoonDealsAction = createAction(
+  `${name}/fetchEndingSoonDealsAction`,
+  (payload: ILatLongType) => {
     return {
       payload,
     };
@@ -165,6 +211,15 @@ export const refreshListingStateAction = createAction(
   `${name}/refreshListingState`
 );
 
+export const fetchProductDetailsAction = createAction(
+  `${name}/fetchProductDetailsAction`,
+  (payload: string) => {
+    return {
+      payload,
+    };
+  }
+);
+
 export const {
   setFilteredData,
   setFilterOfferTypesByCategory,
@@ -173,6 +228,8 @@ export const {
   setFilterModel,
   setResetListingState,
   setGDOffers,
+  setEndingSoonDeals,
+  setProductDetails,
 } = productsSlice.actions;
 export const productsReducer: Reducer<IProductsBaseState> =
   productsSlice.reducer;

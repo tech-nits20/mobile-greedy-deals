@@ -30,18 +30,22 @@ export interface IListingFilterSectionProps {
   location: {
     sectionTitle: string;
     items: ILocationFilterItem[];
+    id: number;
   };
   type: {
     sectionTitle: string;
     items: ITypeFilterItem[];
+    id: number;
   };
   offersTypes?: {
     sectionTitle: string;
     items?: IOffersTypesFilterItem[];
+    id: number;
   };
   brands?: {
     sectionTitle: string;
     items?: IBrandsFilterItem[];
+    id: number;
   };
   setFilterModel?: (filterModel: IListingFilters) => void;
 }

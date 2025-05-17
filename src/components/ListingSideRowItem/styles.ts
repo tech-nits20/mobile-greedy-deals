@@ -45,17 +45,15 @@ export const styles = StyleSheet.create({
   },
   frameWrapper: {
     borderRadius: Border.br_3xs,
-    backgroundColor: Color.colorMistyrose,
   },
   frameWrapperBg: {
-    backgroundColor: Color.colorMistyrose,
     paddingHorizontal: Padding.p_9xs,
     paddingBottom: Padding.p_9xs,
     alignItems: 'center',
     justifyContent: 'center',
   },
   productImageWrapper: {
-    width: 40,
+    width: 70,
     height: 50,
     alignItems: 'center',
   },
@@ -64,8 +62,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   productImage: {
-    width: 25,
-    height: 40,
+    width: '100%',
+    height: '100%',
   },
   productIcon: {
     width: 25,

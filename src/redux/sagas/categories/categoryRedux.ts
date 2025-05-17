@@ -15,6 +15,7 @@ import {
   IEarlyDealsState,
   ILatLongType,
   IPremiumBrandsState,
+  ISectionDataState,
   ISubCategory,
   ITopCashbackState,
 } from './categoriesTypes';
@@ -31,6 +32,7 @@ const initialState: ICategoriesBaseState = {
   categoriesState: {
     categoryLoading: false,
     categoryError: undefined,
+    isFetched: false,
   },
   discountAndOfferState: {
     discountOffersLoading: false,
@@ -54,6 +56,44 @@ const initialState: ICategoriesBaseState = {
   },
   currentLocation: {
     locationName: '',
+    lat: 0,
+    lng: 0,
+  },
+  clothingOffersData: {
+    data: [],
+    loading: false,
+    error: undefined,
+    isFetched: false,
+  },
+  foodsOffersData: {
+    data: [],
+    loading: false,
+    error: undefined,
+    isFetched: false,
+  },
+  beautyAndSpaData: {
+    data: [],
+    loading: false,
+    error: undefined,
+    isFetched: false,
+  },
+  realStatesData: {
+    data: [],
+    loading: false,
+    error: undefined,
+    isFetched: false,
+  },
+  hospitalsData: {
+    data: [],
+    loading: false,
+    error: undefined,
+    isFetched: false,
+  },
+  previousCurrentLocation: {
+    lat: 0,
+    lng: 0,
+  },
+  customLocation: {
     lat: 0,
     lng: 0,
   },
@@ -147,6 +187,48 @@ const categoriesSlice = createSlice({
       action: PayloadAction<ICategory[]>
     ) => {
       state.allCategoriesList = action.payload;
+    },
+    setClothingOffers: (
+      state: ICategoriesBaseState,
+      action: PayloadAction<ISectionDataState>
+    ) => {
+      state.clothingOffersData = action.payload;
+    },
+    setFoodsOffers: (
+      state: ICategoriesBaseState,
+      action: PayloadAction<ISectionDataState>
+    ) => {
+      state.foodsOffersData = action.payload;
+    },
+    setBeautyAndSpaOffers: (
+      state: ICategoriesBaseState,
+      action: PayloadAction<ISectionDataState>
+    ) => {
+      state.beautyAndSpaData = action.payload;
+    },
+    setRealStateOffers: (
+      state: ICategoriesBaseState,
+      action: PayloadAction<ISectionDataState>
+    ) => {
+      state.realStatesData = action.payload;
+    },
+    setHospitalsOffers: (
+      state: ICategoriesBaseState,
+      action: PayloadAction<ISectionDataState>
+    ) => {
+      state.hospitalsData = action.payload;
+    },
+    setPreviousCurrentLocation: (
+      state: ICategoriesBaseState,
+      action: PayloadAction<ILatLongType>
+    ) => {
+      state.previousCurrentLocation = action.payload;
+    },
+    setCustomLocation: (
+      state: ICategoriesBaseState,
+      action: PayloadAction<ILatLongType>
+    ) => {
+      state.customLocation = action.payload;
     },
   },
 });
@@ -247,6 +329,48 @@ export const getAllCategoriesList: (state: {
   return state.categories.allCategoriesList;
 };
 
+export const getClothingOffers: (state: {
+  categories: ICategoriesBaseState;
+}) => ISectionDataState = (state: { categories: ICategoriesBaseState }) => {
+  return state.categories.clothingOffersData;
+};
+
+export const getFoodsOffers: (state: {
+  categories: ICategoriesBaseState;
+}) => ISectionDataState = (state: { categories: ICategoriesBaseState }) => {
+  return state.categories.foodsOffersData;
+};
+
+export const getBeautyAndSpaOffers: (state: {
+  categories: ICategoriesBaseState;
+}) => ISectionDataState = (state: { categories: ICategoriesBaseState }) => {
+  return state.categories.beautyAndSpaData;
+};
+
+export const getRealStateOffers: (state: {
+  categories: ICategoriesBaseState;
+}) => ISectionDataState = (state: { categories: ICategoriesBaseState }) => {
+  return state.categories.realStatesData;
+};
+
+export const getHospitalOffers: (state: {
+  categories: ICategoriesBaseState;
+}) => ISectionDataState = (state: { categories: ICategoriesBaseState }) => {
+  return state.categories.hospitalsData;
+};
+
+export const getPreviousCurrentLocation: (state: {
+  categories: ICategoriesBaseState;
+}) => ILatLongType = (state: { categories: ICategoriesBaseState }) => {
+  return state.categories.previousCurrentLocation;
+};
+
+export const getCustomLocation: (state: {
+  categories: ICategoriesBaseState;
+}) => ILatLongType = (state: { categories: ICategoriesBaseState }) => {
+  return state.categories.customLocation;
+};
+
 export const fetchCategoriesAction = createAction(`${name}/fetchAllCategories`);
 export const fetchDiscountsOffersAction = createAction(
   `${name}/fetchDiscountsOffers`,
@@ -285,6 +409,51 @@ export const fetchCurrentLocationAction = createAction(
   `${name}/fetchCurrentLocation`
 );
 
+export const fetchClothingOffersAction = createAction(
+  `${name}/fetchClothingOffersAction`,
+  (payload: ILatLongType) => {
+    return {
+      payload,
+    };
+  }
+);
+
+export const fetchFoodsOffersAction = createAction(
+  `${name}/fetchClothingOffersAction`,
+  (payload: ILatLongType) => {
+    return {
+      payload,
+    };
+  }
+);
+
+export const fetchBeautyAndSpaOffersAction = createAction(
+  `${name}/fetchClothingOffersAction`,
+  (payload: ILatLongType) => {
+    return {
+      payload,
+    };
+  }
+);
+
+export const fetchRealStateOffersAction = createAction(
+  `${name}/fetchClothingOffersAction`,
+  (payload: ILatLongType) => {
+    return {
+      payload,
+    };
+  }
+);
+
+export const fetchHospitalsOffersAction = createAction(
+  `${name}/fetchClothingOffersAction`,
+  (payload: ILatLongType) => {
+    return {
+      payload,
+    };
+  }
+);
+
 export const {
   setCategoriesData,
   setSubCategoriesData,
@@ -300,6 +469,13 @@ export const {
   setTopCashbackState,
   setCurrentLocation,
   setAllCategoriesList,
+  setBeautyAndSpaOffers,
+  setClothingOffers,
+  setFoodsOffers,
+  setHospitalsOffers,
+  setRealStateOffers,
+  setCustomLocation,
+  setPreviousCurrentLocation,
 } = categoriesSlice.actions;
 export const categoriesReducer: Reducer<ICategoriesBaseState> =
   categoriesSlice.reducer;

@@ -11,8 +11,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchCategoriesAction,
   getAllCategories,
+  getAllSubCategories,
+  getCategoryProducts,
+  getCategoryStatus,
 } from '../../redux/sagas/categories/categoryRedux';
 import Loader from '../../components/Loader';
+import {
+  ICategory,
+  ICategoryProducts,
+} from '../../redux/sagas/categories/categoriesTypes';
+import { setFilteredData } from '../../redux/sagas/products/productsRedux';
+import { getIcons } from '../../helper/Icons';
 
 const MenuScreenItem = ({ item, onPress }) => {
   return (
@@ -21,53 +30,73 @@ const MenuScreenItem = ({ item, onPress }) => {
         <View
           style={[styles.itemContainer, pressed && styles.itemContainerHover]}
         >
+          <Text numberOfLines={1} style={styles.menuItemTitle}>
+            {item.name}
+          </Text>
           <Image
-            source={require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png')}
+            source={getIcons(item.name.trim())}
+            style={{ height: 80, width: 80, borderRadius: 12 }}
           />
-          <Text style={styles.menuItemTitle}>{item}</Text>
         </View>
       )}
     </Pressable>
   );
 };
 const MenuScreen: FC = () => {
-  const categoriesData = useSelector(getAllCategories);
   const route = useRoute();
   const dispatch = useDispatch();
+  const categoriesData = useSelector(getAllCategories);
+  const categoryStatus = useSelector(getCategoryStatus);
+  const subCategories = useSelector(getAllSubCategories);
+  const productsData = useSelector(getCategoryProducts);
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
-  const [categoryData, setCategoryData] = useState(undefined);
 
   useEffect(() => {
-    if (!categoryData) {
+    if (categoriesData.length === 0 && !categoryStatus.categoryLoading) {
       dispatch(fetchCategoriesAction());
     }
   }, []);
 
-  useEffect(() => {
-    if (categoriesData) {
-      const data = categoriesData?.map((item: { name: string }) => item.name);
-      setCategoryData(data);
-    }
-  }, [categoriesData]);
+  const onItemPressed = (item: ICategory) => {
+    let filteredProducts: ICategory[] = [];
+    let filteredSubCategories: ICategory[] = [];
 
-  const onItemPressed = () => {
-    navigation.navigate(LISTING_SCREEN);
+    if (subCategories?.length > 0) {
+      filteredSubCategories = subCategories?.find(
+        (res) => res.categoryId === item.id
+      )?.subCategories;
+    }
+
+    if (filteredSubCategories?.length > 0 && productsData?.length > 0) {
+      const subProducts: ICategoryProducts[] = productsData.filter((res) =>
+        filteredSubCategories.some((val) => res.categoryId === val.id)
+      );
+      subProducts.map((item) => filteredProducts.push(...item?.products));
+    }
+    const productSections = [...filteredSubCategories, ...filteredProducts];
+    dispatch(setFilteredData({ data: [], error: undefined, loading: false }));
+    navigation.navigate(LISTING_SCREEN, {
+      subCategories: productSections,
+      category: item,
+      viewAll: true,
+      selectedSubcategory: item,
+    });
   };
 
   return (
     <View style={styles.container}>
       <TopAppBar title={route?.name === MENU_SCREEN && 'Menu'} />
-      {!categoryData ? (
+      {categoryStatus.categoryLoading ? (
         <Loader />
       ) : (
         <ScrollView>
           <View style={styles.menuGrid}>
-            {categoryData.map((item) => {
+            {categoriesData?.map((item) => {
               return (
                 <MenuScreenItem
-                  key={item}
+                  key={item.id}
                   item={item}
-                  onPress={onItemPressed}
+                  onPress={() => onItemPressed(item)}
                 />
               );
             })}

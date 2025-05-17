@@ -3,12 +3,10 @@ import { Image, View } from 'react-native';
 import { styles } from './styles';
 import TopAppBar from '../../components/TopAppBar';
 import ListingSideRow from '../../components/ListingSideRow';
-import FilterAndSort from '../../components/FilterAndSort';
-import ListingProductSection, {
-  ListingProductSectionProps,
-} from '../../components/ListingProductSection';
-import { Color, Padding } from '../../../GlobalStyles';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import FilterAndSort from '../../components/ListingFilter/FilterAndSort';
+import ListingProductSection from '../../components/ListingProductSection';
+import { Padding } from '../../../GlobalStyles';
+import { FlatList } from 'react-native-gesture-handler';
 import CustomCarousel from '../../components/CustomCarousel';
 import {
   ParamListBase,
@@ -21,103 +19,23 @@ import { ICategory } from '../../redux/sagas/categories/categoriesTypes';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  fetchBrandsVendorAction,
   fetchFilteredProductAction,
+  fetchOfferTypesByCategoryAction,
   getFilteredProducts,
+  getFilterModel,
+  setFilterModel,
 } from '../../redux/sagas/products/productsRedux';
-import { IListingFilters } from '../../types/FilterTypes';
+import {
+  ExtraDealTypeEnum,
+  IListingFilters,
+  LocalOrBrandEnum,
+} from '../../types/FilterTypes';
 import { getCurrentLocation } from '../../redux/sagas/categories/categoryRedux';
 import Loader from '../../components/Loader';
+import { IOffersByCategoryId } from '../../api/services';
+import { mockCarouselData } from '../../helper/Constants';
 
-const mockListingSection: ListingProductSectionProps[] = [
-  {
-    title: 'Sree Venkateswara sarees',
-    imgSrc: require('../../../assets/image-1873881918.png'),
-    offerTitle: 'Buy 1',
-    offerSubTitle: 'Get 2',
-    offerType: 'Free',
-    bgColor: Color.colorGainsboro_100,
-  },
-  {
-    title: 'Sree Venkateswara sarees1',
-    imgSrc: require('../../../assets/image-1873881918.png'),
-    offerTitle: 'Buy 1',
-    offerSubTitle: 'Get 2',
-    offerType: 'Free',
-    bgColor: Color.colorGainsboro_100,
-  },
-  {
-    title: 'Sree Venkateswara sarees2',
-    imgSrc: require('../../../assets/image-1873881918.png'),
-    offerTitle: 'Buy 1',
-    offerSubTitle: 'Get 2',
-    offerType: 'Free',
-    bgColor: Color.colorGainsboro_100,
-  },
-  {
-    title: 'Sree Venkateswara sarees3',
-    imgSrc: require('../../../assets/image-1873881918.png'),
-    offerTitle: 'Buy 1',
-    offerSubTitle: 'Get 2',
-    offerType: 'Free',
-    bgColor: Color.colorGainsboro_100,
-  },
-  {
-    title: 'Summer Fashion',
-    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png'),
-    offerTitle: 'upto',
-    offerSubTitle: '20%',
-    offerType: 'Off',
-  },
-  {
-    title: 'Summer Fashion1',
-    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png'),
-    offerTitle: 'upto',
-    offerSubTitle: '20%',
-    offerType: 'Off',
-  },
-  {
-    title: 'Summer Fashion2',
-    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png'),
-    offerTitle: 'upto',
-    offerSubTitle: '20%',
-    offerType: 'Off',
-  },
-  {
-    title: 'Summer Fashion3',
-    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png'),
-    offerTitle: 'upto',
-    offerSubTitle: '20%',
-    offerType: 'Off',
-  },
-  {
-    title: 'Summer Fashion5',
-    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png'),
-    offerTitle: 'flat',
-    offerSubTitle: '20%',
-    offerType: 'Off',
-  },
-  {
-    title: 'Summer Fashion6',
-    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png'),
-    offerTitle: 'flat',
-    offerSubTitle: '20%',
-    offerType: 'Off',
-  },
-  {
-    title: 'Summer Fashion7',
-    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png'),
-    offerTitle: 'flat',
-    offerSubTitle: '20%',
-    offerType: 'Off',
-  },
-  {
-    title: 'Summer Fashion8',
-    imgSrc: require('../../../assets/bodyshotofadarkskinnedfashionpng-11.png'),
-    offerTitle: 'flat',
-    offerSubTitle: '20%',
-    offerType: 'Off',
-  },
-];
 const ListingScreen = () => {
   const route = useRoute();
   const params = route?.params as {
@@ -129,6 +47,7 @@ const ListingScreen = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   const dispatch = useDispatch();
   const location = useSelector(getCurrentLocation);
+  const filterModel = useSelector(getFilterModel);
   const filteredResult = useSelector(getFilteredProducts);
   const [updateSubCategories, setUpdateSubCategories] = useState<ICategory[]>(
     []
@@ -136,6 +55,8 @@ const ListingScreen = () => {
   const [activeCategory, setActiveCategory] = useState<ICategory>(
     params.selectedSubcategory
   );
+  const isGDDeals = filteredResult?.data?.find((item) => item.offerType)
+    ?.offerType?.isExtraGreedyDealsAvail;
 
   const onFilterSelection = () => {
     navigation.navigate(CATEGORY_PRODUCTS_FILTER_SCREEN);
@@ -152,7 +73,8 @@ const ListingScreen = () => {
       const data: ICategory = {
         id: params.category.id,
         cssClass: params.category?.cssClass,
-        name: 'All',
+        name:
+          params?.subCategories?.length === 0 ? params.category.name : 'All',
       };
       if (
         !updateSubCategories.includes({ name: 'All', id: params.category.id })
@@ -170,29 +92,47 @@ const ListingScreen = () => {
     }
   }, [params.category]);
 
-  useEffect(() => {
-    if (filteredResult.data.length === 0 && !filteredResult.error) {
-      const req: IListingFilters = {
-        filters: {
-          // lat: location.lat,
-          // lng: location.lng,
-          categoryId: activeCategory.id,
-        },
-      };
-      // dispatch(fetchFilteredProductAction(req));
-    }
-  }, [filteredResult.data, filteredResult.error]);
+  const getRangeValues = (data: { min?: number; max?: number } | undefined) => {
+    const range: { min: number; max: number } = {
+      min: data?.min ?? 0,
+      max: data?.max ?? 4,
+    };
+
+    return range;
+  };
 
   useEffect(() => {
-    const req: IListingFilters = {
-      filters: {
-        // lat: location.lat,
-        // lng: location.lng,
-        categoryId: activeCategory.id,
-      },
-    };
-    dispatch(fetchFilteredProductAction(req));
-  }, [activeCategory]);
+    if (location.locationName) {
+      const req: IListingFilters = {
+        filters: {
+          lat: location.lat,
+          lng: location.lng,
+          categoryId: activeCategory.id,
+          localOrBrand: LocalOrBrandEnum.NoFilter,
+          extraDealType: ExtraDealTypeEnum.NoFilter,
+        },
+        sort: { order: 0 },
+      };
+      dispatch(setFilterModel(req));
+      const filterReq = {
+        ...req,
+        range: getRangeValues(filterModel?.filters?.range),
+      };
+      dispatch(fetchFilteredProductAction(filterReq));
+    }
+  }, [activeCategory, location]);
+
+  useEffect(() => {
+    if (location.locationName) {
+      const req: IOffersByCategoryId = {
+        categoryId: activeCategory?.id,
+        lat: location.lat,
+        lng: location.lng,
+      };
+      dispatch(fetchOfferTypesByCategoryAction(req));
+      dispatch(fetchBrandsVendorAction(req));
+    }
+  }, [activeCategory, location]);
 
   return (
     <View style={styles.listingPage}>
@@ -215,11 +155,17 @@ const ListingScreen = () => {
             <View style={[styles.frameParent9, styles.frameParentFlexBox]}>
               <View style={[styles.component2Wrapper, styles.wrapperLayout]}>
                 <View style={styles.component2}>
-                  <CustomCarousel />
+                  <CustomCarousel
+                    carouselMargin={32}
+                    items={mockCarouselData}
+                  />
                 </View>
               </View>
               <View style={styles.frameWrapper10}>
-                <FilterAndSort onFilterSelected={onFilterSelection} />
+                <FilterAndSort
+                  onFilterSelected={onFilterSelection}
+                  isGdDeals={isGDDeals}
+                />
               </View>
               <View style={styles.frameFlexBox}>
                 {filteredResult.loading ? (
@@ -229,7 +175,7 @@ const ListingScreen = () => {
                 ) : (
                   <FlatList
                     data={filteredResult.data}
-                    keyExtractor={(item) => item.title}
+                    keyExtractor={(item) => item.id}
                     numColumns={2}
                     style={styles.flatlist}
                     columnWrapperStyle={{

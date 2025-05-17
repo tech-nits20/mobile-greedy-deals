@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo } from 'react';
-import { Image, View, Text, ImageSourcePropType } from 'react-native';
+import {
+  Image,
+  View,
+  Text,
+  ImageSourcePropType,
+  Pressable,
+} from 'react-native';
 import { styles } from './styles';
 import {
   getCategorySubCatName,
@@ -9,6 +15,7 @@ import {
   getProductOfferInfo,
   getRandomBGColor,
   getStyleValue,
+  getVendorLogoURL,
   IOfferType,
 } from '../../helper/Utils';
 import {
@@ -21,18 +28,22 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
   withRepeat,
+  withDelay,
+  ReduceMotion,
 } from 'react-native-reanimated';
 import { OfferTypeEnum } from '../../types/listingTypes';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Color } from '../../../GlobalStyles';
 
 export type PremiumDealCardRowType = {
   className?: string;
-  bgImage?: IOfferImages[];
+  bgImage?: string;
   offerCategories?: IOfferCategory[];
   expiryDate?: string;
   offerType: IOfferType;
   offerPrice?: number;
   storeName?: string;
+  location?: string;
   onCTAClick?: () => void;
 };
 
@@ -42,12 +53,11 @@ const PrimeBrandItem = (props: PremiumDealCardRowType) => {
   const activeOffer = props?.offerType?.activeOffer;
 
   useEffect(() => {
-    // bounce.value = withRepeat(
-    //   withSpring(10, { damping: 2, stiffness: 100 }),
-    //   -1,
-    //   true
-    // );
-    bounce.value = withSpring(0, { damping: 2, stiffness: 100 });
+    bounce.value = withDelay(
+      2000,
+      withSpring(10, { damping: 2, stiffness: 100 }),
+      ReduceMotion.System
+    );
   }, []);
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -67,17 +77,26 @@ const PrimeBrandItem = (props: PremiumDealCardRowType) => {
   // }, [width]);
 
   return (
-    <TouchableOpacity style={[styles.frameWrapper]} onPress={props.onCTAClick}>
+    <Pressable
+      style={({ pressed }) => [
+        styles.frameWrapper,
+        {
+          backgroundColor: pressed
+            ? Color.colorLightHover
+            : Color.colorTransparent,
+        },
+      ]}
+      onPress={props.onCTAClick}
+    >
       <View style={styles.frameParent}>
         <View style={styles.logoWrapper}>
           <Image
             style={[styles.logoIcon]}
             resizeMode="cover"
             source={
-              require('../../../assets/default_image.png')
-              // props?.bgImage.length > 0
-              //   ? props.bgImage[0].url
-              //   : require('../../../assets/adidas-logosvg-1.png')
+              props?.bgImage
+                ? { uri: getVendorLogoURL(props.bgImage) }
+                : require('../../../assets/default_section.png')
             }
           />
         </View>
@@ -112,7 +131,9 @@ const PrimeBrandItem = (props: PremiumDealCardRowType) => {
           </Text>
           <Text style={styles.couponCode}>{'Get coupon code'}</Text>
           <View style={styles.expiredView}>
-            <Text style={styles.expired}>{'Expired:'}</Text>
+            <Text style={styles.expired} numberOfLines={1} ellipsizeMode="tail">
+              {props?.location}
+            </Text>
             <Text style={styles.expiryDate}>
               {getFormattedExpiryDate(props?.expiryDate)}
             </Text>
@@ -124,7 +145,7 @@ const PrimeBrandItem = (props: PremiumDealCardRowType) => {
           {gdDealsOffer?.title}
         </Animated.Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

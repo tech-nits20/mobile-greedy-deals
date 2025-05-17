@@ -25,19 +25,25 @@ const EarlyDeals = () => {
   const earlyDealsStatus = useSelector(getEarlyDealsStatus);
   const location = useSelector(getCurrentLocation);
 
+  const req: ILatLongType = {
+    lat: location.lat,
+    lng: location.lng,
+  };
   useEffect(() => {
     if (
       earlyDealsOffer.length === 0 &&
       !earlyDealsStatus.isFetched &&
       !earlyDealsStatus.earlyDealsLoading
     ) {
-      const req: ILatLongType = {
-        lat: location.lat,
-        lng: location.lng,
-      };
       dispatch(fetchEarlyDealsAction(req));
     }
   }, [earlyDealsOffer]);
+
+  useEffect(() => {
+    if (location.locationName) {
+      dispatch(fetchEarlyDealsAction(req));
+    }
+  }, [location]);
 
   const onHandleClick = (item: IDiscountsOffersItem) => {
     const data: ICategory = {
@@ -69,7 +75,11 @@ const EarlyDeals = () => {
     >
       <DealsAndOffersSection
         sectionTitle="Early Deals"
-        items={earlyDealsOffer}
+        items={earlyDealsOffer.slice(0, 10)}
+        loading={
+          earlyDealsOffer?.length === 0 && earlyDealsStatus.earlyDealsLoading
+        }
+        location={location.locationName}
         onSeeAllPressed={onSeeAllDealsClicked}
       />
     </View>

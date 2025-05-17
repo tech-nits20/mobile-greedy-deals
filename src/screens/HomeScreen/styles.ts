@@ -7,6 +7,9 @@ import {
   Border,
   Padding,
 } from '../../../GlobalStyles';
+import { getScreenSize, screenWidth } from '../../helper/Utils';
+
+const screenSize = getScreenSize();
 
 export const styles = StyleSheet.create({
   minimumTypo: {
@@ -89,7 +92,7 @@ export const styles = StyleSheet.create({
   },
   component3: {
     top: 16,
-    left: 273,
+    left: screenWidth - 120,
     height: 57,
     alignItems: 'flex-end',
     justifyContent: 'space-between',
@@ -126,14 +129,18 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
   },
   onAmazingDealsOffersCashParent: {
-    left: 24,
-    width: 359,
+    left: 16,
+    width: screenWidth,
     height: 83,
     top: 25,
     position: 'absolute',
   },
   component3Parent: {
-    width: 408,
+    width: screenWidth,
+    alignSelf: 'center',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 108,
   },
   frameItem: {
@@ -223,8 +230,6 @@ export const styles = StyleSheet.create({
   frameParent: {
     gap: Gap.gap_xl,
     marginTop: -25,
-    overflow: 'hidden',
-    alignSelf: 'stretch',
   },
   midRow: {
     paddingHorizontal: Padding.p_3xs,
@@ -235,12 +240,10 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   locationUserBarParent: {
-    zIndex: 1,
-    alignSelf: 'stretch',
     flex: 1,
   },
   mainApps1415Pro: {
-    height: 932,
+    height: '100%',
     width: '100%',
     flex: 1,
     backgroundColor: Color.colorTransparent,
@@ -249,5 +252,6 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: Gap.gap_xl,
+    paddingTop: Padding.p_base,
   },
 });

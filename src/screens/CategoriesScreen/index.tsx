@@ -18,6 +18,7 @@ import {
   getCategoryProducts,
 } from '../../redux/sagas/categories/categoryRedux';
 import Loader from '../../components/Loader';
+import { mockCarouselData } from '../../helper/Constants';
 
 const CategoriesScreen = ({ route }) => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const CategoriesScreen = ({ route }) => {
         <TopAppBar title={screenTitle} />
         <ScrollView horizontal={false}>
           <View style={styles.frameGroup}>
-            <CustomCarousel isFullWidth />
+            <CustomCarousel isFullWidth items={mockCarouselData} />
           </View>
           <View style={styles.midRow}>
             <View style={styles.categoriesPageParent}>
@@ -64,6 +65,10 @@ const CategoriesScreen = ({ route }) => {
                   data={categoryData}
                   keyExtractor={(item) => item.id}
                   nestedScrollEnabled
+                  contentContainerStyle={{
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                  }}
                   renderItem={(item) => {
                     return (
                       <View style={styles.sectionContainer}>

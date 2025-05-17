@@ -1,24 +1,12 @@
 import * as React from 'react';
-import {
-  Image,
-  View,
-  Text,
-  Pressable,
-  ImageBackground,
-  ImageSourcePropType,
-  ActivityIndicator,
-} from 'react-native';
+import { View, Text, ImageBackground, Image } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 import { styles } from './styles';
 import { LISTING_SCREEN } from '../../routes/Routes';
 import CustomCarousel from '../CustomCarousel';
-import {
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
-import { Color, Padding } from '../../../GlobalStyles';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { Color } from '../../../GlobalStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchCategoriesAction,
@@ -26,57 +14,16 @@ import {
   getAllSubCategories,
   getCategoryProducts,
 } from '../../redux/sagas/categories/categoryRedux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   ICategory,
   ICategoryProducts,
 } from '../../redux/sagas/categories/categoriesTypes';
-import { CustomIcon } from '../../helper/Icons';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { CustomIcon, getIcons } from '../../helper/Icons';
 import Loader from '../Loader';
 import { setFilteredData } from '../../redux/sagas/products/productsRedux';
-const mockSectionData = [
-  {
-    title: 'clothes',
-    src: require('../../../assets/mobile-icons.png'),
-  },
-  {
-    title: 'Restaurants',
-    src: require('../../../assets/mobile-icons1.png'),
-  },
-  {
-    title: 'Hospital',
-    src: require('../../../assets/mobile-icons2.png'),
-  },
-  {
-    title: 'Hotel',
-    src: require('../../../assets/mobile-icons3.png'),
-  },
-  {
-    title: 'Real State',
-    src: require('../../../assets/mobile-icons4.png'),
-  },
-  {
-    title: 'Entertainment',
-    src: require('../../../assets/mobile-icons5.png'),
-  },
-  {
-    title: 'Automobiles',
-    src: require('../../../assets/mobile-icons6.png'),
-  },
-  {
-    title: 'Gold',
-    src: require('../../../assets/mobile-icons7.png'),
-  },
-  {
-    title: 'Food',
-    src: require('../../../assets/mobile-icons8.png'),
-  },
-  {
-    title: 'Diagnostics',
-    src: require('../../../assets/mobile-icons9.png'),
-  },
-];
+import { mockCarouselData } from '../../helper/Constants';
+
 export interface HomeSectionItemProps extends ICategory {
   onPress?: () => void;
 }
@@ -91,7 +38,15 @@ const HomeSectionItem: React.FC<HomeSectionItemProps> = ({
       <View style={styles.frameContainer}>
         <View style={styles.mobileIconsWrapper}>
           <View style={styles.mobileIcons}>
-            <CustomIcon name={cssClass} />
+            {/* <CustomIcon name={cssClass} /> */}
+            <Image
+              source={getIcons(name.trim())}
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 24,
+              }}
+            />
           </View>
         </View>
         <View style={styles.nameFlexBox}>
@@ -149,7 +104,7 @@ const HomeSections = () => {
     >
       <View style={styles.subtractParent}>
         <View style={styles.frameParent}>
-          <CustomCarousel />
+          <CustomCarousel items={mockCarouselData} />
         </View>
         <View style={styles.frameWrapper}>
           {categoriesData.length === 0 ? (
@@ -160,8 +115,8 @@ const HomeSections = () => {
               horizontal
               contentContainerStyle={{
                 alignItems: 'center',
-                justifyContent: 'center',
-                alignSelf: 'baseline',
+                justifyContent: 'flex-start',
+                paddingStart: 24,
               }}
               renderItem={({ item, index }) => {
                 return (

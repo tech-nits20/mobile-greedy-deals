@@ -1,5 +1,10 @@
 import axios from 'axios';
 import { BASE_URL } from './endpoints';
+export const MAX_RANGE = 5;
+
+export const HeadersV2 = {
+  'X-api-version': 2,
+};
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,

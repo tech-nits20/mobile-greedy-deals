@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: FontSize.size_sm,
     color: Color.colorBlack,
-    fontWeight: '500',
+    fontWeight: 'bold',
   },
   offerContainer: {
     display: 'flex',
@@ -39,10 +39,15 @@ export const styles = StyleSheet.create({
     color: Color.colorDarkGray,
     fontWeight: '500',
   },
+  offerDescription: {
+    color: '#8B0000',
+    fontWeight: 'bold',
+  },
   descriptionText: {
     color: Color.colorLightslategray,
     fontSize: FontSize.size_xs,
     marginTop: 0,
+    width: '80%',
   },
   productsTitle: {
     color: Color.colorBlack,
@@ -65,7 +70,7 @@ export const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     marginHorizontal: 5,
-    backgroundColor: '#fff',
+    backgroundColor: Color.colorWhitesmoke_100,
     borderRadius: 10,
     overflow: 'hidden',
     alignItems: 'center',
@@ -82,18 +87,20 @@ export const styles = StyleSheet.create({
   categoryWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    gap: Gap.gap_sm,
+    gap: Gap.gap_xs,
     alignItems: 'center',
   },
   categoryName: {
     color: Color.colorDarkRed,
     fontSize: FontSize.size_xs,
-    fontWeight: '500',
+    fontWeight: 'bold',
+    width: '80%',
   },
   offerDeatail: {
     color: Color.colorOrangered_100,
     fontSize: FontSize.size_xs,
-    fontWeight: '500',
+    fontWeight: 'bold',
+    width: '20%',
   },
   couponCodeWrapper: {
     display: 'flex',
@@ -101,6 +108,7 @@ export const styles = StyleSheet.create({
     gap: Gap.gap_xl,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
+    width: '20%',
   },
   ctaButton: {
     height: 24,
@@ -139,6 +147,8 @@ export const styles = StyleSheet.create({
     gap: Gap.gap_xs,
     alignItems: 'flex-start',
     justifyContent: 'center',
+    width: '80%',
+    flexWrap: 'wrap',
   },
   couponCode: {
     paddingTop: Padding.p_3xs,

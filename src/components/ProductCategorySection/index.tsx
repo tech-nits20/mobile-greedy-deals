@@ -92,11 +92,12 @@ const ProductCategorySection: FC<ProductCategorySectionProps> = ({
                 scrollEnabled={productsSections.length < 4}
                 keyboardShouldPersistTaps="handled"
                 ItemSeparatorComponent={() => (
-                  <View style={{ paddingEnd: 16 }} />
+                  <View style={{ paddingEnd: 6 }} />
                 )}
                 contentContainerStyle={{
                   alignItems: 'flex-start',
                   justifyContent: 'flex-start',
+                  paddingHorizontal: 16,
                 }}
                 renderItem={({ item }) => (
                   <ProductCategorySectionItem

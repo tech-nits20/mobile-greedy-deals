@@ -7,6 +7,7 @@ import {
   Gap,
   Padding,
 } from '../../../GlobalStyles';
+import { screenWidth } from '../../helper/Utils';
 
 export const styles = StyleSheet.create({
   wrapperLayout: {
@@ -28,14 +29,16 @@ export const styles = StyleSheet.create({
     position: 'absolute',
   },
   offerImage: {
-    height: 110,
-    width: 154,
+    height: 108,
+    width: screenWidth * 0.365 - 2,
     borderTopLeftRadius: Border.br_5xs,
     borderTopRightRadius: Border.br_5xs,
+    marginTop: 1,
   },
   offerImageWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: screenWidth * 0.365,
   },
   frameWrapper: {
     backgroundColor: Color.colorMistyrose,
@@ -112,7 +115,7 @@ export const styles = StyleSheet.create({
     paddingStart: Padding.p_7xs,
   },
   frameParent: {
-    maxWidth: 154,
+    maxWidth: screenWidth * 0.365,
     width: '100%',
     gap: Gap.gap_lg,
     justifyContent: 'space-between',

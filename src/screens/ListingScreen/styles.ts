@@ -11,7 +11,7 @@ import {
 export const styles = StyleSheet.create({
   midRowSpaceBlock: {
     paddingVertical: 0,
-    paddingHorizontal: Padding.p_3xs,
+    paddingHorizontal: Padding.p_11xs,
   },
 
   frameFlexBox: {
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
   },
   frameGroup: {
     backgroundColor: '#f5f3f3',
-    padding: Padding.p_9xs,
+    padding: Padding.p_11xs,
     borderRadius: Border.br_3xs,
     gap: Gap.gap_lg,
     alignSelf: 'stretch',
@@ -143,6 +143,7 @@ export const styles = StyleSheet.create({
   },
   flatlist: {
     marginBottom: 100,
+    marginEnd: 2,
   },
   loader: {
     display: 'flex',

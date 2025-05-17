@@ -6,7 +6,6 @@ import {
   getCurrentLocation,
   fetchTopCashbackDiscountsAction,
 } from '../../redux/sagas/categories/categoryRedux';
-import { navigate } from '@react-navigation/routers/lib/typescript/src/CommonActions';
 import {
   ILatLongType,
   IDiscountsOffersItem,
@@ -25,19 +24,25 @@ const TopCashback = () => {
   const cashbackStatus = useSelector(getTopCashbackStatus);
   const location = useSelector(getCurrentLocation);
 
+  const req: ILatLongType = {
+    lat: location.lat,
+    lng: location.lng,
+  };
   useEffect(() => {
     if (
       cashbackOffers.length === 0 &&
       !cashbackStatus.isFetched &&
       !cashbackStatus.topCashbackLoading
     ) {
-      const req: ILatLongType = {
-        lat: location.lat,
-        lng: location.lng,
-      };
       dispatch(fetchTopCashbackDiscountsAction(req));
     }
   }, [cashbackOffers]);
+
+  useEffect(() => {
+    if (location.locationName) {
+      dispatch(fetchTopCashbackDiscountsAction(req));
+    }
+  }, [location]);
 
   const onCardClicked = (item: IDiscountsOffersItem) => {
     const data: ICategory = {
@@ -68,7 +73,11 @@ const TopCashback = () => {
     >
       <DealsAndOffersSection
         sectionTitle="Top Cashback Stores"
-        items={cashbackOffers}
+        items={cashbackOffers.slice(0, 10)}
+        loading={
+          cashbackOffers?.length === 0 && cashbackStatus.topCashbackLoading
+        }
+        location={location.locationName}
         onSeeAllPressed={onSeeAllDealsClicked}
       />
     </View>

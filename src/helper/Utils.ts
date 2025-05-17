@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import { IMAGE_BASE_URL } from '../api/endpoints';
+import { IMAGE_BASE_URL, VENDOR_LOGO_BASE_URL } from '../api/endpoints';
 import {
   IExtraGDDealsEnum,
   IOfferCategory,
@@ -64,12 +64,14 @@ const getGDText = (gdType: IStoreOfferType): IGDDealsOffer => {
   switch (gdType.extraGreedyDealsType) {
     case IExtraGDDealsEnum.Cashback:
       return {
-        title: `Extra GD discount ${gdType.extraGreedyDealDiscount} cashback`,
+        title: `Extra GD discount ${gdType.extraGreedyDealDiscount}₹ cashback`,
+        value: gdType.extraGreedyDealDiscount,
       };
 
     default:
       return {
         title: `Extra GD discount ${gdType.extraGreedyDealDiscount}% off`,
+        value: gdType.extraGreedyDealDiscount,
       };
   }
 };
@@ -188,6 +190,10 @@ export const getImageURL = (url: string): ImageSourcePropType => {
   return { uri: `${IMAGE_BASE_URL}${url}` };
 };
 
+export const getVendorLogoURL = (url: string) => {
+  return `${VENDOR_LOGO_BASE_URL}${url}`;
+};
+
 export const getProductOfferInfo = (
   offer: IStoreOfferType,
   offerPrice?: number
@@ -246,5 +252,32 @@ export const getOfferInfo = (offer: IOfferType): string => {
       return `${offer.flatOrUpto?.title} ${offer.flatOrUpto?.value}% off`;
     default:
       return '';
+  }
+};
+
+export type ScreenType = 'small' | 'medium' | 'large';
+
+export const getScreenSize = (): ScreenType => {
+  const width = screenWidth;
+  if (width <= 320) {
+    return 'small';
+  } else if (width >= 320 && width <= 360) {
+    return 'medium';
+  } else {
+    return 'large';
+  }
+};
+
+export const getSectionPadding = () => {
+  const screenSize = getScreenSize();
+  switch (screenSize) {
+    case 'small':
+      return 16;
+    case 'medium':
+      return 16;
+    case 'large':
+      return 16;
+    default:
+      return 16;
   }
 };

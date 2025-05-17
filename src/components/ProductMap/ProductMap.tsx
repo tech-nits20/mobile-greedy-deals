@@ -1,11 +1,6 @@
-import React, { memo } from 'react';
-import { View } from 'react-native';
+import React, { memo, useEffect, useRef } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-
-const containerStyle = {
-  width: '100%',
-  height: 300,
-};
+import { Linking, StyleSheet, View } from 'react-native';
 
 const ProductMap: React.FC<{ lat: number; lng: number }> = ({ lat, lng }) => {
   const center = {
@@ -14,30 +9,56 @@ const ProductMap: React.FC<{ lat: number; lng: number }> = ({ lat, lng }) => {
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   };
+  const mapRef = useRef(null);
 
-  const onClickMarker = () => {
-    // window.open(`${GOOGLE_MARKER_URL}?q=${center.lat},${center.lng}`, '_blank');
+  useEffect(() => {
+    setTimeout(() => {
+      mapRef.current?.animateCamera({
+        center: { latitude: lat, longitude: lng },
+        zoom: 17,
+        duration: 2000,
+      });
+    }, 1000);
+  }, []);
+
+  const handleMarkerPress = () => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${center.latitude},${center.longitude}`;
+
+    Linking.openURL(url).catch((err) => {
+      console.error('Error opening Google Maps:', err);
+    });
   };
 
   return (
-    <View
-      style={{
-        width: '100%',
-        height: 300,
-        backgroundColor: 'ButtonHighlight',
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-      }}
-    >
-      <MapView style={{ width: '100%', height: 300 }} initialRegion={center}>
+    <View style={styles.container}>
+      <MapView
+        ref={mapRef}
+        style={styles.map}
+        initialRegion={center}
+        loadingEnabled
+        scrollEnabled={false}
+      >
         <Marker
-          coordinate={{ latitude: lat, longitude: lng }}
-          title="My Location"
+          coordinate={{
+            latitude: center.latitude,
+            longitude: center.longitude,
+          }}
+          onPress={handleMarkerPress}
         />
       </MapView>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+});
 
 export default memo(ProductMap);

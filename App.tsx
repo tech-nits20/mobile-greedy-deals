@@ -1,4 +1,4 @@
-import React, { StrictMode, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
@@ -7,6 +7,7 @@ import {
   HOME_TABS,
   LISTING_SCREEN,
   PRODUCT_DETAILS_SCREEN,
+  SEARCH_SCREEN,
   SEE_ALL_DEALS_SCREEN,
 } from './src/routes/Routes';
 import BottomTabBar from './src/components/BottomTabBar';
@@ -18,6 +19,10 @@ import { store } from './src/redux/store';
 import ListingScreen from './src/screens/ListingScreen';
 import ProductDetailsScreen from './src/screens/ProductDetailsScreen';
 import SeeAllScreen from './src/screens/SeeAllScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CUSTOM_LOCATION_KEY } from './src/helper/Constants';
+import SearchScreen from './src/screens/SearchScreen';
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
@@ -30,6 +35,14 @@ const App = () => {
       background: Color.colorWhite,
     },
   };
+
+  useLayoutEffect(() => {
+    AsyncStorage.removeItem(CUSTOM_LOCATION_KEY);
+  }, []);
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   return (
     <>
@@ -60,6 +73,11 @@ const App = () => {
                 <Stack.Screen
                   name={SEE_ALL_DEALS_SCREEN}
                   component={SeeAllScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name={SEARCH_SCREEN}
+                  component={SearchScreen}
                   options={{ headerShown: false }}
                 />
               </Stack.Navigator>

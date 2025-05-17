@@ -1,5 +1,5 @@
 import React, { FC, memo, useEffect, useState } from 'react';
-import { View, Dimensions, Image } from 'react-native';
+import { View, Dimensions, Image, ImageSourcePropType } from 'react-native';
 import { styles } from './styles';
 import Carousel from 'react-native-reanimated-carousel';
 import { Padding } from '../../../GlobalStyles';
@@ -17,17 +17,6 @@ configureReanimatedLogger({
   strict: false,
 });
 
-const mockCarouselData = [
-  {
-    imgSrc: require('../../../assets/image-122.png'),
-  },
-  {
-    imgSrc: require('../../../assets/carousel1.png'),
-  },
-  {
-    imgSrc: require('../../../assets/carousel2.png'),
-  },
-];
 export interface CarouselProps {
   isFullWidth?: boolean;
   carouselMargin?: number;
@@ -42,6 +31,7 @@ const CustomCarousel: FC<CarouselProps> = ({
   autoPlay = true,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [imageError, setImageError] = useState(false);
 
   return (
     <>
@@ -57,7 +47,7 @@ const CustomCarousel: FC<CarouselProps> = ({
           }}
           autoPlay={autoPlay}
           pagingEnabled
-          data={mockCarouselData}
+          data={items}
           scrollAnimationDuration={autoPlay ? 5000 : 500}
           snapEnabled
           onSnapToItem={(index) => setCurrentIndex(index)}
@@ -69,7 +59,12 @@ const CustomCarousel: FC<CarouselProps> = ({
                     ? styles.imageContainerFull
                     : styles.imageContainer
                 }
-                source={item.imgSrc}
+                source={
+                  imageError
+                    ? require('../../../assets/image-122.png')
+                    : (item?.imgSrc as ImageSourcePropType)
+                }
+                onError={() => setImageError(true)}
               />
             </View>
           )}
@@ -77,7 +72,7 @@ const CustomCarousel: FC<CarouselProps> = ({
       </View>
       <View style={styles.paginationContainer}>
         <View style={styles.pagination}>
-          {mockCarouselData.map((_, index) => (
+          {items?.map((_, index) => (
             <TouchableOpacity
               key={index}
               onPress={() => setCurrentIndex(index)}

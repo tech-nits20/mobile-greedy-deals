@@ -7,6 +7,7 @@ import {
   FontSize,
   FontFamily,
 } from '../../../GlobalStyles';
+import { screenWidth } from '../../helper/Utils';
 
 export const styles = StyleSheet.create({
   wrapperFlexBox: {
@@ -105,13 +106,14 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   frameWrapper: {
-    justifyContent: 'center',
+    flex: 1,
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    alignSelf: 'stretch',
     paddingTop: Padding.p_5xs,
+    width: screenWidth,
   },
   subtractParent: {
-    height: 221,
+    height: 240,
     paddingHorizontal: Padding.p_3xs,
     gap: Gap.gap_lg,
     paddingVertical: 0,

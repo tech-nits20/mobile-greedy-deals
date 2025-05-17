@@ -22,6 +22,7 @@ const ListingSideRowItem: FC<ListingSideRowItemProps> = ({
   name,
   cssClass,
   isSelected,
+  imageUrl,
   onSelected,
   id,
 }) => {
@@ -38,21 +39,11 @@ const ListingSideRowItem: FC<ListingSideRowItemProps> = ({
       <View style={getSelectedStyle}>
         <View style={[styles.frameWrapper, styles.frameWrapperBg]}>
           <View style={[styles.productImageWrapper, styles.wrapperLayout]}>
-            {cssClass ? (
-              <View style={styles.productIcon}>
-                <CustomIcon
-                  name={cssClass}
-                  size={20}
-                  color={Color.colorOrangered_100}
-                />
-              </View>
-            ) : (
-              <Image
-                style={styles.productImage}
-                resizeMode="cover"
-                source={defaultImage}
-              />
-            )}
+            <Image
+              style={styles.productImage}
+              resizeMode="stretch"
+              source={imageUrl ? { uri: imageUrl } : defaultImage}
+            />
           </View>
         </View>
         <View style={[styles.nameWrapper, styles.frameViewPosition]}>

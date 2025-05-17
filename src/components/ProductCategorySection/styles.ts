@@ -12,14 +12,14 @@ import { screenWidth } from '../../helper/Utils';
 export const styles = StyleSheet.create({
   frameView: {
     alignItems: 'center',
-    alignSelf: 'stretch',
+    justifyContent: 'flex-start',
   },
   fashionParent: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
     flexDirection: 'row',
-    paddingHorizontal: Padding.p_3xs,
+    paddingHorizontal: 24,
   },
   fashion1Typo: {
     color: Color.colorOrangered_100,
@@ -41,7 +41,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: Padding.p_3xs,
     display: 'flex',
-    alignSelf: 'stretch',
   },
   frameWrapper: {
     backgroundColor: Color.colorMistyrose,

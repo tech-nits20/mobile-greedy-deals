@@ -7,11 +7,13 @@ import {
   Border,
   Padding,
 } from '../../../GlobalStyles';
+import { getSectionPadding } from '../../helper/Utils';
 
 export const styles = StyleSheet.create({
   sectionParent: {
     gap: Gap.gap_lg,
     paddingTop: 16,
+    paddingHorizontal: getSectionPadding(),
   },
   parentFlexBox1: {
     display: 'flex',
@@ -19,7 +21,6 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   sectionContainer: {
-    lineHeight: 16,
     color: Color.colorOrangered_100,
     fontFamily: FontFamily.poppinsRegular,
     letterSpacing: 1,
@@ -39,7 +40,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
   },
   sectionTitle: {
-    fontSize: FontSize.size_sm,
+    fontSize: FontSize.size_lg,
     textAlign: 'left',
   },
   frameWrapper: {
@@ -126,5 +127,23 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     alignSelf: 'stretch',
     paddingTop: Padding.p_11xs,
+  },
+  container: {
+    padding: 16,
+    flexDirection: 'row',
+    gap: Gap.gap_xl,
+    justifyContent: 'flex-start',
+    width: '100%',
+  },
+  item: {
+    flexDirection: 'row',
+    marginBottom: 24,
+    alignItems: 'center',
+  },
+  avatar: {
+    borderRadius: 30,
+  },
+  line: {
+    marginBottom: 8,
   },
 });

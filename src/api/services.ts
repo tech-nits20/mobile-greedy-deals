@@ -1,5 +1,5 @@
-import { call } from 'redux-saga/effects';
-import axiosClient from './client';
+import { call, put } from 'redux-saga/effects';
+import axiosClient, { HeadersV2 } from './client';
 import { SagaIterator } from 'redux-saga';
 import {
   DOWNLOAD_OFFER_COUPON_CODE,
@@ -9,20 +9,23 @@ import {
   GET_EARLY_DEALS,
   GET_FILTER_BRANDS_VENDOR,
   GET_OFFER_BY_CATEGORY,
-  GET_PREMIUM_BRANDS_OFFERS,
   GET_TOP_CASHBACK_DISCOUNTS,
   GET_PRODUCT_FILTERS,
   GOOGLE_PLACES_BASE_URL,
   GOOGLE_API_KEY,
+  OFFER_PRODUCT_DETAILS,
 } from './endpoints';
 import { IListingFilters } from '../types/FilterTypes';
 import { ILatLongType } from '../redux/sagas/categories/categoriesTypes';
-import Geolocation from 'react-native-geolocation-service';
+import Geolocation from '@react-native-community/geolocation';
+import { setPreviousCurrentLocation } from '../redux/sagas/categories/categoryRedux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CUSTOM_LOCATION_KEY } from '../helper/Constants';
 
 export interface IOffersByCategoryId {
   categoryId: string;
   lat: number;
-  long: number;
+  lng: number;
 }
 
 export interface ILocationType {
@@ -55,19 +58,11 @@ export function* fetchCategoryService(payload: string): SagaIterator {
 }
 
 export function* fetchDiscountsAndOffersService(
-  payload: ILatLongType
+  payload: IListingFilters
 ): SagaIterator {
   try {
-    const response = yield call(
-      axiosClient.post,
-      GET_DISCOUNTS_OFFERS,
-      {
-        lat: payload.lat,
-        lng: payload.lng,
-      },
-      {
-        params: { maxItems: 10 },
-      }
+    const response = yield call(() =>
+      axiosClient.post(GET_DISCOUNTS_OFFERS, payload, { headers: HeadersV2 })
     );
     return response;
   } catch (error) {
@@ -77,19 +72,13 @@ export function* fetchDiscountsAndOffersService(
 }
 
 export function* fetchTopCashbackDiscountsService(
-  payload: ILatLongType
+  payload: IListingFilters
 ): SagaIterator {
   try {
-    const response = yield call(
-      axiosClient.post,
-      GET_TOP_CASHBACK_DISCOUNTS,
-      {
-        lat: payload.lat,
-        lng: payload.lng,
-      },
-      {
-        params: { maxItems: 10 },
-      }
+    const response = yield call(() =>
+      axiosClient.post(GET_TOP_CASHBACK_DISCOUNTS, payload, {
+        headers: HeadersV2,
+      })
     );
     return response;
   } catch (error) {
@@ -98,18 +87,12 @@ export function* fetchTopCashbackDiscountsService(
   }
 }
 
-export function* fetchEarlyDealsService(payload: ILatLongType): SagaIterator {
+export function* fetchEarlyDealsService(
+  payload: IListingFilters
+): SagaIterator {
   try {
-    const response = yield call(
-      axiosClient.post,
-      GET_EARLY_DEALS,
-      {
-        lat: payload.lat,
-        lng: payload.lng,
-      },
-      {
-        params: { maxItems: 10 },
-      }
+    const response = yield call(() =>
+      axiosClient.post(GET_EARLY_DEALS, payload, { headers: HeadersV2 })
     );
     return response;
   } catch (error) {
@@ -118,40 +101,10 @@ export function* fetchEarlyDealsService(payload: ILatLongType): SagaIterator {
   }
 }
 
-export function* fetchPremiumBrandsOffersService(
-  payload: ILatLongType
-): SagaIterator {
+export function* fetchFilterAPIService(payload: IListingFilters): SagaIterator {
   try {
-    const response = yield call(
-      axiosClient.post,
-      GET_PREMIUM_BRANDS_OFFERS,
-      {
-        lat: payload.lat,
-        lng: payload.lng,
-      },
-      {
-        params: { maxItems: 10 },
-      }
-    );
-    return response;
-  } catch (error) {
-    console.error('==Error fetchPremiumBrandsOffersService data:', error);
-    throw error;
-  }
-}
-
-export function* fetchCategoriesFilterService(
-  payload: IListingFilters
-): SagaIterator {
-  try {
-    console.log(`==SAGA CAT ID: ${JSON.stringify(payload)}`);
-    const response = yield call(
-      axiosClient.post,
-      GET_PRODUCT_FILTERS,
-      payload,
-      {
-        params: { maxItems: 30 },
-      }
+    const response = yield call(() =>
+      axiosClient.post(GET_PRODUCT_FILTERS, payload, { headers: HeadersV2 })
     );
 
     return response;
@@ -162,16 +115,11 @@ export function* fetchCategoriesFilterService(
 }
 
 export function* fetchOfferByCategoryService(
-  payload: IOffersByCategoryId
+  payload: IListingFilters
 ): SagaIterator {
   try {
-    const response = yield call(
-      axiosClient.post,
-      `${GET_OFFER_BY_CATEGORY}${payload.categoryId}`,
-      {
-        lat: payload.lat,
-        lng: payload.long,
-      }
+    const response = yield call(() =>
+      axiosClient.post(GET_OFFER_BY_CATEGORY, payload, { headers: HeadersV2 })
     );
     return response;
   } catch (error) {
@@ -181,16 +129,13 @@ export function* fetchOfferByCategoryService(
 }
 
 export function* fetchFilterBrandsVendorService(
-  payload: IOffersByCategoryId
+  payload: IListingFilters
 ): SagaIterator {
   try {
-    const response = yield call(
-      axiosClient.post,
-      `${GET_FILTER_BRANDS_VENDOR}${payload.categoryId}`,
-      {
-        lat: payload.lat,
-        lng: payload.long,
-      }
+    const response = yield call(() =>
+      axiosClient.post(GET_FILTER_BRANDS_VENDOR, payload, {
+        headers: HeadersV2,
+      })
     );
     return response;
   } catch (error) {
@@ -204,10 +149,11 @@ export function* downloadOfferCouponCodeService(payload: string): SagaIterator {
     const response = yield call(
       axiosClient.post,
       `${DOWNLOAD_OFFER_COUPON_CODE}${payload}`,
-      ''
-      // {
-      //   responseType: 'blob',
-      // }
+      '',
+      {
+        responseType: 'blob',
+        headers: HeadersV2,
+      }
     );
     return response;
   } catch (error) {
@@ -226,26 +172,91 @@ const fetchCurrentLocation = async (latitude: number, longitude: number) => {
 
 export function* fetchCurrentLocationService(): SagaIterator {
   try {
-    const position = yield call(
-      () =>
-        new Promise((resolve, reject) =>
-          Geolocation.getCurrentPosition(resolve, reject)
-        )
+    let latitude = 0;
+    let longitude = 0;
+    const customLocation = yield call(
+      AsyncStorage.getItem,
+      CUSTOM_LOCATION_KEY
     );
 
-    if (position) {
-      const latitude = position?.coords?.latitude;
-      const longitude = position?.coords?.longitude;
-      const locationRes = yield call(fetchCurrentLocation, latitude, longitude);
+    if (!customLocation) {
+      const position = yield call(
+        () =>
+          new Promise((resolve, reject) =>
+            Geolocation.getCurrentPosition(resolve, reject)
+          )
+      );
 
-      const result: ILocationType = {
-        data: locationRes,
-        lat: latitude,
-        lng: longitude,
-      };
-      return result;
+      if (position) {
+        latitude = position?.coords?.latitude;
+        longitude = position?.coords?.longitude;
+      }
+    } else {
+      const parsedLocation = JSON.parse(customLocation);
+      latitude = parsedLocation?.lat;
+      longitude = parsedLocation?.lng;
     }
+
+    yield put(setPreviousCurrentLocation({ lat: latitude, lng: longitude }));
+    const locationRes = yield call(fetchCurrentLocation, latitude, longitude);
+
+    const result: ILocationType = {
+      data: locationRes,
+      lat: latitude,
+      lng: longitude,
+    };
+    return result;
   } catch (error) {
     console.error('==Error fetchCurrentLocation data:', error);
   }
+}
+
+export function* fetchProductDetailsService(payload: string): SagaIterator {
+  try {
+    const response = yield call(
+      axiosClient.get,
+      `${OFFER_PRODUCT_DETAILS}${payload}`,
+      {
+        headers: HeadersV2,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error('==Error fetchProductDetailsService data:', error);
+    throw error;
+  }
+}
+
+export async function fetchLocationSuggestion(query: string) {
+  if (query.length < 2) return;
+
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&key=${GOOGLE_API_KEY}&language=en&components=country:in`;
+
+  try {
+    const response = await fetch(url);
+    const json = await response.json();
+    if (json.predictions) {
+      return json.predictions;
+    }
+  } catch (error) {
+    console.error('Error fetching places:', error);
+  }
+
+  return [];
+}
+
+export async function fetchLocationDetails(placeId: string) {
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=geometry&key=${GOOGLE_API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    const json = await response.json();
+    if (json.result) {
+      return json.result;
+    }
+  } catch (error) {
+    console.error('Error fetching place details:', error);
+  }
+
+  return null;
 }

@@ -7,11 +7,14 @@ import {
   Border,
   Padding,
 } from '../../../GlobalStyles';
+import { getSectionPadding } from '../../helper/Utils';
 
 export const styles = StyleSheet.create({
   frameGroup: {
     gap: Gap.gap_lg,
     alignSelf: 'stretch',
+    paddingHorizontal: getSectionPadding(),
+    paddingTop: Padding.p_base,
   },
   primeBrandsParent: {
     display: 'flex',

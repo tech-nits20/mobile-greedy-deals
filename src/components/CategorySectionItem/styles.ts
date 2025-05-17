@@ -7,6 +7,7 @@ import {
   Border,
   Padding,
 } from '../../../GlobalStyles';
+import { screenWidth } from '../../helper/Utils';
 
 export const styles = StyleSheet.create({
   frameParent3: {
@@ -31,7 +32,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: Border.br_5xs,
-    marginTop: -1,
+    marginTop: 1,
   },
   gdDiscountContainer: {
     position: 'absolute',
@@ -56,7 +57,7 @@ export const styles = StyleSheet.create({
   offParent: {
     borderBottomRightRadius: Border.br_5xs,
     borderBottomLeftRadius: Border.br_5xs,
-    backgroundColor: Color.colorWhite,
+    // backgroundColor: Color.colorWhite,
     borderStyle: 'dashed',
     borderRadius: 0.001,
     borderTopWidth: 0.5,
@@ -121,6 +122,7 @@ export const styles = StyleSheet.create({
     fontFamily: FontFamily.poppinsSemiBold,
     color: Color.colorDarkGray,
     textAlign: 'left',
+    maxWidth: 80,
   },
   expiryDate: {
     fontSize: FontSize.size_3xs,
@@ -154,7 +156,7 @@ export const styles = StyleSheet.create({
   },
   upto: {
     top: 3,
-    fontWeight: '500',
+    fontWeight: 'bold',
     fontFamily: FontFamily.poppinsMedium,
     textAlign: 'left',
     textTransform: 'uppercase',
@@ -168,8 +170,8 @@ export const styles = StyleSheet.create({
     top: 14,
     color: Color.colorGold,
     lineHeight: 12,
-    fontWeight: '700',
-    fontSize: FontSize.size_3xs,
+    fontWeight: 'bold',
+    fontSize: FontSize.size_2xs,
     left: 12,
   },
   off: {
@@ -183,11 +185,11 @@ export const styles = StyleSheet.create({
     ],
     color: Color.colorWhite,
     lineHeight: 10,
-    fontWeight: '700',
+    fontWeight: 'bold',
   },
   offTypo: {
     fontFamily: FontFamily.poppinsBold,
-    fontWeight: '700',
+    fontWeight: 'bold',
     textAlign: 'left',
     textTransform: 'uppercase',
     position: 'absolute',

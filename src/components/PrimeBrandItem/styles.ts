@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     letterSpacing: 1,
     lineHeight: 12,
     fontWeight: 'bold',
-    fontFamily: FontFamily.poppinsSemiBold,
+    fontFamily: FontFamily.poppinsBold,
     color: Color.colorOrangered_100,
     textAlign: 'left',
     alignSelf: 'stretch',
@@ -99,6 +99,7 @@ export const styles = StyleSheet.create({
     fontFamily: FontFamily.poppinsSemiBold,
     color: Color.colorDarkGray,
     textAlign: 'left',
+    maxWidth: 80,
   },
   expiryDate: {
     fontSize: FontSize.size_3xs,

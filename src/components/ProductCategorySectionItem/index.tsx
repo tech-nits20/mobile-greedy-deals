@@ -16,25 +16,18 @@ const ProductCategorySectionItem: FC<ProductCategoryItemType> = ({
   id,
   name,
   cssClass,
+  imageUrl,
   onPress,
 }) => {
   return (
     <Pressable onPress={onPress} style={styles.frameParent}>
       <View style={[styles.frameWrapper, styles.wrapperLayout]}>
         <View style={[styles.imageWrapper, styles.wrapperLayout]}>
-          {cssClass ? (
-            <CustomIcon
-              name={cssClass}
-              size={32}
-              color={Color.colorOrangered_100}
-            />
-          ) : (
-            <Image
-              style={styles.imageIcon}
-              resizeMode="cover"
-              source={defaultImage}
-            />
-          )}
+          <Image
+            style={styles.imageIcon}
+            resizeMode="stretch"
+            source={imageUrl ? { uri: imageUrl } : defaultImage}
+          />
         </View>
       </View>
       <View style={styles.menFashionWrapper}>

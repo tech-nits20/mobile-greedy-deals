@@ -9,10 +9,14 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import { Padding } from '../../../GlobalStyles';
 import CategorySectionItem from '../../components/CategorySectionItem';
-import { LISTING_SCREEN } from '../../routes/Routes';
+import { LISTING_SCREEN, PRODUCT_DETAILS_SCREEN } from '../../routes/Routes';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
+import { getCurrentLocation } from '../../redux/sagas/categories/categoryRedux';
+import { IProductInfo } from '../../redux/sagas/products/productsTypes';
 
 const SeeAllScreen = () => {
+  const location = useSelector(getCurrentLocation);
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   const route = useRoute<{
     key: string;
@@ -22,28 +26,24 @@ const SeeAllScreen = () => {
   const items = route?.params?.items as IDiscountsOffersItem[];
 
   const onCardClicked = (res: IDiscountsOffersItem) => {
-    const item: ICategory = {
-      name: res.offerCategories[res.offerCategories.length - 1]?.name,
-      id: res.id,
+    const item: IProductInfo = {
+      ...res,
     };
-    navigation.navigate(LISTING_SCREEN, {
-      subCategories: [item],
-      category: item,
-      selectedSubcategory: item,
-    });
+    navigation.navigate(PRODUCT_DETAILS_SCREEN, { product: item });
   };
 
   const renderDealsCard = (item: IDiscountsOffersItem) => {
     return (
       <CategorySectionItem
         key={`${item.id}`}
-        bgImage={item.offerImages}
+        bgImage={item.vendorLogo}
         offerCategories={item?.offerCategories}
         offerPrice={item.offerPrice}
         expiryDate={item?.expiryEndDate}
         offerType={item?.offerType}
-        storeName={item?.storeOffers?.[0]?.name}
+        storeName={item?.stores?.[0]?.storeName}
         isSeeAll
+        location={item?.stores?.[0]?.storeCity}
         onCTAClick={() => onCardClicked(item)}
       />
     );

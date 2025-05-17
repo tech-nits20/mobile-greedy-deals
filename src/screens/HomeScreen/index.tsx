@@ -9,11 +9,19 @@ import { memo } from 'react';
 import DiscountsAndOffers from '../../sections/DiscountsAndOffers';
 import TopCashback from '../../sections/TopCashback';
 import EarlyDeals from '../../sections/EarlyDeals';
+import ClothingOffers from '../../sections/ClothingOffers';
+import FoodsOffers from '../../sections/FoodsOffers';
+import BeautyAndSpaOffers from '../../sections/BeautyAndSpaOffers';
+import RealEstateOffers from '../../sections/RealEstateOffers';
+import HospitalsOffers from '../../sections/HospitalsOffers';
+import { getScreenSize, screenWidth } from '../../helper/Utils';
 
 const HomeScreen = () => {
+  console.log(`===SCRWID: ${getScreenSize()}`);
+
   return (
     <>
-      <TopAppBar />
+      <TopAppBar isShowSearch />
       <ScrollView
         style={styles.mainApps1415Pro}
         bounces={false}
@@ -26,26 +34,52 @@ const HomeScreen = () => {
               <View style={styles.component3Parent}>
                 <View style={styles.component3}>
                   <View style={styles.minimumParent}>
-                    <Text style={[styles.minimum, styles.minimumTypo]}>
+                    <Text
+                      allowFontScaling={false}
+                      style={[styles.minimum, styles.minimumTypo]}
+                    >
                       Minimum
                     </Text>
-                    <Text style={[styles.off, styles.offText]}>OFF</Text>
-                    <Text style={[styles.text, styles.offText]}>20%</Text>
+                    <Text
+                      allowFontScaling={false}
+                      style={[styles.off, styles.offText]}
+                    >
+                      OFF
+                    </Text>
+                    <Text
+                      allowFontScaling={false}
+                      style={[styles.text, styles.offText]}
+                    >
+                      20%
+                    </Text>
                   </View>
                 </View>
                 <View style={styles.onAmazingDealsOffersCashParent}>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.onAmazingDealsContainer,
                       styles.bigBrandsFlexBox,
                     ]}
                   >
-                    <Text style={styles.onAmazingDealsContainer1}>
-                      <Text style={styles.onAmazing}>
-                        <Text style={styles.onAmazing1}>On Amazing</Text>
-                        <Text style={styles.text1}>{` `}</Text>
+                    <Text
+                      allowFontScaling={false}
+                      style={styles.onAmazingDealsContainer1}
+                    >
+                      <Text allowFontScaling={false} style={styles.onAmazing}>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.onAmazing1}
+                        >
+                          On Amazing
+                        </Text>
+                        <Text
+                          allowFontScaling={false}
+                          style={styles.text1}
+                        >{` `}</Text>
                       </Text>
                       <Text
+                        allowFontScaling={false}
                         style={[
                           styles.dealsOffersCashback,
                           styles.trendingCategoriesTypo,
@@ -55,18 +89,26 @@ const HomeScreen = () => {
                       </Text>
                     </Text>
                   </Text>
-                  <Text style={[styles.bigBrands, styles.bigBrandsFlexBox]}>
+                  <Text
+                    allowFontScaling={false}
+                    style={[styles.bigBrands, styles.bigBrandsFlexBox]}
+                  >
                     Big Brands
                   </Text>
                 </View>
               </View>
-              <PrimeBrands />
-              <View style={styles.topCategories}>
-                <DiscountsAndOffers />
-                <TopCashback />
-                <EarlyDeals />
-              </View>
             </View>
+          </View>
+          <PrimeBrands />
+          <View style={styles.topCategories}>
+            <DiscountsAndOffers />
+            <TopCashback />
+            <EarlyDeals />
+            <ClothingOffers />
+            <FoodsOffers />
+            <BeautyAndSpaOffers />
+            <RealEstateOffers />
+            <HospitalsOffers />
           </View>
         </View>
       </ScrollView>

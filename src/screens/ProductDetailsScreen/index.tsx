@@ -11,20 +11,35 @@ import ProductCategorySectionItem, {
 import { IProductInfo } from '../../redux/sagas/products/productsTypes';
 import {
   getCategorySubCatName,
+  getExtraGDActiveOfferText,
   getFormattedExpiryDate,
+  getImageURL,
   getOfferDetailText,
+  getOfferType,
 } from '../../helper/Utils';
 import CTAButton from '../../components/CTAButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchOfferCouponCodeAction,
+  fetchProductDetailsAction,
   getOfferCouponCode,
+  getProductDetails,
 } from '../../redux/sagas/products/productsRedux';
 import { Color, FontSize } from '../../../GlobalStyles';
 import RenderHTML from 'react-native-render-html';
 import ProductMap from '../../components/ProductMap/ProductMap';
+import CustomSkeleton from '../../components/CustomSkeleton';
+import { mockCarouselData } from '../../helper/Constants';
+
+export enum OfferDetailType {
+  DISCOUNT_OFFER,
+  GD_DISCOUNT,
+  VALID_TILL,
+  VALID_FOR,
+  TIME_DURATION,
+}
 export interface ShopInfoItem {
-  id: number;
+  id: OfferDetailType;
   title: string;
   description: string;
 }
@@ -42,17 +57,17 @@ const customStyles = {
 
 const offerDetailsList: ShopInfoItem[] = [
   {
-    id: 1,
+    id: OfferDetailType.DISCOUNT_OFFER,
     title: 'Discount offer',
     description: 'buy1 get 2 free',
   },
   {
-    id: 2,
+    id: OfferDetailType.VALID_TILL,
     title: 'Valid till',
     description: '20 Oct 2025',
   },
   {
-    id: 3,
+    id: OfferDetailType.VALID_FOR,
     title: 'Valid for',
     description: 'Category',
   },
@@ -88,6 +103,7 @@ const VIDEO_DATA = [
   { id: '5', title: 'Video 5', thumbnail: 'https://via.placeholder.com/150' },
   { id: '6', title: 'Video 6', thumbnail: 'https://via.placeholder.com/150' },
 ];
+
 const ProductOfferSectionItem: React.FC<ShopInfoItem> = ({
   title,
   id,
@@ -96,15 +112,39 @@ const ProductOfferSectionItem: React.FC<ShopInfoItem> = ({
   return (
     <View style={styles.offerSectionItem}>
       <Text style={styles.offerText}>{title}</Text>
-      <Text style={styles.offerText}>{description}</Text>
+      <Text style={styles.offerDescription}>{description}</Text>
     </View>
   );
 };
 const ProductOfferSection = (props: IProductInfo) => {
+  const [mappedOfferDetail, setMappedOfferDetail] =
+    useState<ShopInfoItem[]>(offerDetailsList);
+
+  useEffect(() => {
+    const offerTypeData = getOfferType(props?.offerType);
+    const gdDealsOffer = getExtraGDActiveOfferText(offerTypeData);
+
+    if (gdDealsOffer?.title) {
+      const data: ShopInfoItem = {
+        id: OfferDetailType.GD_DISCOUNT,
+        title: 'Extra GD discount',
+        description: gdDealsOffer.title.includes('%')
+          ? `${gdDealsOffer.value}% off`
+          : `${gdDealsOffer.value}₹ cashback`,
+      };
+      const temp = [...offerDetailsList];
+      temp.splice(1, 0, data);
+      setMappedOfferDetail(temp);
+    }
+  }, [props]);
+
   return (
     <>
-      {offerDetailsList?.map((item) => {
-        if (item.id === 1 && props?.expiryEndDate) {
+      {mappedOfferDetail?.map((item) => {
+        if (
+          item.id === OfferDetailType.DISCOUNT_OFFER &&
+          props?.expiryEndDate
+        ) {
           return (
             <ProductOfferSectionItem
               key={item.title}
@@ -112,7 +152,7 @@ const ProductOfferSection = (props: IProductInfo) => {
               description={getOfferDetailText(props.offerType)}
             />
           );
-        } else if (item.id === 2 && props?.offerType) {
+        } else if (item.id === OfferDetailType.VALID_TILL && props?.offerType) {
           return (
             <ProductOfferSectionItem
               key={item.title}
@@ -120,7 +160,7 @@ const ProductOfferSection = (props: IProductInfo) => {
               description={getFormattedExpiryDate(props.expiryEndDate)}
             />
           );
-        } else if (item.id === 3) {
+        } else if (item.id === OfferDetailType.VALID_FOR) {
           return (
             <ProductOfferSectionItem
               key={item.title}
@@ -145,21 +185,22 @@ type RouteParams = {
   };
 };
 
+const renderItem = ({ item }) => (
+  <View style={styles.itemContainer}>
+    <Image source={{ uri: item.thumbnail }} style={styles.thumbnail} />
+    <Text style={styles.title}>{item.title}</Text>
+  </View>
+);
+
 const ProductDetailsScreen: FC = () => {
   const dispatch = useDispatch();
   const couponCodeUrl = useSelector(getOfferCouponCode);
+  const productDetails = useSelector(getProductDetails);
   const [loading, setLoading] = useState(false);
   const route = useRoute<RouteProp<RouteParams, 'params'>>();
   const dimensions = useWindowDimensions();
   const productData = route?.params?.product as IProductInfo;
-  const firstStoreOffer = productData?.storeOffers?.[0];
-
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Image source={{ uri: item.thumbnail }} style={styles.thumbnail} />
-      <Text style={styles.title}>{item.title}</Text>
-    </View>
-  );
+  const firstStoreOffer = productDetails?.data?.storeOffers?.[0];
 
   const onCouponCodeClick = () => {
     if (productData?.id) {
@@ -174,19 +215,25 @@ const ProductDetailsScreen: FC = () => {
     }
   }, [couponCodeUrl]);
 
+  useEffect(() => {
+    dispatch(fetchProductDetailsAction(productData?.id));
+  }, []);
+
   const productMap = useMemo(() => {
-    const latLng = productData?.storeOffers?.[0]?.geoLocation;
+    if (productDetails?.loading && !firstStoreOffer?.geoLocation) return;
+    const latLng = firstStoreOffer?.geoLocation;
     let splittedLatLng: string[] | number[] = [];
     if (latLng) {
       splittedLatLng = latLng.split(',');
     }
+    if (splittedLatLng.length < 2) return;
     return (
       <ProductMap
         lat={Number(splittedLatLng[0])}
         lng={Number(splittedLatLng[1])}
       />
     );
-  }, []);
+  }, [firstStoreOffer]);
 
   return (
     <ScrollView>
@@ -195,11 +242,15 @@ const ProductDetailsScreen: FC = () => {
           <TopAppBar title="Product Details" />
         </View>
         <View>
-          <CustomCarousel isFullWidth />
+          <CustomCarousel isFullWidth items={mockCarouselData} />
         </View>
         <View style={styles.contentContainer}>
           <View>
-            <Text style={styles.title}>{firstStoreOffer?.name}</Text>
+            {productDetails?.loading ? (
+              <CustomSkeleton width={200} height={20} style={{}} />
+            ) : (
+              <Text style={styles.title}>{firstStoreOffer?.name}</Text>
+            )}
             <View style={styles.categoryWrapper}>
               <Text style={styles.categoryName}>
                 {getCategorySubCatName(productData?.offerCategories)}
@@ -210,37 +261,48 @@ const ProductDetailsScreen: FC = () => {
             </View>
           </View>
           <View>
-            <CustomCarousel carouselMargin={32} autoPlay={false} />
+            <CustomCarousel
+              carouselMargin={32}
+              autoPlay={false}
+              items={productDetails?.data?.offerImages?.map((item) => ({
+                imgSrc: getImageURL(item.url),
+              }))}
+            />
           </View>
           <View style={styles.descriptionView}>
             <View style={styles.descriptionDetail}>
-              {productData?.additionalDescription && (
-                <View>
-                  <Text
-                    style={[
-                      styles.title,
-                      {
-                        color: Color.colorDarkGray,
-                        fontSize: FontSize.size_xs,
-                        fontWeight: 'bold',
-                      },
-                    ]}
-                  >
-                    {'Description:'}
-                  </Text>
-                  <Text style={styles.descriptionText}>
-                    <RenderHTML
-                      contentWidth={dimensions.width - 16}
-                      source={{
-                        html: productData.additionalDescription,
-                      }}
-                      baseStyle={{
-                        color: Color.colorDarkGray,
-                      }}
-                      tagsStyles={customStyles}
-                    />
-                  </Text>
-                </View>
+              {productDetails?.loading ? (
+                <CustomSkeleton width={'80%'} height={120} style={{}} />
+              ) : (
+                productDetails?.data?.additionalDescription && (
+                  <View>
+                    <Text
+                      style={[
+                        styles.title,
+                        {
+                          color: Color.colorDarkGray,
+                          fontSize: FontSize.size_xs,
+                          fontWeight: 'bold',
+                        },
+                      ]}
+                    >
+                      {'Description:'}
+                    </Text>
+                    <Text style={styles.descriptionText}>
+                      <RenderHTML
+                        contentWidth={dimensions.width - 16}
+                        source={{
+                          html: productDetails?.data?.additionalDescription,
+                        }}
+                        baseStyle={{
+                          color: Color.colorDarkGray,
+                          width: dimensions.width - 150,
+                        }}
+                        tagsStyles={customStyles}
+                      />
+                    </Text>
+                  </View>
+                )
               )}
             </View>
             <View style={styles.couponCodeWrapper}>
@@ -262,7 +324,7 @@ const ProductDetailsScreen: FC = () => {
                         width: 130,
                         height: 70,
                         resizeMode: 'contain',
-                        backgroundColor: Color.colorLightslategray,
+                        backgroundColor: Color.colorWhiteSmoke,
                       }}
                     />
                   )}
@@ -276,16 +338,17 @@ const ProductDetailsScreen: FC = () => {
           <View>
             <Text style={styles.address}>{'Address:'}</Text>
             <Text style={styles.addressField}>
-              {productData?.storeOffers?.[0]?.address}
+              {productDetails?.data?.storeOffers?.[0]?.address}
             </Text>
           </View>
           <View style={styles.mapWrapper}>{productMap}</View>
           <View>
-            <Text style={styles.productsTitle}>Products</Text>
+            <Text style={styles.productsTitle}>{'Products'}</Text>
             <View style={styles.productWrapper}>
               <FlatList
                 data={mockProducts}
                 horizontal
+                scrollEnabled={mockProducts.length > 3}
                 ItemSeparatorComponent={() => (
                   <View style={{ paddingRight: 16 }} />
                 )}
@@ -300,7 +363,7 @@ const ProductDetailsScreen: FC = () => {
               />
             </View>
           </View>
-          <View style={styles.youtubeLinks}>
+          {/* <View style={styles.youtubeLinks}>
             <Text style={{ color: 'black' }}>Youtube links</Text>
           </View>
           <View style={styles.container}>
@@ -310,7 +373,7 @@ const ProductDetailsScreen: FC = () => {
               horizontal
               keyExtractor={(item) => item.id}
             />
-          </View>
+          </View> */}
         </View>
       </View>
     </ScrollView>

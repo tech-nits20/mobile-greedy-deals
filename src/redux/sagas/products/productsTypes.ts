@@ -1,5 +1,11 @@
 import { IListingFilters } from '../../../types/FilterTypes';
-import { IOfferImages, IStoreOfferType } from '../categories/categoriesTypes';
+import {
+  IDiscountsOffersItem,
+  IOfferCategory,
+  IOfferImages,
+  IOfferItemStoreType,
+  IStoreOfferType,
+} from '../categories/categoriesTypes';
 
 export interface IProductInfo {
   id?: string;
@@ -8,12 +14,7 @@ export interface IProductInfo {
   couponCode?: string;
   offerImages?: IOfferImages[];
   storeOffers?: IStoreOffersType[];
-  offerCategories: [
-    {
-      id: string;
-      name: string;
-    }
-  ];
+  offerCategories: IOfferCategory[];
   isActive?: boolean;
   downloadCount?: number;
   expiryDate?: string;
@@ -24,8 +25,12 @@ export interface IProductInfo {
   offerType: IStoreOfferType;
   offerPrice?: number;
   productName?: string;
-  additionalDescription: string;
-  youtubeLink: string;
+  additionalDescription?: string;
+  youtubeLink?: string;
+  vendorName?: string;
+  vendorLogo?: string;
+  offerTypeId?: string;
+  stores?: IOfferItemStoreType[];
 }
 
 export interface IStoreOffersType {
@@ -77,7 +82,8 @@ export interface IMappedFilterTypes {
 
 export interface IFilterBrandsVendor {
   id: string;
-  name: string;
+  vendorId: string;
+  vendorName: string;
   address: string;
   geoLocation: string;
   rank: number;
@@ -97,6 +103,12 @@ export interface IFilterProductType {
   loading: boolean;
   error: string | undefined;
 }
+
+export interface IProductDetailsType {
+  data?: IProductInfo;
+  loading: boolean;
+  error?: string | undefined;
+}
 export interface ICouponCodeType {
   error?: string;
   url?: string;
@@ -107,5 +119,7 @@ export interface IProductsBaseState {
   brandsVendor?: IMappedBrandVendor[];
   offerCouponCode?: ICouponCodeType;
   filterModel?: IListingFilters;
-  GDOffersData?: IProductInfo[];
+  GDOffersData?: IDiscountsOffersItem[];
+  endingSoonDeals?: IDiscountsOffersItem[];
+  productDetailsData?: IProductDetailsType;
 }

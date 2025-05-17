@@ -6,6 +6,7 @@ import {
   getFormattedExpiryDate,
   getImageURL,
   getProductOfferInfo,
+  getVendorLogoURL,
 } from '../../helper/Utils';
 import { ParamListBase, useNavigation } from '@react-navigation/core';
 import { PRODUCT_DETAILS_SCREEN } from '../../routes/Routes';
@@ -13,6 +14,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { IProductInfo } from '../../redux/sagas/products/productsTypes';
 import { useDispatch } from 'react-redux';
 import { setOfferCouponCode } from '../../redux/sagas/products/productsRedux';
+import { Color } from '../../../GlobalStyles';
 
 const ListingProductSection: FC<IProductInfo> = (props) => {
   const dispatch = useDispatch();
@@ -25,15 +27,28 @@ const ListingProductSection: FC<IProductInfo> = (props) => {
   };
 
   return (
-    <Pressable onPress={onProductPressed} style={styles.frameParent}>
+    <Pressable
+      onPress={onProductPressed}
+      style={({ pressed }) => [
+        styles.frameParent,
+        {
+          backgroundColor: pressed
+            ? Color.colorLightHover
+            : Color.colorTransparent,
+        },
+      ]}
+    >
       <View style={styles.innerWrapper}>
         <View style={[styles.frameWrapper, styles.wrapperLayout]}>
           <View style={[styles.offerImageWrapper, styles.wrapperLayout]}>
             <Image
               style={styles.offerImage}
               resizeMode="stretch"
-              // source={getImageURL(props.offerImages?.[0]?.url)}
-              source={require('../../../assets/default_image.png')}
+              source={
+                props?.vendorLogo
+                  ? { uri: getVendorLogoURL(props.vendorLogo) }
+                  : require('../../../assets/default_image.png')
+              }
             />
           </View>
           {offerType?.gdDiscount?.title && (
@@ -74,7 +89,7 @@ const ListingProductSection: FC<IProductInfo> = (props) => {
         </View>
         <View style={styles.titleWrapper}>
           <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
-            {props?.storeOffers?.[0]?.name}
+            {props?.stores?.[0]?.storeName}
           </Text>
         </View>
         <Text
@@ -87,7 +102,7 @@ const ListingProductSection: FC<IProductInfo> = (props) => {
         <View style={styles.expiredContainer}>
           <Text style={styles.expiryDate}>{'Expired'}</Text>
           <Text style={styles.expiryDate}>
-            {getFormattedExpiryDate(props?.expiryDate)}
+            {getFormattedExpiryDate(props?.expiryEndDate)}
           </Text>
         </View>
         <View style={styles.button}>

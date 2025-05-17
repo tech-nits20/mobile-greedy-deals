@@ -1,49 +1,70 @@
 import { SagaIterator } from 'redux-saga';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import {
   fetchAllCategoryService,
-  fetchCategoryService,
+  fetchFilterAPIService,
   fetchCurrentLocationService,
   fetchDiscountsAndOffersService,
   fetchEarlyDealsService,
-  fetchPremiumBrandsOffersService,
   fetchTopCashbackDiscountsService,
   ILocationType,
 } from '../../../api/services';
 import {
+  fetchBeautyAndSpaOffersAction,
   fetchCategoriesAction,
+  fetchClothingOffersAction,
   fetchCurrentLocationAction,
   fetchDiscountsOffersAction,
   fetchEarlyDealsAction,
+  fetchFoodsOffersAction,
+  fetchHospitalsOffersAction,
   fetchPremiumBrandsOffersAction,
+  fetchRealStateOffersAction,
   fetchTopCashbackDiscountsAction,
+  getAllCategoriesList,
   setAllCategoriesList,
+  setBeautyAndSpaOffers,
   setCategoriesData,
   setCategoriesState,
   setCategoryProductsData,
+  setClothingOffers,
   setCurrentLocation,
   setDiscountOfferState,
   setDiscountsAndOffers,
   setEarlyDeals,
   setEarlyDealsState,
+  setFoodsOffers,
+  setHospitalsOffers,
   setPremiumBrandsOffers,
   setPremiumBrandsState,
+  setRealStateOffers,
   setSubCategoriesData,
   setTopCashbackDiscounts,
   setTopCashbackState,
 } from './categoryRedux';
 import {
+  ICategory,
   ICategoryProducts,
   ICurrentLocationType,
   ILatLongType,
   ISubCategory,
 } from './categoriesTypes';
-import mockData from '../../../mock-data/mock_discount_offer.json';
+import {
+  ExtraDealTypeEnum,
+  IListingFilters,
+  LocalOrBrandEnum,
+  SortTypeEnum,
+} from '../../../types/FilterTypes';
+import { MAX_RANGE } from '../../../api/client';
 
 export function* fetchCategoriesSaga(): SagaIterator {
   try {
     yield put(
-      setCategoriesState({ categoryLoading: true, categoryError: undefined })
+      setCategoriesState({
+        categoryLoading: true,
+        categoryError: undefined,
+        isFetched: false,
+      })
     );
     const response = yield call(fetchAllCategoryService);
     if (response) {
@@ -56,6 +77,7 @@ export function* fetchCategoriesSaga(): SagaIterator {
         setCategoriesState({
           categoryLoading: false,
           categoryError: undefined,
+          isFetched: true,
         })
       );
 
@@ -147,6 +169,7 @@ export function* fetchCategoriesSaga(): SagaIterator {
       setCategoriesState({
         categoryLoading: false,
         categoryError: JSON.stringify(error),
+        isFetched: true,
       })
     );
   }
@@ -165,8 +188,24 @@ export function* fetchDiscountsOffersSaga({
         isFetched: false,
       })
     );
-    // const response = yield call(fetchDiscountsAndOffersService, payload);
-    const response = mockData;
+    const requestPayload: IListingFilters = {
+      filters: {
+        lat: payload.lat,
+        lng: payload.lng,
+        range: {
+          min: 0,
+          max: MAX_RANGE,
+        },
+        extraDealType: ExtraDealTypeEnum.Discount,
+        localOrBrand: LocalOrBrandEnum.NoFilter,
+      },
+      sort: {
+        order: SortTypeEnum.Popularity,
+      },
+    };
+    console.log(`==DIS REQ: ${JSON.stringify(requestPayload)}`);
+
+    const response = yield call(fetchDiscountsAndOffersService, requestPayload);
     if (response) {
       yield put(setDiscountsAndOffers(response));
     }
@@ -202,8 +241,25 @@ export function* fetchTopCashbackDiscountsSaga({
         isFetched: false,
       })
     );
-    // const response = yield call(fetchTopCashbackDiscountsService, payload);
-    const response = mockData;
+    const requestPayload: IListingFilters = {
+      filters: {
+        lat: payload.lat,
+        lng: payload.lng,
+        range: {
+          min: 0,
+          max: MAX_RANGE,
+        },
+        extraDealType: ExtraDealTypeEnum.CashBack,
+        localOrBrand: LocalOrBrandEnum.NoFilter,
+      },
+      sort: {
+        order: SortTypeEnum.Popularity,
+      },
+    };
+    const response = yield call(
+      fetchTopCashbackDiscountsService,
+      requestPayload
+    );
     if (response) {
       yield put(setTopCashbackDiscounts(response));
     }
@@ -239,8 +295,22 @@ export function* fetchEarlyDealsSaga({
         isFetched: false,
       })
     );
-    // const response = yield call(fetchEarlyDealsService, payload);
-    const response = mockData;
+    const requestPayload: IListingFilters = {
+      filters: {
+        lat: payload.lat,
+        lng: payload.lng,
+        range: {
+          min: 0,
+          max: MAX_RANGE,
+        },
+        extraDealType: ExtraDealTypeEnum.NoFilter,
+        localOrBrand: LocalOrBrandEnum.NoFilter,
+      },
+      sort: {
+        order: SortTypeEnum.Upcoming,
+      },
+    };
+    const response = yield call(fetchEarlyDealsService, requestPayload);
     if (response) {
       yield put(setEarlyDeals(response));
     }
@@ -276,8 +346,22 @@ export function* fetchPremiumBrandsOffersSaga({
         isFetched: false,
       })
     );
-    // const response = yield call(fetchPremiumBrandsOffersService, payload);
-    const response = mockData;
+    const requestPayload: IListingFilters = {
+      filters: {
+        lat: payload.lat,
+        lng: payload.lng,
+        range: {
+          min: 0,
+          max: MAX_RANGE,
+        },
+        extraDealType: ExtraDealTypeEnum.NoFilter,
+        localOrBrand: LocalOrBrandEnum.Branded,
+      },
+      sort: {
+        order: SortTypeEnum.Popularity,
+      },
+    };
+    const response = yield call(fetchFilterAPIService, requestPayload);
     if (response) {
       yield put(setPremiumBrandsOffers(response));
     }
@@ -302,36 +386,88 @@ export function* fetchPremiumBrandsOffersSaga({
 
 export function* fetchCurrentLocationSaga(): SagaIterator {
   try {
-    // const response: ILocationType = yield call(fetchCurrentLocationService);
-    const response: ILocationType = {
-      lat: 28.7041,
-      lng: 77.1025,
-      data: [],
-    };
+    const response: ILocationType = yield call(fetchCurrentLocationService);
+    console.log(`==IS LOCATION CALLED`);
+    let route = undefined;
+    let premises = undefined;
+    let streetAddress = undefined;
+    let locality = undefined;
+    let subLocalityLevel1 = undefined;
+    let subLocalityLevel2 = undefined;
+
     if (response) {
-      const addressComponents = response.data.results[0].address_components;
-      const locality = addressComponents.find(
-        (c: { types: string | string[] }) => c.types.includes('locality')
+      let addressComponents: any[] = [];
+      addressComponents = response?.data?.results?.find(
+        (type: { types: string | any[] }) =>
+          type.types.includes('street_address') ||
+          type.types.includes('premise')
+      )?.address_components;
+
+      if (!addressComponents || addressComponents?.length === 0) {
+        addressComponents = response?.data?.results?.find(
+          (type: { types: string | any[] }) =>
+            type.types.includes('locality') ||
+            type.types.includes('sublocality') ||
+            type.types.includes('sublocality_level_1')
+        )?.address_components;
+      }
+
+      if (!addressComponents || addressComponents?.length === 0) {
+        addressComponents = response?.data?.results?.find(
+          (type: { types: string | any[] }) =>
+            type.types.includes('locality') ||
+            type.types.includes('sublocality') ||
+            type.types.includes('sublocality_level_2')
+        )?.address_components;
+      }
+
+      if (!addressComponents || addressComponents?.length === 0) {
+        addressComponents = response?.data?.results?.find(
+          (type: { types: string | any[] }) => type.types.includes('route')
+        )?.address_components;
+      }
+
+      streetAddress = addressComponents.find(
+        (c: { types: string | string[] }) => c.types.includes('street_address')
       )?.long_name;
 
-      const subLocalityLevel1 = addressComponents.find(
+      subLocalityLevel1 = addressComponents.find(
         (c: { types: string | string[] }) =>
           c.types.includes('sublocality_level_1')
       )?.long_name;
 
-      const subLocalityLevel2 = addressComponents.find(
+      subLocalityLevel2 = addressComponents.find(
         (c: { types: string | string[] }) =>
           c.types.includes('sublocality_level_2')
       )?.long_name;
-      // setCity(sublocalityLevel1 || sublocalityLevel2 || locality);
-      console.log('City:', locality);
-      console.log('District/Area:', subLocalityLevel1);
-      console.log('Smaller Sector:', subLocalityLevel2);
 
+      locality = addressComponents.find(
+        (c: { types: string | string[] }) =>
+          c.types.includes('locality') || c.types.includes('political')
+      )?.long_name;
+
+      console.log(`==Street Address: ${streetAddress}`);
+      console.log(`==Sub Locality Level 1: ${subLocalityLevel1}`);
+      console.log(`==Sub Locality Level 2: ${subLocalityLevel2}`);
+      console.log(`==Locality: ${locality}`);
+
+      let address = undefined;
+      if (streetAddress && streetAddress.length < 8) {
+        address = streetAddress;
+      }
+      if (subLocalityLevel1 && address) {
+        address = address + ', ' + subLocalityLevel1;
+      }
       const location: ICurrentLocationType = {
-        locationName: subLocalityLevel1 ?? subLocalityLevel2 ?? locality ?? '',
-        lat: response.lat,
-        lng: response.lng,
+        locationName:
+          address ??
+          streetAddress ??
+          subLocalityLevel1 ??
+          subLocalityLevel2 ??
+          locality ??
+          '',
+        lat: response?.lat ?? 0,
+        lng: response?.lng ?? 0,
       };
       yield put(
         setCurrentLocation({
@@ -342,10 +478,286 @@ export function* fetchCurrentLocationSaga(): SagaIterator {
         })
       );
     } else {
-      console.error('Geocoding error:', response);
+      console.log(`==Error on fetchCurrentLocationSaga: ${response}`);
     }
   } catch (error) {
     console.log(`==Error on fetchCurrentLocationSaga: ${error}`);
+  }
+}
+
+export function* fetchClothingOffersSaga({
+  payload,
+}: {
+  payload: ILatLongType;
+}): SagaIterator {
+  try {
+    yield put(setClothingOffers({ data: [], isFetched: false, loading: true }));
+    const allCategories: ICategory[] = yield select(getAllCategoriesList);
+    const clothingCategory = allCategories.filter(
+      (item) => item.name.trim().toLowerCase() === 'fashion'.toLowerCase()
+    );
+    if (clothingCategory.length > 0) {
+      const requestPayload: IListingFilters = {
+        filters: {
+          lat: payload.lat,
+          lng: payload.lng,
+          range: {
+            min: 0,
+            max: MAX_RANGE,
+          },
+          extraDealType: ExtraDealTypeEnum.NoFilter,
+          localOrBrand: LocalOrBrandEnum.NoFilter,
+          categoryId: clothingCategory[0].id,
+        },
+        sort: {
+          order: SortTypeEnum.Popularity,
+        },
+      };
+      const response = yield call(fetchFilterAPIService, requestPayload);
+      if (response) {
+        yield put(
+          setClothingOffers({ data: response, isFetched: true, loading: false })
+        );
+      }
+    } else {
+      yield put(
+        setClothingOffers({ data: [], isFetched: true, loading: false })
+      );
+    }
+  } catch (error) {
+    console.log(`Error on fetchClothingOffersSaga: ${error}`);
+    yield put(
+      setClothingOffers({
+        data: [],
+        isFetched: true,
+        loading: false,
+        error: JSON.stringify(error),
+      })
+    );
+  }
+}
+
+export function* fetchFoodsOfferSaga({
+  payload,
+}: {
+  payload: ILatLongType;
+}): SagaIterator {
+  try {
+    yield put(setFoodsOffers({ data: [], isFetched: false, loading: true }));
+    const allCategories: ICategory[] = yield select(getAllCategoriesList);
+    const foodsCategory = allCategories.filter(
+      (item) => item.name.trim().toLowerCase() === 'food'.toLowerCase()
+    );
+    if (foodsCategory.length > 0) {
+      const requestPayload: IListingFilters = {
+        filters: {
+          lat: payload.lat,
+          lng: payload.lng,
+          range: {
+            min: 0,
+            max: MAX_RANGE,
+          },
+          extraDealType: ExtraDealTypeEnum.NoFilter,
+          localOrBrand: LocalOrBrandEnum.NoFilter,
+          categoryId: foodsCategory[0].id,
+        },
+        sort: {
+          order: SortTypeEnum.Popularity,
+        },
+      };
+      const response = yield call(fetchFilterAPIService, requestPayload);
+      if (response) {
+        yield put(
+          setFoodsOffers({ data: response, isFetched: true, loading: false })
+        );
+      }
+    } else {
+      yield put(setFoodsOffers({ data: [], isFetched: true, loading: false }));
+    }
+  } catch (error) {
+    console.log(`Error on fetchFoodsOfferSaga: ${error}`);
+    yield put(
+      setFoodsOffers({
+        data: [],
+        isFetched: true,
+        loading: false,
+        error: JSON.stringify(error),
+      })
+    );
+  }
+}
+
+export function* fetchBeautyAndSpaOfferSaga({
+  payload,
+}: {
+  payload: ILatLongType;
+}): SagaIterator {
+  try {
+    yield put(
+      setBeautyAndSpaOffers({ data: [], isFetched: false, loading: true })
+    );
+    const allCategories: ICategory[] = yield select(getAllCategoriesList);
+    const beautySpaCategory = allCategories.filter(
+      (item) => item.name.trim().toLowerCase() === 'Beauty & Spa'.toLowerCase()
+    );
+    if (beautySpaCategory.length > 0) {
+      const requestPayload: IListingFilters = {
+        filters: {
+          lat: payload.lat,
+          lng: payload.lng,
+          range: {
+            min: 0,
+            max: MAX_RANGE,
+          },
+          extraDealType: ExtraDealTypeEnum.NoFilter,
+          localOrBrand: LocalOrBrandEnum.NoFilter,
+          categoryId: beautySpaCategory[0].id,
+        },
+        sort: {
+          order: SortTypeEnum.Popularity,
+        },
+      };
+      const response = yield call(fetchFilterAPIService, requestPayload);
+      if (response) {
+        yield put(
+          setBeautyAndSpaOffers({
+            data: response,
+            isFetched: true,
+            loading: false,
+          })
+        );
+      }
+    } else {
+      yield put(
+        setBeautyAndSpaOffers({ data: [], isFetched: true, loading: false })
+      );
+    }
+  } catch (error) {
+    console.log(`Error on fetchBeautyAndSpaOfferSaga: ${error}`);
+    yield put(
+      setBeautyAndSpaOffers({
+        data: [],
+        isFetched: true,
+        loading: false,
+        error: JSON.stringify(error),
+      })
+    );
+  }
+}
+
+export function* fetchRealStatesOfferSaga({
+  payload,
+}: {
+  payload: ILatLongType;
+}): SagaIterator {
+  try {
+    yield put(
+      setRealStateOffers({ data: [], isFetched: false, loading: true })
+    );
+    const allCategories: ICategory[] = yield select(getAllCategoriesList);
+    const realStateCategory = allCategories.filter(
+      (item) => item.name.trim().toLowerCase() === 'Real Estate'.toLowerCase()
+    );
+    if (realStateCategory.length > 0) {
+      const requestPayload: IListingFilters = {
+        filters: {
+          lat: payload.lat,
+          lng: payload.lng,
+          range: {
+            min: 0,
+            max: MAX_RANGE,
+          },
+          extraDealType: ExtraDealTypeEnum.NoFilter,
+          localOrBrand: LocalOrBrandEnum.NoFilter,
+          categoryId: realStateCategory[0].id,
+        },
+        sort: {
+          order: SortTypeEnum.Popularity,
+        },
+      };
+      const response = yield call(fetchFilterAPIService, requestPayload);
+      if (response) {
+        yield put(
+          setRealStateOffers({
+            data: response,
+            isFetched: true,
+            loading: false,
+          })
+        );
+      }
+    } else {
+      yield put(
+        setRealStateOffers({ data: [], isFetched: true, loading: false })
+      );
+    }
+  } catch (error) {
+    console.log(`Error on fetchRealStatesOfferSaga: ${error}`);
+    yield put(
+      setRealStateOffers({
+        data: [],
+        isFetched: true,
+        loading: false,
+        error: JSON.stringify(error),
+      })
+    );
+  }
+}
+
+export function* fetchHospitalOfferSaga({
+  payload,
+}: {
+  payload: ILatLongType;
+}): SagaIterator {
+  try {
+    yield put(
+      setHospitalsOffers({ data: [], isFetched: false, loading: true })
+    );
+    const allCategories: ICategory[] = yield select(getAllCategoriesList);
+    const hospitalCategory = allCategories.filter(
+      (item) => item.name.trim().toLowerCase() === 'Hospitals'.toLowerCase()
+    );
+    if (hospitalCategory.length > 0) {
+      const requestPayload: IListingFilters = {
+        filters: {
+          lat: payload.lat,
+          lng: payload.lng,
+          range: {
+            min: 0,
+            max: MAX_RANGE,
+          },
+          extraDealType: ExtraDealTypeEnum.NoFilter,
+          localOrBrand: LocalOrBrandEnum.NoFilter,
+          categoryId: hospitalCategory[0].id,
+        },
+        sort: {
+          order: SortTypeEnum.Popularity,
+        },
+      };
+      const response = yield call(fetchFilterAPIService, requestPayload);
+      if (response) {
+        yield put(
+          setHospitalsOffers({
+            data: response,
+            isFetched: true,
+            loading: false,
+          })
+        );
+      }
+    } else {
+      yield put(
+        setHospitalsOffers({ data: [], isFetched: true, loading: false })
+      );
+    }
+  } catch (error) {
+    console.log(`Error on fetchHospitalOfferSaga: ${error}`);
+    yield put(
+      setHospitalsOffers({
+        data: [],
+        isFetched: true,
+        loading: false,
+        error: JSON.stringify(error),
+      })
+    );
   }
 }
 
@@ -362,4 +774,9 @@ export function* initCategoriesSaga(): SagaIterator {
     fetchPremiumBrandsOffersSaga
   );
   yield takeLatest(fetchCurrentLocationAction, fetchCurrentLocationSaga);
+  yield takeLatest(fetchClothingOffersAction, fetchClothingOffersSaga);
+  yield takeLatest(fetchFoodsOffersAction, fetchFoodsOfferSaga);
+  yield takeLatest(fetchBeautyAndSpaOffersAction, fetchBeautyAndSpaOfferSaga);
+  yield takeLatest(fetchRealStateOffersAction, fetchRealStatesOfferSaga);
+  yield takeLatest(fetchHospitalsOffersAction, fetchHospitalOfferSaga);
 }
