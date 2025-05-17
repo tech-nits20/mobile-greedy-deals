@@ -11,7 +11,7 @@ import {
 export const styles = StyleSheet.create({
   midRowSpaceBlock: {
     paddingVertical: 0,
-    paddingHorizontal: Padding.p_11xs,
+    paddingHorizontal: Padding.p_9xs,
   },
 
   frameFlexBox: {
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     borderRadius: Border.br_3xs,
     gap: Gap.gap_lg,
     alignSelf: 'stretch',
-    minWidth: 70,
+    minWidth: 65,
   },
   image122Icon: {
     maxWidth: '100%',
@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
     borderRadius: Border.br_5xs,
   },
   frameParentFlexBox: {
-    gap: Gap.gap_lg,
+    gap: Gap.gap_xs,
     flex: 1,
   },
   frameWrapper10: {

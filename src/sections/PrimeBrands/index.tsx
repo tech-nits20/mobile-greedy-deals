@@ -58,7 +58,11 @@ const PrimeBrands = () => {
   }, [premiumBrandsOffers]);
 
   useEffect(() => {
-    if (location.locationName) {
+    if (
+      location.locationName &&
+      premiumBrandsOffers.length === 0 &&
+      !premiumBrandsStatus?.isFetched
+    ) {
       dispatch(fetchPremiumBrandsOffersAction(req));
     }
   }, [location]);

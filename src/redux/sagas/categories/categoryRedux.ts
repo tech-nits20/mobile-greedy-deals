@@ -97,6 +97,7 @@ const initialState: ICategoriesBaseState = {
     lat: 0,
     lng: 0,
   },
+  isHomeScreen: false,
 };
 const name = 'categories';
 // Create a slice with actions and reducer
@@ -229,6 +230,12 @@ const categoriesSlice = createSlice({
       action: PayloadAction<ILatLongType>
     ) => {
       state.customLocation = action.payload;
+    },
+    setIsHomeScreen: (
+      state: ICategoriesBaseState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isHomeScreen = action.payload;
     },
   },
 });
@@ -371,6 +378,12 @@ export const getCustomLocation: (state: {
   return state.categories.customLocation;
 };
 
+export const getISHomeScreen: (state: {
+  categories: ICategoriesBaseState;
+}) => boolean = (state: { categories: ICategoriesBaseState }) => {
+  return state.categories.isHomeScreen;
+};
+
 export const fetchCategoriesAction = createAction(`${name}/fetchAllCategories`);
 export const fetchDiscountsOffersAction = createAction(
   `${name}/fetchDiscountsOffers`,
@@ -476,6 +489,7 @@ export const {
   setRealStateOffers,
   setCustomLocation,
   setPreviousCurrentLocation,
+  setIsHomeScreen,
 } = categoriesSlice.actions;
 export const categoriesReducer: Reducer<ICategoriesBaseState> =
   categoriesSlice.reducer;

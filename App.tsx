@@ -14,7 +14,7 @@ import BottomTabBar from './src/components/BottomTabBar';
 import { Color } from './GlobalStyles';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import CategoryProductsFilters from './src/components/CategoryProductsFilters';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { store } from './src/redux/store';
 import ListingScreen from './src/screens/ListingScreen';
 import ProductDetailsScreen from './src/screens/ProductDetailsScreen';
@@ -23,6 +23,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CUSTOM_LOCATION_KEY } from './src/helper/Constants';
 import SearchScreen from './src/screens/SearchScreen';
 import SplashScreen from 'react-native-splash-screen';
+import { setIsHomeScreen } from './src/redux/sagas/categories/categoryRedux';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
@@ -44,11 +45,22 @@ const App = () => {
     SplashScreen.hide();
   }, []);
 
+  const setHomeScreenStatus = (name: string) => {
+    store.dispatch(setIsHomeScreen(name === HOME_TABS));
+  };
+
   return (
     <>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Provider store={store}>
-          <NavigationContainer theme={MyTheme}>
+          <NavigationContainer
+            theme={MyTheme}
+            onStateChange={(state) => {
+              const currentRoute = state.routes[state.index];
+              setHomeScreenStatus(currentRoute.name);
+              console.log('Current screen:', currentRoute.name);
+            }}
+          >
             {hideSplashScreen ? (
               <Stack.Navigator
                 initialRouteName={HOME_SCREEN}

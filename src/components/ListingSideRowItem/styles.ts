@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: Border.br_3xs,
     borderTopLeftRadius: Border.br_3xs,
     backgroundColor: Color.colorWhite,
-    maxWidth: 70,
+    width: 65,
   },
   frameView: {
     justifyContent: 'center',
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   productImageWrapper: {
-    width: 70,
+    width: 65,
     height: 50,
     alignItems: 'center',
   },

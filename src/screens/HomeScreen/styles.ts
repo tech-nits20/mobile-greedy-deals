@@ -229,7 +229,7 @@ export const styles = StyleSheet.create({
   },
   frameParent: {
     gap: Gap.gap_xl,
-    marginTop: -25,
+    marginTop: -15,
   },
   midRow: {
     paddingHorizontal: Padding.p_3xs,

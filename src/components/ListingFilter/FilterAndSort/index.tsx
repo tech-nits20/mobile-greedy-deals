@@ -51,16 +51,6 @@ const FilterAndSort: FC<FilterAndSortProps> = ({
 
   useEffect(() => {
     console.log(`==GD DEAL: ${isGdDeals}`);
-
-    // if (isGdDeals !== undefined && isGdDeals === true) {
-    //   setMappedSortOption([
-    //     ...sortOptions,
-    //     { label: 'GD Extra Discount', value: 2 },
-    //   ]);
-    // } else {
-    //   setActiveSort(activeSort === 2 ? 0 : activeSort);
-    //   setMappedSortOption(sortOptions);
-    // }
     setMappedSortOption(sortOptions);
   }, [isGdDeals]);
 

@@ -22,6 +22,7 @@ export interface ICategoriesBaseState {
   hospitalsData: ISectionDataState;
   previousCurrentLocation: ILatLongType;
   customLocation: ILatLongType;
+  isHomeScreen: boolean;
 }
 
 export interface ISectionDataState {

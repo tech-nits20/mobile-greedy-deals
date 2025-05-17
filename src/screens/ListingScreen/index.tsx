@@ -64,6 +64,7 @@ const ListingScreen = () => {
   };
 
   const onItemSelected = (item: ICategory) => {
+    refetchFilteredProducts(item.id);
     setActiveCategory(item);
   };
 
@@ -93,13 +94,20 @@ const ListingScreen = () => {
     }
   }, [params.category]);
 
-  const getRangeValues = (data: { min?: number; max?: number } | undefined) => {
-    const range: { min: number; max: number } = {
-      min: data?.min ?? 0,
-      max: data?.max ?? 4,
+  const refetchFilteredProducts = (id: string) => {
+    if (filterModel?.filters?.categoryId === id) return;
+    const req = {
+      filters: {
+        lat: location.lat,
+        lng: location.lng,
+        range: { min: 0, max: 4 },
+        categoryId: id,
+        localOrBrand: LocalOrBrandEnum.NoFilter,
+        extraDealType: ExtraDealTypeEnum.NoFilter,
+      },
+      sort: { order: 0 },
     };
-
-    return range;
+    dispatch(fetchFilteredProductAction(req));
   };
 
   useEffect(() => {
@@ -111,14 +119,16 @@ const ListingScreen = () => {
           filters: {
             lat: location.lat,
             lng: location.lng,
-            range: { min: 0, max: 4 },
             categoryId: activeCategory.id,
             localOrBrand: LocalOrBrandEnum.NoFilter,
             extraDealType: ExtraDealTypeEnum.NoFilter,
           },
           sort: { order: 0 },
         };
-        filterRequest = req;
+        filterRequest = {
+          ...req,
+          filters: { ...req.filters, range: { min: 0, max: 4 } },
+        };
       } else {
         req = filterModel;
         filterRequest = {

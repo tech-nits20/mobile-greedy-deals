@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchCurrentLocationAction,
   getCurrentLocation,
+  getISHomeScreen,
 } from '../../redux/sagas/categories/categoryRedux';
 import { useEffect } from 'react';
 import { HOME_SCREEN, SEARCH_SCREEN } from '../../routes/Routes';
@@ -45,6 +46,7 @@ const TopAppBar: React.FC<TopAppBarProps> = ({
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   const dispatch = useDispatch();
   const currentLocation = useSelector(getCurrentLocation);
+  const isHomeScreen = useSelector(getISHomeScreen);
   const focusedTab = useNavigationState((state) => state.routes[state.index]);
   // const { isLocationChange } = useLocationChange();
   const [showModal, setShowModal] = React.useState(false);

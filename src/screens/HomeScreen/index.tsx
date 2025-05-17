@@ -14,11 +14,9 @@ import FoodsOffers from '../../sections/FoodsOffers';
 import BeautyAndSpaOffers from '../../sections/BeautyAndSpaOffers';
 import RealEstateOffers from '../../sections/RealEstateOffers';
 import HospitalsOffers from '../../sections/HospitalsOffers';
-import { getScreenSize, screenWidth } from '../../helper/Utils';
+import HomeOfferChips from '../../components/HomeOfferChips';
 
 const HomeScreen = () => {
-  console.log(`===SCRWID: ${getScreenSize()}`);
-
   return (
     <>
       <TopAppBar isShowSearch />
@@ -30,6 +28,7 @@ const HomeScreen = () => {
         <View style={styles.locationUserBarParent}>
           <View style={styles.midRow}>
             <HomeSections />
+            <HomeOfferChips />
             <View style={styles.frameParent}>
               <View style={styles.component3Parent}>
                 <View style={styles.component3}>
